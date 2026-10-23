@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="NeuroShield open non-clinical research workbench for helmet-impact biomechanics and synthetic signals">
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+  <title>NeuroShield | Research Workbench</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="logo" href="/" aria-label="NeuroShield home"><span class="logo-glyph">◈</span><span>NEURO<span class="em">SHIELD</span><small>RESEARCH LAB / V0.2</small></span></a>
+      <div class="side-divider"></div>
+      <div class="section-heading"><span>01 / EXPERIMENT</span><span class="little-dot"></span></div>
+      <label class="input-label" for="scenario">Impact scenario</label>
+      <select id="scenario" aria-label="Impact scenario"></select>
+      <p class="hint">Deterministic half-sine force input. No experimental calibration.</p>
+      <div class="section-heading second"><span>02 / DESIGN PARAMETERS</span><span class="little-dot"></span></div>
+      <div class="slider-pair"><label for="mount_k_n_m">Faceguard mount stiffness</label><output id="v_mount_k_n_m"></output></div>
+      <input id="mount_k_n_m" type="range" min="30000" max="250000" step="5000">
+      <div class="slider-pair"><label for="mount_c_ns_m">Mount damping</label><output id="v_mount_c_ns_m"></output></div>
+      <input id="mount_c_ns_m" type="range" min="20" max="900" step="10">
+      <div class="slider-pair"><label for="mount_travel_mm">Mount travel limit</label><output id="v_mount_travel_mm"></output></div>
+      <input id="mount_travel_mm" type="range" min="1" max="15" step="0.5">
+      <div class="slider-pair"><label for="liner_k_n_m">Inner liner stiffness</label><output id="v_liner_k_n_m"></output></div>
+      <input id="liner_k_n_m" type="range" min="25000" max="130000" step="5000">
+      <div class="slider-pair"><label for="liner_c_ns_m">Inner liner damping</label><output id="v_liner_c_ns_m"></output></div>
+      <input id="liner_c_ns_m" type="range" min="30" max="800" step="10">
+      <div class="button-stack">
+        <button class="primary" id="simulate" type="button"><span>↗</span> Run comparison</button>
+        <button class="ghost" id="reset" type="button">Restore proposed design</button><button class="ghost" id="qualify" type="button">↳ Check numerical refinement</button>
+      </div>
+      <div class="side-divider"></div>
+      <div class="sidebar-note"><span class="eyebrow">CURRENT EVIDENCE LEVEL</span><strong>S0 · SYNTHETIC</strong><p>Not medical-grade. No real people, headforms or injury outcomes in this dataset.</p></div>
+      <div class="sidebar-bottom">OPEN RESEARCH · LOCAL ONLY</div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div class="crumb">WORKBENCH <span>/</span> MULTIMODAL IMPACT ANALYSIS</div><div class="top-right"><span class="online"><i></i> SIMULATION ENGINE</span><span class="avatar">NS</span></div></header>
+      <div class="content">
+        <div class="hero"><div><div class="eyebrow blue">RESEARCH ENVIRONMENT / 001</div><h1>Inside the impact<span class="period">.</span></h1><p>Explore how hypothetical helmet mechanics change simulated head motion, and inspect synchronized synthetic physiological signals.</p></div><div class="hero-number"><strong>04</strong><span>SYNCHRONIZED<br>RESEARCH VIEWS</span></div></div>
+        <div class="banner" role="note"><strong>MODEL LIMITATION</strong><span>Illustrative lumped-body model. Brain visualization is a dimensionless response proxy, <b>not tissue strain, concussion risk or a protective-equipment rating.</b></span></div>
+        <div class="toolbar"><div class="live-label"><span class="pulse-mark"></span><span id="scenario-name">Loading scenario...</span><span class="splitter">/</span><span id="time-display">0.0 ms</span></div><div class="toolbar-actions"><button class="small-btn" id="play" type="button" aria-label="Play impact replay">▶ Play</button><button class="small-btn outlined" id="export" type="button">↓ Export JSON</button></div></div>
+        <div class="scrubber"><span>0 MS</span><input id="scrub" type="range" min="0" max="500" value="0" aria-label="Replay position"><span>250 MS</span></div>
+        <div class="visual-grid">
+          <section class="panel"><div class="panel-header"><span class="panel-index">01</span><div><h2>Impact mechanics</h2><p>Contact site + input force</p></div><span class="pill amber">INPUT</span></div><canvas id="impact" role="img" aria-label="Conceptual helmet showing impact direction and force" width="600" height="315"></canvas><div class="panel-footer"><span>INPUT FORCE</span><strong id="force-val">0 N</strong></div></section>
+          <section class="panel"><div class="panel-header"><span class="panel-index">02</span><div><h2>Head / neck motion</h2><p>Head relative to fixed torso</p></div><span class="pill purple">KINEMATICS</span></div><canvas id="neck" role="img" aria-label="Illustrative side-view head, neck and torso rotation" width="600" height="315"></canvas><div class="panel-footer"><span>RELATIVE ANGLE</span><strong id="neck-val">0°</strong></div></section>
+          <section class="panel"><div class="panel-header"><span class="panel-index">03</span><div><h2>Response visualization</h2><p>NOT a measured brain strain field</p></div><span class="pill orange">PROXY ONLY</span></div><canvas id="brain" role="img" aria-label="Illustrative colored brain response index with no clinical interpretation" width="600" height="315"></canvas><div class="panel-footer"><span>DIMENSIONLESS INDEX</span><strong id="brain-val">0.000</strong></div></section>
+          <section class="panel"><div class="panel-header"><span class="panel-index">04</span><div><h2>Neural + cervical signals</h2><p>Synthetic EEG / left + right EMG</p></div><span class="pill cyan">SYNTHETIC</span></div><canvas id="signals" role="img" aria-label="Synthetic EEG and two cervical EMG traces with quality gating" width="600" height="315"></canvas><div class="panel-footer"><span>EEG QUALITY (SYNTHETIC)</span><strong id="quality-val">–</strong></div></section>
+        </div>
+        <div class="results-title"><div><div class="eyebrow blue">DESIGN COMPARISON</div><h2>Reference vs. candidate</h2></div><span class="context-label">CHANGE FROM SYNTHETIC BASELINE · NOT SAFETY BENEFIT</span></div>
+        <div class="metric-grid" id="metrics"><div class="loading">Running model...</div></div>
+        <div class="timeline-card"><div class="timeline-heading"><div><span class="eyebrow">TIME DOMAIN</span><h2>Head response traces</h2></div><div class="legend"><span class="legend-ref">REFERENCE</span><span class="legend-cand">CANDIDATE</span></div></div><div class="chart-row"><div><h3>Linear acceleration <small>g</small></h3><canvas id="chart-g" width="900" height="200" role="img" aria-label="Comparison of head linear acceleration time courses"></canvas></div><div><h3>Angular acceleration <small>rad/s²</small></h3><canvas id="chart-a" width="900" height="200" role="img" aria-label="Comparison of head angular acceleration time courses"></canvas></div></div></div>
+        <section class="qualification-box" aria-live="polite"><div class="eyebrow blue">NUMERICAL INTEGRITY / S0</div><div id="qualification-output">Run a refinement check to compare the candidate at four numerical step sizes. This does not verify real-world biomechanics.</div></section>
+        <div id="warnings" class="warning-area" role="status" aria-live="polite"></div>
+        <footer><span>NEUROSHIELD / OPEN RESEARCH SYSTEM</span><span>NO DIAGNOSIS · NO ATHLETE DATA · NO CERTIFICATION</span></footer>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
