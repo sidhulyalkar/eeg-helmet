@@ -1,6 +1,6 @@
 # NeuroShield Research Workbench
 
-**V0.2: A runnable, open-source *synthetic research prototype* for exploratory football-helmet biomechanics, synchronized electrophysiology visualization, and transparent comparison of candidate mechanical designs.**
+**V0.3: A runnable, open-source *synthetic research prototype* for exploratory football-helmet biomechanics, synchronized electrophysiology visualization, and transparent comparison of candidate mechanical designs.**
 
 > **Not protective equipment or a medical device.** No concussion prediction, diagnosis, return-to-play decision, actual brain tissue strain or helmet certification is supported. All dashboard signals are **SYNTHETIC**, mechanics are **ILLUSTRATIVE**, and the model does not represent a real commercial helmet. Never mount the generated CAD geometry on sports equipment.
 
@@ -50,7 +50,7 @@ The service is bound to localhost and has **no real-data upload route**. No exte
 
 All model parameters and scenarios are fixed in `src/neuroshield/models.py`; equations and masses are in `src/neuroshield/physics.py`. Each numerical run records a stable SHA-256 **scientific fingerprint** over model source and inputs, separate from a hash of its produced traces. The synthetic electrophysiology overlays in `signals.py` intentionally include motion artifacts and flagged data-quality intervals.
 
-## V0.2 numerical qualification and multimodal session contract
+## V0.3 numerical qualification and multimodal session contract
 
 This milestone adds configurable simulation time steps (0.125–1.0 ms), a four-resolution numerical-refinement check, and a strictly **synthetic-only** multimodal session interchange contract.
 
@@ -58,6 +58,7 @@ The refinement gate compares the five principal peak outputs between the two fin
 
 ```bash
 python -m neuroshield qualify --scenario oblique --out numerical-oblique.json
+python -m neuroshield qualify-independent --scenario all --out numerical-audit.json
 python -m neuroshield synthetic-session --out SYNTHETIC-session.json
 python -m neuroshield validate-session SYNTHETIC-session.json
 ```
@@ -91,6 +92,8 @@ src/neuroshield/
   ingestion.py    local CSV structure/units validator
   cad.py          OpenSCAD view-only geometry emitter
   qualification.py  numerical step-size refinement report (S0 only)
+  independent_solver.py       independently expressed RK4 + energy budget (synthetic)
+  independent_qualification.py cross-solver 16-case qualification matrix (S0 only)
   session.py       strictly synthetic multimodal session schema validator
   server.py       localhost-only stdlib JSON API and static host
   web/            dependency-free dashboard
