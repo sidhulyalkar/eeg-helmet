@@ -21,3 +21,6 @@ neuroshield = ["web/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[project.optional-dependencies]
+neurospatial = ["numpy>=1.24,<3"]

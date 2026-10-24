@@ -6,6 +6,18 @@
 
 *Dashboard screenshot is included in the downloadable local release archive; run the local server for the interactive workbench.*
 
+## NeuroSpatial Open: inverse EEG research (experimental)
+
+The **NeuroSpatial Open** module investigates identifiable information in scalp EEG using a reproducible, **S0 SYNTHETIC** inverse-problem lab. It includes referenced lead fields, correlated reference noise, Gaussian Bayesian posteriors, resolution operators, singular spectra, null-space controls, temporal observability and 8 tests. **It does not decode thoughts, validate source locations on real heads, collect human EEG or change any helmet safety claim.**
+
+```bash
+python -m pip install -e ".[neurospatial]"
+python -m neuroshield.neurospatial --out synthetic-inverse-report.json
+python -m unittest discover -s tests -p test_neurospatial.py -v
+```
+
+See [inverse-modeling research contract](docs/neurospatial-open.md), [open hardware/data charter](docs/neurospatial-makers-and-data.md), and [contribution guide](docs/neurospatial-contributing.md). No real data can be sent to the existing local demo server.
+
 ## Start the interactive workbench
 
 Python 3.10+ required, no runtime third-party dependencies.
