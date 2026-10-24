@@ -1,0 +1,70 @@
+{
+  "schema": "neuroshield.corpora.v1",
+  "hypotheses": [
+    {
+      "id": "h-facemask-rot",
+      "claim_ids": [
+        "C-SIM-001",
+        "C-OPT-001"
+      ],
+      "reference_ids": [
+        "nfl-fe-toolkit",
+        "nocsae-nd081",
+        "nocsae-nd087",
+        "vt-star-2026"
+      ],
+      "status": "not_physically_validated",
+      "evidence_tier": "S0",
+      "test_to_run": "Compare candidate and reference facemask mounts on an instrumented nonhuman headform across pre-registered frontal and oblique conditions, including measured neck responses.",
+      "blocker": "No independently calibrated headform impact measurements, apparatus calibration report, manufacturer approval or validated neck load estimates."
+    },
+    {
+      "id": "h-simulator-transfer",
+      "claim_ids": [
+        "C-NUM-001",
+        "C-HEADFORM-001"
+      ],
+      "reference_ids": [
+        "nfl-fe-toolkit",
+        "nocsae-nd081",
+        "nfl-hps-faq"
+      ],
+      "status": "not_physically_validated",
+      "evidence_tier": "S0",
+      "test_to_run": "Reproduce a documented instrumented headform scenario using measured inputs and compare full kinematic time series, peak metrics, and uncertainty bounds.",
+      "blocker": "Only agreement between synthetic solver formulations; no external experimental calibration or independently measured kinematics."
+    },
+    {
+      "id": "h-neural-events",
+      "claim_ids": [
+        "C-NEURAL-001",
+        "C-PRIVACY-001"
+      ],
+      "reference_ids": [
+        "eeg-bids-v17",
+        "openneuro-data-policy",
+        "cdc-concussion-response"
+      ],
+      "status": "not_physically_validated",
+      "evidence_tier": "S0",
+      "test_to_run": "Pilot a noncontact, ethically approved, voluntary EEG/EMG recording protocol assessing signal quality, event alignment and artifact burden before any injury associations.",
+      "blocker": "No approved human protocol, measured neural data, signal-validity comparison or validated concussion label."
+    },
+    {
+      "id": "h-evidence-separation",
+      "claim_ids": [
+        "C-PRIVACY-001",
+        "C-HEADFORM-001"
+      ],
+      "reference_ids": [
+        "cdc-concussion-response",
+        "fda-assessment-aid",
+        "nocsae-football-index"
+      ],
+      "status": "not_physically_validated",
+      "evidence_tier": "S0",
+      "test_to_run": "Audit privacy, source permissions, clinical inference boundaries and calibration documentation with independent domain reviewers.",
+      "blocker": "Public links and structural schema checks cannot establish safety, certification or clinical effectiveness."
+    }
+  ]
+}

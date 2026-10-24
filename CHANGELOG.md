@@ -31,3 +31,9 @@
 ## V0.1.0
 
 - First deterministic reduced-order impact workbench with synthetic EEG/EMG visualization.
+
+
+## V0.6 (research metadata integration, no model validation)
+- Added three curated external-reference catalogs: biomechanics, neural recording, evidence/qualification. All references are link-only and require separate license review.
+- Added cross-linked S0 hypothesis gap register, metadata-only search, fixed integration benchmark and committed-HEAD-only per-domain staging for optional XERJ.
+- Added negative permission/provenance tests and portable CLI/CI smoke checks. No real sensors, external models, standards text, human data, clinical scoring or S1 promotion.

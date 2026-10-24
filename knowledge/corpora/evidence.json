@@ -1,0 +1,48 @@
+{
+  "schema": "neuroshield.corpora.v1",
+  "domain": "evidence",
+  "sources": [
+    {
+      "id": "cdc-concussion-response",
+      "corpus": "evidence",
+      "title": "CDC HEADS UP responding to sports concussion",
+      "url": "https://www.cdc.gov/heads-up/response/index.html",
+      "publisher": "US Centers for Disease Control and Prevention",
+      "version": "September 15 2025",
+      "version_kind": "dated_page",
+      "relevance": "Clinical referral and removal from play guidance; a wearable signal is not a substitute for healthcare assessment.",
+      "access": "metadata_only",
+      "license_status": "pending_manual_review",
+      "evidence_role": "reference_only",
+      "can_promote_evidence": false
+    },
+    {
+      "id": "fda-assessment-aid",
+      "corpus": "evidence",
+      "title": "FDA QEA brain injury adjunctive oculomotor assessment aid classification",
+      "url": "https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPCD/classification.cfm?ID=QEA",
+      "publisher": "US Food and Drug Administration",
+      "version": "Classification page reviewed September 7 2026",
+      "version_kind": "dated_page",
+      "relevance": "Example of an adjunctive device category, not standalone concussion diagnosis; not a classification of this prototype.",
+      "access": "metadata_only",
+      "license_status": "pending_manual_review",
+      "evidence_role": "reference_only",
+      "can_promote_evidence": false
+    },
+    {
+      "id": "nocsae-football-index",
+      "corpus": "evidence",
+      "title": "NOCSAE catalog of football equipment standards",
+      "url": "https://nocsae.org/standards-library/",
+      "publisher": "NOCSAE",
+      "version": "Living standards index, revision not pinned",
+      "version_kind": "living_page",
+      "relevance": "Locate current helmet, faceguard, apparatus and recertification requirements; standards text and certification not imported.",
+      "access": "metadata_only",
+      "license_status": "pending_manual_review",
+      "evidence_role": "reference_only",
+      "can_promote_evidence": false
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "schema": "neuroshield.corpora.v1",
+  "domain": "biomechanics",
+  "sources": [
+    {
+      "id": "nfl-fe-toolkit",
+      "corpus": "biomechanics",
+      "title": "NFL finite element helmet models and dummy toolkit",
+      "url": "https://www.nfl.com/playerhealthandsafety/equipment-and-innovation/engineering-technology/finite-element-models-new-tools-for-innovation-in-football-helmet-design",
+      "publisher": "National Football League",
+      "version": "2018 landing page, toolkit revision unverified",
+      "version_kind": "dated_page",
+      "relevance": "Four helmet finite element models, test configurations, dummy components, experimental validation material; confirm asset license and format before download.",
+      "access": "metadata_only",
+      "license_status": "pending_manual_review",
+      "evidence_role": "reference_only",
+      "can_promote_evidence": false
+    },
+    {
+      "id": "nocsae-nd002",
+      "corpus": "biomechanics",
+      "title": "NOCSAE ND002 new football helmet performance specification",
+      "url": "https://nocsae.org/nd002-standard-performance-specification-for-newly-manufactured-football-helmets/",
+      "publisher": "NOCSAE",
+      "version": "ND002-25, effective August 2026",
+      "version_kind": "explicit_version",
+      "relevance": "Newly manufactured football helmet standard and certification boundary; this link is not permission to redistribute standard text.",
+      "access": "metadata_only",
+      "license_status": "pending_manual_review",
+      "evidence_role": "reference_only",
+      "can_promote_evidence": false
+    },
+    {
+      "id": "nocsae-nd081",
+      "corpus": "biomechanics",
+      "title": "NOCSAE ND081 impact headform pneumatic ram test method",
+      "url": "https://nocsae.org/football-standards/",
+      "publisher": "NOCSAE",
+      "version": "ND081 standard landing list, revision must be checked",
+      "version_kind": "living_page",
+      "relevance": "Headform mounted on Hybrid III neck, centric and noncentric impact tests, linear and rotational acceleration; version and apparatus need verification.",
+      "access": "metadata_only",
+      "license_status": "pending_manual_review",
+      "evidence_role": "reference_only",
+      "can_promote_evidence": false
+    },
+    {
+      "id": "nocsae-nd087",
+      "corpus": "biomechanics",
+      "title": "NOCSAE ND087 football faceguard impact requirements",
+      "url": "https://nocsae.org/nd089-related-documents/",
+      "publisher": "NOCSAE",
+      "version": "ND087 listed as related standard; current revision unverified",
+      "version_kind": "living_page",
+      "relevance": "Football faceguard laboratory impact testing and performance requirements, including candidate facemask mount scope.",
+      "access": "metadata_only",
+      "license_status": "pending_manual_review",
+      "evidence_role": "reference_only",
+      "can_promote_evidence": false
+    },
+    {
+      "id": "vt-star-2026",
+      "corpus": "biomechanics",
+      "title": "Virginia Tech 2026 varsity football helmet STAR ratings methodology",
+      "url": "https://www.helmet.bme.vt.edu/varsity-football-helmet-ratings.html",
+      "publisher": "Virginia Tech Helmet Lab",
+      "version": "2026 edition",
+      "version_kind": "dated_page",
+      "relevance": "Independent laboratory testing of football helmets, impact scenarios, linear and rotational accelerations, consumer rating limitations.",
+      "access": "metadata_only",
+      "license_status": "pending_manual_review",
+      "evidence_role": "reference_only",
+      "can_promote_evidence": false
+    },
+    {
+      "id": "nfl-hps-faq",
+      "corpus": "biomechanics",
+      "title": "NFL Helmet Challenge protocol and HPS frequently asked questions",
+      "url": "https://www.nfl.com/playerhealthandsafety/equipment-and-innovation/innovation-challenges/the-nfl-helmet-challenge-frequently-asked-questions",
+      "publisher": "National Football League",
+      "version": "Helmet Challenge FAQ, historical protocol; current revision unverified",
+      "version_kind": "living_page",
+      "relevance": "Helmet performance score based on selected on-field impact reconstructions, Hybrid III head kinematics and test design.",
+      "access": "metadata_only",
+      "license_status": "pending_manual_review",
+      "evidence_role": "reference_only",
+      "can_promote_evidence": false
+    }
+  ]
+}

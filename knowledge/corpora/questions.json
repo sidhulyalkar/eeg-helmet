@@ -1,0 +1,101 @@
+{
+  "schema": "neuroshield.corpora.v1",
+  "questions": [
+    {
+      "id": "b1",
+      "domain": "biomechanics",
+      "query": "Find NFL finite element helmet dummy and impact model toolkit",
+      "expected_ids": [
+        "nfl-fe-toolkit"
+      ]
+    },
+    {
+      "id": "b2",
+      "domain": "biomechanics",
+      "query": "What is the football helmet ND002 certification standard",
+      "expected_ids": [
+        "nocsae-nd002"
+      ]
+    },
+    {
+      "id": "b3",
+      "domain": "biomechanics",
+      "query": "Locate headform pneumatic ram test noncentric acceleration",
+      "expected_ids": [
+        "nocsae-nd081"
+      ]
+    },
+    {
+      "id": "b4",
+      "domain": "biomechanics",
+      "query": "Find faceguard mount impact requirements",
+      "expected_ids": [
+        "nocsae-nd087"
+      ]
+    },
+    {
+      "id": "b5",
+      "domain": "biomechanics",
+      "query": "Which laboratory uses STAR football helmet ratings",
+      "expected_ids": [
+        "vt-star-2026"
+      ]
+    },
+    {
+      "id": "b6",
+      "domain": "biomechanics",
+      "query": "NFL helmet performance score HPS impact protocol",
+      "expected_ids": [
+        "nfl-hps-faq"
+      ]
+    },
+    {
+      "id": "n1",
+      "domain": "neural",
+      "query": "EEG electrode positions and coordinate frames in BIDS",
+      "expected_ids": [
+        "eeg-bids-v17"
+      ]
+    },
+    {
+      "id": "n2",
+      "domain": "neural",
+      "query": "OpenNeuro public datasets consent requirements",
+      "expected_ids": [
+        "openneuro-data-policy"
+      ]
+    },
+    {
+      "id": "n3",
+      "domain": "neural",
+      "query": "public EEG dataset metadata example",
+      "expected_ids": [
+        "openneuro-eeg-example"
+      ]
+    },
+    {
+      "id": "e1",
+      "domain": "evidence",
+      "query": "What guidance says remove athlete when concussion suspected",
+      "expected_ids": [
+        "cdc-concussion-response"
+      ]
+    },
+    {
+      "id": "e2",
+      "domain": "evidence",
+      "query": "FDA adjunctive brain injury eye movement assessment device",
+      "expected_ids": [
+        "fda-assessment-aid"
+      ]
+    },
+    {
+      "id": "e3",
+      "domain": "evidence",
+      "query": "Where is the football NOCSAE standards index",
+      "expected_ids": [
+        "nocsae-football-index"
+      ]
+    }
+  ]
+}
