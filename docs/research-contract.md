@@ -48,7 +48,7 @@ One versioned `NeuralEvent` adapter should convert validated, *consented* neural
 ## V0.2 numerical qualification (partial S1 prerequisites only)
 
 `python -m neuroshield qualify --scenario oblique --out report.json`
-checks four step sizes (1, 0.5, 0.25, 0.125 ms). The pass criterion checks relative changes of rounded peak metrics between the finest two steps under a fixed 5% tolerance. It is not a mathematical proof of convergence; it does not establish experimental validity or upgraded evidence level. Traces are deterministic but no independent solver, conservation identity, stiff-stop convergence bound or experimental uncertainty study is implemented.
+checks four step sizes (1, 0.5, 0.25, 0.125 ms). The pass criterion checks relative changes of rounded peak metrics between the finest two steps under a fixed 5% tolerance. It is not a mathematical proof of convergence; it does not establish experimental validity or upgraded evidence level. This describes the historical V0.2 command only; V0.3 introduces a separate RK4 cross-check and an energy-balance audit below. Neither version establishes experimental uncertainty or physical validity.
 
 ## V0.2 synthetic session contract
 

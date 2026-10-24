@@ -1,137 +1,84 @@
 # NeuroShield Research Workbench
 
-**V0.3: A runnable, open-source *synthetic research prototype* for exploratory football-helmet biomechanics, synchronized electrophysiology visualization, and transparent comparison of candidate mechanical designs.**
+**V0.3: an open-source, local-first, entirely synthetic biomechanics and electrophysiology research demonstration.**
 
-> **Not protective equipment or a medical device.** No concussion prediction, diagnosis, return-to-play decision, actual brain tissue strain or helmet certification is supported. All dashboard signals are **SYNTHETIC**, mechanics are **ILLUSTRATIVE**, and the model does not represent a real commercial helmet. Never mount the generated CAD geometry on sports equipment.
+> **Safety and scientific scope:** This is **not a medical device, protective helmet design, concussion detector, brain-strain estimator, or certification test**. Never install the concept CAD on protective equipment. No real athlete data are accepted by the demo server. There is no headform calibration, injury model, NOCSAE/NFL testing, or evidence of concussion reduction. All reported mechanics remain S0, unvalidated.
 
-*Dashboard screenshot is included in the downloadable local release archive; run the local server for the interactive workbench.*
+## Run locally
 
-## Start the interactive workbench
-
-Python 3.10+ required, no runtime third-party dependencies.
+Python 3.10+, no third-party runtime dependencies:
 
 ```bash
-# From the unzipped neuroshield-research/ directory:
 python -m pip install -e .
-python -m neuroshield serve
-# Open http://127.0.0.1:8765 in a browser
-```
-
-If installing in an offline environment with setuptools already installed: `python -m pip install --no-build-isolation -e .`. Or run without installation using `PYTHONPATH=src python -m neuroshield serve` on macOS/Linux; PowerShell: `$env:PYTHONPATH='src'; python -m neuroshield serve`.
-
-The service is bound to localhost and has **no real-data upload route**. No external JavaScript or CSS dependencies, database, API keys or athlete records are used.
-
-## What is actually implemented?
-
-| System | V0.1 status | Evidence status |
-|---|---|---|
-| Facemask/shell/head dynamic simulation (translational and rotational) | Working | S0, illustrative |
-| Frontal, oblique, lateral and rear simulated impacts | Working | S0, synthetic |
-| Slider-controlled mount stiffness/damping/travel and liner properties | Working | S0, parameter exploration |
-| Synchronized 4-panel replay and two kinematic comparison charts | Working | S0, visualized toy model |
-| Synthetic EEG + bilateral cervical EMG with motion artifact quality overlay | Working | S0, synthetic; no real EEG |
-| Candidate-vs-reference mechanical metrics and hard-stop warning | Working | S0, not safety scores |
-| Reproducible multi-scenario Pareto parameter sweep | Working | Toy-model exploration only |
-| Local JSON export + SHA-256 scientific and execution fingerprints | Working | Deterministic reproducibility identifiers only |
-| Quaternion head-to-torso kinematics + quality-aware sample alignment | Working as library | Requires real IMU calibration |
-| Local CLI CSV schema validator | Working | Structural validation only |
-| Parametric OpenSCAD conceptual mounting fixture source generation | Working | Visualization only, never for equipment |
-| Explicit purpose/scope consent decision primitive | Unit tested | Not production authentication |
-| Actual instrumented mouthguard, head-neck finite-element model, real EEG hardware | **Not implemented** | Would require device/lab work |
-| Actual brain strain, concussion model, NOCSAE/NFL test certification | **Not implemented** | Not claimed |
-
-### Dashboard workflow
-
-1. Choose an impact location (frontal facemask, oblique facemask, lateral shell, rear shell).
-2. Tune proposed faceguard/liner parameters and click **Run comparison**.
-3. Use **Play**, the scrubber, or arrow keys to navigate the **same time sample** in all four panels and both charts.
-4. Inspect the reference vs candidate metrics and warning list. Worsening angular acceleration is shown even if peak linear acceleration improves.
-5. Download an explicitly **SYNTHETIC** JSON record for reproducibility.
-
-All model parameters and scenarios are fixed in `src/neuroshield/models.py`; equations and masses are in `src/neuroshield/physics.py`. Each numerical run records a stable SHA-256 **scientific fingerprint** over model source and inputs, separate from a hash of its produced traces. The synthetic electrophysiology overlays in `signals.py` intentionally include motion artifacts and flagged data-quality intervals.
-
-## V0.3 numerical qualification and multimodal session contract
-
-This milestone adds configurable simulation time steps (0.125–1.0 ms), a four-resolution numerical-refinement check, and a strictly **synthetic-only** multimodal session interchange contract.
-
-The refinement gate compares the five principal peak outputs between the two finest tested time steps and produces `PASS_NUMERICAL_REFINEMENT_ONLY` or `FAIL_NUMERICAL_REFINEMENT`. **A numerical PASS is not S1 physical validation**. There is still no independent solver, measured headform, calibrated neck or biological recording.
-
-```bash
-python -m neuroshield qualify --scenario oblique --out numerical-oblique.json
-python -m neuroshield qualify-independent --scenario all --out numerical-audit.json
-python -m neuroshield synthetic-session --out SYNTHETIC-session.json
-python -m neuroshield validate-session SYNTHETIC-session.json
-```
-
-The session validator rejects non-synthetic origin labels, identifiable subject fields, unrecognized modalities/units, non-finite values, out-of-order timestamps, inconsistent sample lengths and illegal signal quality scores. It flags possible timing gaps. It does not establish true device clock synchronization, privacy of actual athlete data or hardware signal fidelity. **Never upload real athlete recordings to the demonstration interface.**
-
-## Other developer commands
-
-```bash
 python -m unittest discover -s tests -v
+python -m neuroshield serve
+# Open http://127.0.0.1:8765
+```
+
+For offline development with setuptools installed, try `python -m pip install --no-build-isolation -e .`; on macOS/Linux you can skip installation with `PYTHONPATH=src python -m neuroshield serve`. On Windows PowerShell: `$env:PYTHONPATH='src'; python -m neuroshield serve`.
+
+The service binds to loopback only. There is no real-data upload API, user account system, database or remote telemetry. Privacy policy primitives are educational and **not** production authorization or medical-record security.
+
+## Workbench capabilities
+
+| Module | What it does | Evidence |
+|---|---|---|
+| `physics.py` | Three-body facemask/shell/head, two-axis, spring/damper/stop impact model | Synthetic toy mechanics |
+| `analysis.py` / `web/` | Four-panel synchronized replay with comparative metrics, force timeline and synthetic EEG/EMG | Visualization only |
+| `models.py` | Four controlled synthetic collision scenarios, bounded stiffness/damping/travel | Not product-specific |
+| `design_space.py` | Multi-scenario Pareto parameter exploration that retains worsening responses | Not a helmet safety ranking |
+| `qualification.py` | Four-step-size peak-metric refinement | Partial numerical check |
+| `independent_solver.py` | Separately expressed RK4 solver with conservative spring/stop energy, damping and applied work | Same unvalidated physical assumptions |
+| `independent_qualification.py` | 16-case cross-solver, RK4 refinement and energy-balance audit with strict numerical gates | **Numerical-only** PASS/FAIL |
+| `kinematics.py` | Quaternion head-to-torso orientation and gap-aware interpolation | Not calibrated to sensors |
+| `session.py` / `ingestion.py` | Synthetic-only session data contract and local CSV shape/unit validator | No actual acquisition |
+| `privacy.py` | Basic purpose/scope consent decision checks | Not production-grade access control |
+| `cad.py` | Nonfunctional OpenSCAD geometry concept | **NEVER INSTALL** on equipment |
+
+**No real EEG/EMG or IMU acquisition, cervical injury criterion, finite-element brain strain, concussion prediction, athlete-specific risk estimate or validated helmet design is implemented.**
+
+## Reproducible experiments
+
+```bash
+# Synthetic helmet comparison and multi-design exploration
 python -m neuroshield export --scenario oblique --out synthetic-oblique.json
-python -m neuroshield cad-preview --out cad/concept-mount.scad
-python -m neuroshield sweep --out examples/parameter-sweep.json
-python -m neuroshield validate-csv path/to/imu.csv
+python -m neuroshield sweep --out pareto-SYNTHETIC.json
+
+# Historical V0.2 single-integrator refinement test
+python -m neuroshield qualify --scenario oblique --out numerical-oblique.json
+
+# V0.3 cross-integrator & energy audit, default 4 scenarios x 4 designs
+python -m neuroshield qualify-independent --scenario all --out numerical-audit.json
+
+# Synthetic-only session interchange
+python -m neuroshield synthetic-session --out session-SYNTHETIC.json
+python -m neuroshield validate-session session-SYNTHETIC.json
+
+# Shape and unit validation on a *local* CSV; does not anonymize or authorize sharing
+python -m neuroshield validate-csv examples/kinematics-SYNTHETIC.csv
+
+# Geometry illustration, not a buildable helmet component
+python -m neuroshield cad-preview --out concept-preview.scad
 ```
 
-The local CSV validator expects `time_s,head_ax_m_s2,head_ay_m_s2,head_az_m_s2,head_gx_rad_s,head_gy_rad_s,head_gz_rad_s`. All values must be finite and timestamps increasing. **Validation does not upload, anonymize, diagnose or share data.**
+### What numerical qualification means
 
-## Code layout
+The independent check compares an original semi-implicit Euler implementation with a separately written RK4 integrator **of the same toy equations**. It checks maximum symmetric peak-metric discrepancy, RK4 refinement between 0.25 and 0.125 ms, mechanical energy balance and agreement on mount-stop engagement. Cases fail the command when a threshold is exceeded. CI exercises all 16 combinations on Linux, Windows and macOS.
 
-```text
-src/neuroshield/
-  models.py       scenario catalogue + bounded versionable configuration
-  physics.py      deterministic 3-lump reduced-order dynamics
-  signals.py      synthetic EEG/EMG + quality gates
-  analysis.py     paired baseline/candidate comparison
-  kinematics.py   unit quaternions, segment-relative rotation, sample gap checks
-  provenance.py   distinct SHA-256 design identity and execution trace hash
-  design_space.py multi-scenario exploratory Pareto sweep
-  privacy.py      explicit-purpose and per-modality consent policy primitive
-  ingestion.py    local CSV structure/units validator
-  cad.py          OpenSCAD view-only geometry emitter
-  qualification.py  numerical step-size refinement report (S0 only)
-  independent_solver.py       independently expressed RK4 + energy budget (synthetic)
-  independent_qualification.py cross-solver 16-case qualification matrix (S0 only)
-  session.py       strictly synthetic multimodal session schema validator
-  server.py       localhost-only stdlib JSON API and static host
-  web/            dependency-free dashboard
-  __main__.py     CLI commands
-cad/              CAD caution / optional OpenSCAD output
-docs/             science evidence ladder and validation gates
-tests/            reproducible unit/API test suite
-.github/workflows automated cross-platform test matrix
-```
+The 16-case fixture currently passes these **nonclinical mathematical tolerances**: 5% cross-solver difference, 1% reference refinement difference, 0.5% normalized energy residual and identical stop-engagement classification. Read `examples/numerical-audit-summary-SYNTHETIC.json` for per-case values; regenerate a full report via the CLI. **Passing is not S1 physical verification**. Both solvers could be consistently wrong about actual helmet dynamics. The baseline solver also rounds peak observables; this precision limitation is reported rather than hidden.
 
-## Model description and known limitations
+## Source layout and research contract
 
-- The facemask, shell and head are modeled as three lumped masses and three inertias, connected by spring/damper pairs in **one linear** and **one angular** dimension. The torso is a fixed anchor with a passive stiffness/damper surrogate.
-- Forces use a half-sine pulse with a scenario-specific duration. This is **not** a standardized NFL/NOCSAE loading configuration.
-- The facemask-to-shell stop adds strongly increasing stiffness after a user-selected travel bound; it is a mathematical safeguard and warning, not an engineered retention mechanism.
-- Response-visualization colors come from a weighted, normalized linear/angular acceleration proxy. **They are not simulated strain distributions.**
-- Torso-relative angle and neck torque are approximations from the fixed-torso model, **not** actual cervical or spinal injuries or measurements.
-- The EEG/EMG overlays are deterministic synthetic waveforms; there is no biological coupling between neural activity and the mechanical model, and quality flags are illustrative.
-- Model calibration, convergence at stiff parameter boundaries, uncertainty analysis, real geometry and material response, parameter identifiability, torsional/3D coupling, injury outcomes and independent reproduction **remain future research**.
+- [`docs/research-contract.md`](docs/research-contract.md): S0→S4 evidence ladder, numerical threshold definitions, and clinical/privacy boundaries.
+- [`docs/architecture-and-next-experiments.md`](docs/architecture-and-next-experiments.md): architecture, experimental roadmap, sensors, and future neurOS integration.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`SECURITY.md`](SECURITY.md): developer practices and responsible reporting.
+- [`docs/source-sha256-manifest.json`](docs/source-sha256-manifest.json): **historical V0.2 snapshot**, not a current-branch verification manifest. V0.3 audit reports separately contain hashes of the numerical source and parameter policy.
 
-See [research contract](docs/research-contract.md) for a staged scientific qualification plan and [system architecture](docs/architecture-and-next-experiments.md) for the path from this demo to calibrated hardware and eventual neurOS integration.
+## Next gates
 
-## Ethics, safety and governance
+1. **Physics credibility:** unrounded and time-aligned primary observables, independently reproduced full-system benchmarks, parameter sensitivity and energy accounting for all discontinuities.
+2. **Bench validation:** responsibly licensed helmet/headform configurations, measured acceleration traces, force/torque calibration, cervical loading and stop-failure tests.
+3. **Neural recording feasibility:** ethics-approved stationary EEG/EMG studies, rigorous contact-quality and motion-artifact analysis, device clock synchronization and informed consent.
+4. **Clinical evidence:** external prospective research with appropriate specialists and independent assessment. Never infer concussion diagnosis or return-to-play clearance from synthetic kinematics.
 
-The local demo allows only synthetic data. The `privacy.py` module checks a scoped consent object but is **not** a data-security implementation. No real athlete data should be served until audited identity, field-level access, encryption, informed consent, subject deletion/revocation, retention policy, and medical/operations separation are added and independently reviewed. Never use unvalidated metrics for athlete selection, concussion diagnosis or clearance.
-
-Independent bench testing, qualified safety engineers, approvals, and compliance with relevant NOCSAE standards such as ND002 (helmets), ND081 (linear impactor protocol), and ND087 (faceguards) are prerequisites to consideration as protective equipment. [NOCSAE standards library](https://nocsae.org/football-standards/).
-
-## Roadmap
-
-**P1: scientific integrity.** V0.2 implements a preliminary time-step refinement report. Next: independent integrator, analytic benchmarks, energy accounting, sensitivity/uncertainty, reference tests, geometry/material validation. No clinical claims.
-
-**P2: mechanical validation.** Properly licensed reference finite-element data, qualified lab and headform tests, neck loading and facemask/chinstrap retention, worst-case safety regressions.
-
-**P3: actual sensor feasibility.** Separate head-coupled and helmet IMUs, synchronized torso sensors, cervical sEMG and post-impact EEG with artifact rejection and calibration.
-
-**P4: human/clinical research.** Consent/governance, clinician-supervised outcomes, blinded longitudinal validation and neurOS dataset lineage/evaluation adapters.
-
-## License
-
-Apache-2.0, see [LICENSE](LICENSE). This code is for research demonstration and carries no fitness-for-purpose or injury-prevention warranty.
+**License:** Apache-2.0; see [`LICENSE`](LICENSE). No claims of fitness for protective use.

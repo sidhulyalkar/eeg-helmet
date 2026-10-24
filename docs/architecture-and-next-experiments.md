@@ -1,6 +1,6 @@
 # NeuroShield research platform: engineering architecture and next experimental gates
 
-**Current status:** V0.1 is a deterministic, non-clinical research demonstration. There is no approved hardware, recorded EEG, biomechanical truth, patient or athlete database, or clinical model.
+**Current status:** V0.3 is a deterministic, non-clinical research demonstration. There is no approved hardware, recorded EEG, biomechanical truth, patient or athlete database, or clinical model.
 
 ## Module graph
 
@@ -22,6 +22,8 @@ physics.py                     | (standalone library)
    |
    +--> provenance.py (scientific fingerprint vs trace digest)
    +--> design_space.py (multi-scenario, nonvalidated Pareto grid)
+   +--> independent_solver.py (separately implemented toy-model RK4 reference)
+   +--> independent_qualification.py (16-case cross-check + energy ledger)
    +--> cad.py (unusable geometry-study OpenSCAD output)
 
 Future, NOT implemented: physical sensors -> acquisition -> device clock alignment
