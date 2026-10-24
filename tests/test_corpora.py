@@ -105,6 +105,14 @@ class CorpusTests(unittest.TestCase):
         with self.assertRaises(KnowledgeError):
             corpora.stage_metadata(self.root, output)
 
+    def test_windows_crlf_checkout_is_equivalent_to_committed_blob(self):
+        self.init_git()
+        p = self.root / "knowledge" / "corpora" / "biomechanics.json"
+        p.write_bytes(p.read_bytes().replace(b"\n", b"\r\n"))
+        output = Path(self.tmp.name) / "crlf-staged"
+        result = corpora.stage_metadata(self.root, output)
+        self.assertEqual(result["source_count"], 12)
+
     def test_reject_staging_dirty_catalog(self):
         self.init_git()
         self.modify("biomechanics", lambda x: x["sources"][0].update(relevance="Secret uncommitted data should not be indexed"))
