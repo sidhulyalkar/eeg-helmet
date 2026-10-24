@@ -1,3 +1,10 @@
+## V0.4.0: timebase accuracy and NONHUMAN bench-data contract (2026-10-23)
+- Pre-step aligned head state, head acceleration, angular acceleration, mount displacement and neck torque on one timebase; avoids a silent 1-sample offset.
+- Unrounded primary peak observables and opt-in full-precision synthetic audit traces, including a SHA-256 digest and explicit sample semantics.
+- Corrected V0.2 and V0.3 numerical refinement comparisons to use unrounded primary peaks. Remaining status S0 even when gates pass.
+- Strict offline, read-only NONHUMAN headform CSV+manifest structural validator. Rejects human origin, missing/duplicate columns, timestamp reversal, nonfinite data, undeclared frames and units. Flags gaps and reports content hashes.
+- Added 6 dedicated regression tests; no live athlete data, calibration claims or helmet safety claims.
+
 ## V0.3.0: numerical cross-check (2026-10-23)
 - Independently expressed RK4 solution of the same synthetic equations, including applied work, mechanical energy storage, progressive stop energy, and damping.
 - Cross-solver report: 4 impact scenarios x 4 bounded design configurations, strict numerical-only pass/fail gates, source SHA-256s, case-level failures and conservative energy accounting.

@@ -45,7 +45,7 @@ def qualify(scenario: str, params: Parameters | None = None,
     runs = [simulate(scenario, p, dt=dt) for dt in DT_LEVELS_S]
     rows = []
     for key in OBSERVABLES:
-        observed = [r["metrics"][key] for r in runs]
+        observed = [r["metrics_unrounded"][key] for r in runs]
         last_change = _fractional_change(observed[-2], observed[-1])
         previous_change = _fractional_change(observed[-3], observed[-2])
         rows.append({"metric": key, "values": observed,
@@ -60,14 +60,14 @@ def qualify(scenario: str, params: Parameters | None = None,
         "scenario": scenario,
         "parameters": p.to_dict(),
         "step_sizes_s": DT_LEVELS_S,
-        "comparison": "relative change of each rounded peak value between the finest two step sizes",
+        "comparison": "relative change of each unrounded peak value between the finest two step sizes",
         "tolerance_fraction": tolerance,
         "metrics": rows,
         "mount_stop_engaged": all_stops,
         "status": "PASS_NUMERICAL_REFINEMENT_ONLY" if all(r["within_tolerance"] for r in rows) else "FAIL_NUMERICAL_REFINEMENT",
-        "limitations": ["No independent integrator or analytical reference solution",
+        "limitations": ["See qualify-independent for a separate RK4 integration cross-check",
                         "No measured helmet or instrumented headform data",
-                        "Peak metrics rounded by the toy simulator before comparison",
+                        "Unrounded primary peak metrics used; trace timebase is pre-step aligned",
                         "No tissue-strain, injury-risk or clinical inference"],
     }
     result["report_sha256"] = canonical_hash(result)

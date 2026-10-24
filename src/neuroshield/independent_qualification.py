@@ -60,7 +60,7 @@ def qualify_independent(scenario: str = "all", *, solver_tol: float = .05,
             primary=simulate(scene,p,dt=.000125)
             reference=solve_reference(scene,p,dt=.000125)
             coarse=solve_reference(scene,p,dt=.00025)
-            errors={key:relative_error(primary["metrics"][key],reference["metrics"][key]) for key in METRICS}
+            errors={key:relative_error(primary["metrics_unrounded"][key],reference["metrics"][key]) for key in METRICS}
             refinement={key:relative_error(coarse["metrics"][key],reference["metrics"][key]) for key in METRICS}
             energy=reference["energy_budget_j"]
             scale=max(abs(energy["external_work"]),abs(energy["damping_dissipation"]),
@@ -70,6 +70,7 @@ def qualify_independent(scenario: str = "all", *, solver_tol: float = .05,
                   "primary_method":"semi_implicit_euler", "reference_method":"independent_explicit_rk4",
                   "primary_dt_s":.000125,"reference_dt_s":.000125,"coarse_reference_dt_s":.00025,
                   "metric_comparison":{key:{"primary_rounded":primary["metrics"][key],
+                                              "primary_unrounded":primary["metrics_unrounded"][key],
                                               "reference_unrounded":reference["metrics"][key],
                                               "cross_solver_fraction":errors[key],
                                               "reference_refinement_fraction":refinement[key]} for key in METRICS},
@@ -99,7 +100,7 @@ def qualify_independent(scenario: str = "all", *, solver_tol: float = .05,
             "case_count":len(cases),"passed":sum(c["status"]=="PASS_NUMERICAL_ONLY" for c in cases),
             "status":"PASS_NUMERICAL_ONLY" if all(c["status"]=="PASS_NUMERICAL_ONLY" for c in cases) else "FAIL_NUMERICAL",
             "limitations":["Both methods implement the same simplified unvalidated physical assumptions",
-                           "Primary solver returns rounded metrics; cross-solver comparison includes rounding error",
+                           "Primary solver audit metrics use full precision and a pre-step timebase",
                            "Fixed-torso, lumped-mass single-axis motion is not an instrumented headform or brain model",
                            "Numerical convergence does not establish protective benefit or concussion prediction",
                            "Impact force profile is prescribed, not a validated contact boundary condition"]}
