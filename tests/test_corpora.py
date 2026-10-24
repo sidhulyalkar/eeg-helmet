@@ -108,7 +108,8 @@ class CorpusTests(unittest.TestCase):
     def test_windows_crlf_checkout_is_equivalent_to_committed_blob(self):
         self.init_git()
         p = self.root / "knowledge" / "corpora" / "biomechanics.json"
-        p.write_bytes(p.read_bytes().replace(b"\n", b"\r\n"))
+        normalized = p.read_bytes().replace(b"\r\n", b"\n")
+        p.write_bytes(normalized.replace(b"\n", b"\r\n"))
         output = Path(self.tmp.name) / "crlf-staged"
         result = corpora.stage_metadata(self.root, output)
         self.assertEqual(result["source_count"], 12)
