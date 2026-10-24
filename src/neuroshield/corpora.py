@@ -236,7 +236,10 @@ def stage_metadata(root: str | Path, destination: str | Path) -> dict:
             committed = _run_git(root, ["show", f"HEAD:{name}"])
         except KnowledgeError as exc:
             raise KnowledgeError(f"Commit the catalog before staging: {name}") from exc
-        if committed != (root / name).read_bytes():
+        checkout = (root / name).read_bytes()
+        # Windows core.autocrlf may materialize CRLF for committed LF blobs.
+        # Only canonicalize line endings; any substantive edit still fails.
+        if committed != checkout.replace(b"\r\n", b"\n"):
             raise KnowledgeError(f"Catalog differs from committed HEAD: {name}")
     outputs = []
     for domain in DOMAINS:
