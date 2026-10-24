@@ -33,6 +33,18 @@ def main():
     bench = command.add_parser("validate-headform", help="Local-only NONHUMAN headform metadata and CSV structure check")
     bench.add_argument("manifest")
     bench.add_argument("csv")
+    intake = command.add_parser("inspect-bench-intake", help="Offline NONHUMAN provenance and quality-gate check")
+    intake.add_argument("profile")
+    intake.add_argument("manifest")
+    intake.add_argument("csv")
+    paired = command.add_parser("compare-bench-pair", help="Offline nonhuman reference/candidate comparison; no safety rating")
+    paired.add_argument("reference_profile")
+    paired.add_argument("reference_manifest")
+    paired.add_argument("reference_csv")
+    paired.add_argument("candidate_profile")
+    paired.add_argument("candidate_manifest")
+    paired.add_argument("candidate_csv")
+    paired.add_argument("--out", required=True)
     session = command.add_parser("validate-session", help="Check local synthetic-only session contract")
     session.add_argument("path")
     fixture = command.add_parser("synthetic-session", help="Write a synthetic-only multimodal fixture")
@@ -137,6 +149,16 @@ def main():
     elif args.command == "validate-headform":
         from .headform import validate_headform_bundle
         print(json.dumps(validate_headform_bundle(args.manifest, args.csv), indent=2))
+    elif args.command == "inspect-bench-intake":
+        from .bench_intake import validate_intake
+        print(json.dumps(validate_intake(args.profile, args.manifest, args.csv), indent=2, allow_nan=False))
+    elif args.command == "compare-bench-pair":
+        from .bench_intake import compare_paired_trials
+        report = compare_paired_trials(
+            (args.reference_profile, args.reference_manifest, args.reference_csv),
+            (args.candidate_profile, args.candidate_manifest, args.candidate_csv))
+        Path(args.out).write_text(json.dumps(report, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+        print(f"Descriptive NONHUMAN benchmark: {report['status']} => {args.out}")
     elif args.command == "validate-session":
         from .session import validate_session_file
         print(json.dumps(validate_session_file(args.path), indent=2))
