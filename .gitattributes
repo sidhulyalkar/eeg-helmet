@@ -1,0 +1,2 @@
+# Keep raw-byte SHA-256 pinned synthetic acquisition fixtures reproducible on Windows.
+/examples/bench-*-SYNTHETIC.csv text eol=lf
