@@ -1,0 +1,215 @@
+{
+  "source": "SYNTHETIC DESIGN EXPLORATION",
+  "model_clinically_validated": false,
+  "comparison": "Worst-case candidate/reference ratio across four toy impact scenes; >1 means worse.",
+  "objective_names": [
+    "peak_head_accel_g",
+    "peak_angular_accel_rad_s2",
+    "peak_neck_torque_proxy_nm"
+  ],
+  "candidate_count": 36,
+  "pareto_count": 10,
+  "pareto_frontier": [
+    {
+      "parameters": {
+        "mount_k_n_m": 60000.0,
+        "mount_c_ns_m": 170.0,
+        "mount_travel_mm": 3.5,
+        "liner_k_n_m": 52000.0,
+        "liner_c_ns_m": 330.0
+      },
+      "worst_case_ratios": {
+        "peak_head_accel_g": 0.96786,
+        "peak_angular_accel_rad_s2": 1.20795,
+        "peak_neck_torque_proxy_nm": 1.00266
+      },
+      "mount_stop_scenarios": [
+        "facemask",
+        "oblique",
+        "lateral",
+        "rear"
+      ]
+    },
+    {
+      "parameters": {
+        "mount_k_n_m": 60000.0,
+        "mount_c_ns_m": 170.0,
+        "mount_travel_mm": 3.5,
+        "liner_k_n_m": 65000.0,
+        "liner_c_ns_m": 330.0
+      },
+      "worst_case_ratios": {
+        "peak_head_accel_g": 1.01095,
+        "peak_angular_accel_rad_s2": 1.30023,
+        "peak_neck_torque_proxy_nm": 1.0
+      },
+      "mount_stop_scenarios": [
+        "facemask",
+        "oblique",
+        "lateral",
+        "rear"
+      ]
+    },
+    {
+      "parameters": {
+        "mount_k_n_m": 60000.0,
+        "mount_c_ns_m": 170.0,
+        "mount_travel_mm": 7.0,
+        "liner_k_n_m": 65000.0,
+        "liner_c_ns_m": 330.0
+      },
+      "worst_case_ratios": {
+        "peak_head_accel_g": 1.00908,
+        "peak_angular_accel_rad_s2": 1.37224,
+        "peak_neck_torque_proxy_nm": 1.0005
+      },
+      "mount_stop_scenarios": [
+        "facemask",
+        "oblique",
+        "lateral",
+        "rear"
+      ]
+    },
+    {
+      "parameters": {
+        "mount_k_n_m": 60000.0,
+        "mount_c_ns_m": 310.0,
+        "mount_travel_mm": 3.5,
+        "liner_k_n_m": 65000.0,
+        "liner_c_ns_m": 330.0
+      },
+      "worst_case_ratios": {
+        "peak_head_accel_g": 1.01164,
+        "peak_angular_accel_rad_s2": 1.2216,
+        "peak_neck_torque_proxy_nm": 1.00089
+      },
+      "mount_stop_scenarios": [
+        "facemask",
+        "oblique",
+        "lateral",
+        "rear"
+      ]
+    },
+    {
+      "parameters": {
+        "mount_k_n_m": 105000.0,
+        "mount_c_ns_m": 170.0,
+        "mount_travel_mm": 3.5,
+        "liner_k_n_m": 52000.0,
+        "liner_c_ns_m": 330.0
+      },
+      "worst_case_ratios": {
+        "peak_head_accel_g": 0.96227,
+        "peak_angular_accel_rad_s2": 1.08326,
+        "peak_neck_torque_proxy_nm": 1.00298
+      },
+      "mount_stop_scenarios": [
+        "facemask",
+        "oblique",
+        "lateral",
+        "rear"
+      ]
+    },
+    {
+      "parameters": {
+        "mount_k_n_m": 105000.0,
+        "mount_c_ns_m": 170.0,
+        "mount_travel_mm": 3.5,
+        "liner_k_n_m": 65000.0,
+        "liner_c_ns_m": 330.0
+      },
+      "worst_case_ratios": {
+        "peak_head_accel_g": 1.00559,
+        "peak_angular_accel_rad_s2": 1.16589,
+        "peak_neck_torque_proxy_nm": 1.00099
+      },
+      "mount_stop_scenarios": [
+        "facemask",
+        "oblique",
+        "lateral",
+        "rear"
+      ]
+    },
+    {
+      "parameters": {
+        "mount_k_n_m": 105000.0,
+        "mount_c_ns_m": 310.0,
+        "mount_travel_mm": 3.5,
+        "liner_k_n_m": 65000.0,
+        "liner_c_ns_m": 330.0
+      },
+      "worst_case_ratios": {
+        "peak_head_accel_g": 0.99439,
+        "peak_angular_accel_rad_s2": 1.12168,
+        "peak_neck_torque_proxy_nm": 1.00103
+      },
+      "mount_stop_scenarios": [
+        "facemask",
+        "oblique",
+        "lateral",
+        "rear"
+      ]
+    },
+    {
+      "parameters": {
+        "mount_k_n_m": 105000.0,
+        "mount_c_ns_m": 480.0,
+        "mount_travel_mm": 3.5,
+        "liner_k_n_m": 65000.0,
+        "liner_c_ns_m": 330.0
+      },
+      "worst_case_ratios": {
+        "peak_head_accel_g": 1.00505,
+        "peak_angular_accel_rad_s2": 1.08552,
+        "peak_neck_torque_proxy_nm": 1.00103
+      },
+      "mount_stop_scenarios": [
+        "facemask",
+        "oblique",
+        "lateral",
+        "rear"
+      ]
+    },
+    {
+      "parameters": {
+        "mount_k_n_m": 155000.0,
+        "mount_c_ns_m": 170.0,
+        "mount_travel_mm": 3.5,
+        "liner_k_n_m": 52000.0,
+        "liner_c_ns_m": 330.0
+      },
+      "worst_case_ratios": {
+        "peak_head_accel_g": 0.94645,
+        "peak_angular_accel_rad_s2": 0.97239,
+        "peak_neck_torque_proxy_nm": 1.0031
+      },
+      "mount_stop_scenarios": [
+        "facemask",
+        "oblique",
+        "lateral",
+        "rear"
+      ]
+    },
+    {
+      "parameters": {
+        "mount_k_n_m": 155000.0,
+        "mount_c_ns_m": 170.0,
+        "mount_travel_mm": 3.5,
+        "liner_k_n_m": 65000.0,
+        "liner_c_ns_m": 330.0
+      },
+      "worst_case_ratios": {
+        "peak_head_accel_g": 0.98598,
+        "peak_angular_accel_rad_s2": 1.04513,
+        "peak_neck_torque_proxy_nm": 1.00178
+      },
+      "mount_stop_scenarios": [
+        "facemask",
+        "oblique",
+        "lateral",
+        "rear"
+      ]
+    }
+  ],
+  "warning": "A Pareto design under unvalidated toy equations is not a helmet recommendation."
+}
