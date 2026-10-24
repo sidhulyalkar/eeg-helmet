@@ -121,7 +121,10 @@ class CorpusTests(unittest.TestCase):
     def test_symlink_manifest_disallowed(self):
         p = self.root / "knowledge" / "corpora" / "neural.json"
         p.unlink()
-        p.symlink_to(ROOT / "knowledge" / "corpora" / "neural.json")
+        try:
+            p.symlink_to(ROOT / "knowledge" / "corpora" / "neural.json")
+        except (OSError, NotImplementedError):
+            self.skipTest("OS does not allow symlink creation")
         with self.assertRaises(KnowledgeError):
             corpora.audit(self.root)
 
