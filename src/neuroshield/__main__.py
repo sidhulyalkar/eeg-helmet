@@ -24,6 +24,9 @@ def main():
     qual = command.add_parser("qualify", help="Generate S0 numerical step-size qualification report")
     qual.add_argument("--scenario", choices=SCENARIOS, default="oblique")
     qual.add_argument("--out", required=True)
+    iq = command.add_parser("qualify-independent", help="Cross-integrator / energy-budget audit (synthetic model only)")
+    iq.add_argument("--scenario", choices=("all", *SCENARIOS), default="all")
+    iq.add_argument("--out", required=True)
     session = command.add_parser("validate-session", help="Check local synthetic-only session contract")
     session.add_argument("path")
     fixture = command.add_parser("synthetic-session", help="Write a synthetic-only multimodal fixture")
@@ -47,6 +50,13 @@ def main():
         result = qualify(args.scenario)
         Path(args.out).write_text(json.dumps(result, indent=2), encoding="utf-8")
         print(f"Numerical qualification: {result['status']} => {args.out}")
+    elif args.command == "qualify-independent":
+        from .independent_qualification import qualify_independent
+        result = qualify_independent(args.scenario)
+        Path(args.out).write_text(json.dumps(result, indent=2, allow_nan=False), encoding="utf-8")
+        print(f"Independent S0 numerical check: {result['status']} ({result['passed']}/{result['case_count']}) => {args.out}")
+        if result["status"] != "PASS_NUMERICAL_ONLY":
+            raise SystemExit(1)
     elif args.command == "validate-session":
         from .session import validate_session_file
         print(json.dumps(validate_session_file(args.path), indent=2))

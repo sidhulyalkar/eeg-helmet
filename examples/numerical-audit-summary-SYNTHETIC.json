@@ -1,0 +1,193 @@
+{
+  "schema_version": "0.3.0",
+  "source": "SYNTHETIC_INDEPENDENT_NUMERICAL_QUALIFICATION",
+  "evidence_level": "S0_UNVALIDATED_MECHANICS",
+  "thresholds": {
+    "cross_solver_fraction": 0.05,
+    "reference_refinement_fraction": 0.01,
+    "energy_balance_fraction": 0.005
+  },
+  "source_sha256": {
+    "primary_physics": "f80c849885facfd819a40cf543cb62645c81ac1d802315939c181f5b207a2e0a",
+    "reference_solver": "0997f334609d9f9152e027074d659ffe89eaae3f7e9decf54c63dabdbe2f380f",
+    "model_parameters": "cfd83289ac0df5818df8456f14771cc3d04da91f7b4d1e87db7843c149178d6e",
+    "qualification_policy": "d9f02ba3be38e0d722c8b33004a9f528eb34d2e6b08d391e29238a228b84a92c"
+  },
+  "case_count": 16,
+  "passed": 16,
+  "status": "PASS_NUMERICAL_ONLY",
+  "report_sha256": "7ed7dcb0a04367d94a5769c5c170be62712498a1f33b5b86ce2c3c2320a5f87f",
+  "worst_cross_solver_fraction": 0.016166365343404113,
+  "worst_reference_refinement_fraction": 0.008409254073363384,
+  "worst_energy_balance_fraction": 1.9107563042977017e-05,
+  "stop_engagement_disagreements": 0,
+  "by_case": [
+    {
+      "scenario": "facemask",
+      "design": "reference",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.007837011726580707,
+      "worst_reference_refinement_fraction": 0.00026087135991721753,
+      "energy_balance_fraction": 8.160599833487273e-06,
+      "primary_stop_engaged": true,
+      "reference_stop_engaged": true
+    },
+    {
+      "scenario": "facemask",
+      "design": "suggested",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.009391370479318973,
+      "worst_reference_refinement_fraction": 0.00031462034757002836,
+      "energy_balance_fraction": 1.436338051228628e-06,
+      "primary_stop_engaged": true,
+      "reference_stop_engaged": true
+    },
+    {
+      "scenario": "facemask",
+      "design": "stiff_low_damping",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.00229511268300785,
+      "worst_reference_refinement_fraction": 0.0013395103278695032,
+      "energy_balance_fraction": 7.927082899845724e-06,
+      "primary_stop_engaged": true,
+      "reference_stop_engaged": true
+    },
+    {
+      "scenario": "facemask",
+      "design": "soft_high_damping",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.009259561101341117,
+      "worst_reference_refinement_fraction": 0.00027348676480807525,
+      "energy_balance_fraction": 2.917148907757623e-06,
+      "primary_stop_engaged": true,
+      "reference_stop_engaged": true
+    },
+    {
+      "scenario": "oblique",
+      "design": "reference",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.008057843946304691,
+      "worst_reference_refinement_fraction": 0.004496223920291377,
+      "energy_balance_fraction": 1.87518508441858e-05,
+      "primary_stop_engaged": true,
+      "reference_stop_engaged": true
+    },
+    {
+      "scenario": "oblique",
+      "design": "suggested",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.00919279433464496,
+      "worst_reference_refinement_fraction": 0.0003513441694019046,
+      "energy_balance_fraction": 1.6401253107589105e-05,
+      "primary_stop_engaged": true,
+      "reference_stop_engaged": true
+    },
+    {
+      "scenario": "oblique",
+      "design": "stiff_low_damping",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.0036857323355931316,
+      "worst_reference_refinement_fraction": 0.0015931621842614299,
+      "energy_balance_fraction": 1.9107563042977017e-05,
+      "primary_stop_engaged": true,
+      "reference_stop_engaged": true
+    },
+    {
+      "scenario": "oblique",
+      "design": "soft_high_damping",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.013792319274853677,
+      "worst_reference_refinement_fraction": 0.00017154231955857535,
+      "energy_balance_fraction": 1.1052278979357826e-06,
+      "primary_stop_engaged": true,
+      "reference_stop_engaged": true
+    },
+    {
+      "scenario": "lateral",
+      "design": "reference",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.007856547990008117,
+      "worst_reference_refinement_fraction": 7.848787757605107e-06,
+      "energy_balance_fraction": 2.937759267360348e-06,
+      "primary_stop_engaged": true,
+      "reference_stop_engaged": true
+    },
+    {
+      "scenario": "lateral",
+      "design": "suggested",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.007415647893188352,
+      "worst_reference_refinement_fraction": 0.00018643299613043602,
+      "energy_balance_fraction": 2.2782157667766723e-06,
+      "primary_stop_engaged": true,
+      "reference_stop_engaged": true
+    },
+    {
+      "scenario": "lateral",
+      "design": "stiff_low_damping",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.0014706466444360997,
+      "worst_reference_refinement_fraction": 0.008409254073363384,
+      "energy_balance_fraction": 1.4044008316199505e-05,
+      "primary_stop_engaged": true,
+      "reference_stop_engaged": true
+    },
+    {
+      "scenario": "lateral",
+      "design": "soft_high_damping",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.006148718182185175,
+      "worst_reference_refinement_fraction": 6.251347111191612e-05,
+      "energy_balance_fraction": 2.6124859125217958e-08,
+      "primary_stop_engaged": false,
+      "reference_stop_engaged": false
+    },
+    {
+      "scenario": "rear",
+      "design": "reference",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.006845755208315182,
+      "worst_reference_refinement_fraction": 0.00016221910190511083,
+      "energy_balance_fraction": 2.2661328290899343e-06,
+      "primary_stop_engaged": true,
+      "reference_stop_engaged": true
+    },
+    {
+      "scenario": "rear",
+      "design": "suggested",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.0064367641563630364,
+      "worst_reference_refinement_fraction": 0.00032047659411357294,
+      "energy_balance_fraction": 1.7537219399099542e-08,
+      "primary_stop_engaged": false,
+      "reference_stop_engaged": false
+    },
+    {
+      "scenario": "rear",
+      "design": "stiff_low_damping",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.016166365343404113,
+      "worst_reference_refinement_fraction": 0.0037106633491702456,
+      "energy_balance_fraction": 1.3045349834474946e-06,
+      "primary_stop_engaged": true,
+      "reference_stop_engaged": true
+    },
+    {
+      "scenario": "rear",
+      "design": "soft_high_damping",
+      "status": "PASS_NUMERICAL_ONLY",
+      "worst_cross_solver_fraction": 0.005196040198196344,
+      "worst_reference_refinement_fraction": 4.042222697261044e-06,
+      "energy_balance_fraction": 1.9888067813197932e-08,
+      "primary_stop_engaged": false,
+      "reference_stop_engaged": false
+    }
+  ],
+  "limitations": [
+    "Both methods implement the same simplified unvalidated physical assumptions",
+    "Primary solver returns rounded metrics; cross-solver comparison includes rounding error",
+    "Fixed-torso, lumped-mass single-axis motion is not an instrumented headform or brain model",
+    "Numerical convergence does not establish protective benefit or concussion prediction",
+    "Impact force profile is prescribed, not a validated contact boundary condition"
+  ]
+}
