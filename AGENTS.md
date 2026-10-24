@@ -11,3 +11,5 @@ Read `README.md`, `docs/research-contract.md`, and `docs/knowledge-and-retrieval
 7. **Review increments:** preserve negative tests, physical uncertainty, benchmark regressions, and separate source freshness from proof. Prefer small PRs.
 
 8. **External corpora:** read `docs/external-corpora-and-qualification.md` before modifying `knowledge/corpora/`; metadata-only references require manual file-level license review before import. Run `python -m neuroshield corpora audit --root .` and `python -m neuroshield corpora bench --root . --out ../corpora-benchmark.json`. Never increase evidence tier from a reference link or search hit.
+
+9. **Nonhuman bench files:** read `docs/nonhuman-bench-intake-v0.7.md`. Only examples containing clearly synthetic values may be committed. Never promote self-declared calibration and permissions to independent physical validation.

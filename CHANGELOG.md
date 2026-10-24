@@ -1,3 +1,10 @@
+## V0.7.0 — Local-only, nonhuman bench intake
+
+- Added hash-bound acquisition profile for external nonhuman headform traces; declared rights and calibration remain independently unverified.
+- Added single-pair descriptive peak/RMS resultant kinematic comparison, conservative declared-uncertainty bounds and explicit blockers.
+- Added synthetic reference/candidate fixtures illustrating competing linear and angular responses; no physical evidence or clinical output.
+- Added negative tests for tampering, clock drift, mismatched protocols and saturation, plus offline CI smoke.
+
 ## V0.5 research knowledge and retrieval layer
 
 - Add offline S0 claims/sources registry with fail-closed structural audit.

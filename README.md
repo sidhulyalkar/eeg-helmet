@@ -1,6 +1,6 @@
 # NeuroShield Research Workbench
 
-**V0.5: an open-source, local-first, entirely synthetic biomechanics and electrophysiology research demonstration.**
+**V0.7 research workbench: local-first synthetic demonstrations, with offline-only interfaces for future nonhuman bench data. All distributed example signals remain synthetic.**
 
 > **Safety and scientific scope:** This is **not a medical device, protective helmet design, concussion detector, brain-strain estimator, or certification test**. Never install the concept CAD on protective equipment. No real athlete data are accepted by the demo server. There is no headform calibration, injury model, NOCSAE/NFL testing, or evidence of concussion reduction. All reported mechanics remain S0, unvalidated.
 
@@ -33,6 +33,7 @@ The service binds to loopback only. There is no real-data upload API, user accou
 | `kinematics.py` | Quaternion head-to-torso orientation and gap-aware interpolation | Not calibrated to sensors |
 | `session.py` / `ingestion.py` | Synthetic-only session data contract and local CSV shape/unit validator | No actual acquisition |
 | `headform.py` | Strict, offline NONHUMAN headform bench metadata/CSV validator, sample-gap flags and content hashes | Structural checks only, not measured-data calibration |
+| `bench_intake.py` | Optional hash-bound acquisition sidecar, local QC and paired kinematic summaries | Synthetic demonstrations, NEVER physical safety qualification |
 | `privacy.py` | Basic purpose/scope consent decision checks | Not production-grade access control |
 | `cad.py` | Nonfunctional OpenSCAD geometry concept | **NEVER INSTALL** on equipment |
 
@@ -56,6 +57,13 @@ python -m neuroshield export-audit-trace --scenario oblique --out audit-SYNTHETI
 
 # Read-only NONHUMAN bench contract. The included sample is synthetic, not measured.
 python -m neuroshield validate-headform examples/headform-SYNTHETIC-manifest.json examples/headform-SYNTHETIC.csv
+
+# V0.7 BENCH DEMO (synthetic, not a real helmet or calibrated sensor)
+python -m neuroshield inspect-bench-intake \
+  examples/bench-reference-SYNTHETIC-profile.json \
+  examples/bench-reference-SYNTHETIC-manifest.json \
+  examples/bench-reference-SYNTHETIC.csv
+# See docs/nonhuman-bench-intake-v0.7.md for paired reference/candidate command.
 
 # Synthetic-only session interchange
 python -m neuroshield synthetic-session --out session-SYNTHETIC.json

@@ -1,0 +1,37 @@
+{
+  "schema_version": "0.1.0",
+  "origin": "SYNTHETIC_HEADFORM_FIXTURE",
+  "headform_bundle_sha256": "9708a4ae836f8a9bdf5c25601571f32e14434e91af8c816da4f10a8228d817ea",
+  "source": {
+    "source_uri": "synthetic:neuroshield",
+    "raw_data_sha256": "310af31d71162b77b65cab0fd972b17d2f6ecc2fa6f097d215265ef2d656213b",
+    "protocol_reference": "DEMONSTRATION_ONLY",
+    "laboratory_report_reference": "NONE_SYNTHETIC"
+  },
+  "rights": {
+    "review_status": "pending",
+    "license_reference": "INTERNAL_SYNTHETIC_EXAMPLE",
+    "permission_evidence_reference": "NOT_APPLICABLE_DEMO",
+    "redistribution_allowed": false
+  },
+  "acquisition": {
+    "trial_id": "demo-candidate",
+    "replicate_id": "demo-candidate-01",
+    "impact_speed_m_s": 5.0,
+    "sampling_hz": 2000.0,
+    "filter_reference": "FAKE_NO_FILTER",
+    "gravity_reference": "FAKE_ZERO_GRAVITY",
+    "clock_reference": "FAKE_CLOCK",
+    "frame_reference": "FAKE_HEADFORM",
+    "calibration_certificate_reference": "NONE_SYNTHETIC",
+    "calibration_review_reference": "NONE_SYNTHETIC",
+    "sensor_linear_fullscale_m_s2": 1000.0,
+    "sensor_angular_fullscale_rad_s2": 10000.0,
+    "sensor_omega_fullscale_rad_s": 1000.0
+  },
+  "uncertainty": {
+    "linear_acceleration_m_s2": 0.1,
+    "angular_acceleration_rad_s2": 1.0,
+    "angular_velocity_rad_s": 0.01
+  }
+}

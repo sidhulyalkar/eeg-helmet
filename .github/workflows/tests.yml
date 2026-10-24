@@ -25,3 +25,5 @@ jobs:
       - run: python -m neuroshield qualify-independent --scenario all --out numerical-audit.json
       - run: python -m neuroshield export-audit-trace --scenario oblique --out trace-audit-SYNTHETIC.json
       - run: python -m neuroshield validate-headform examples/headform-SYNTHETIC-manifest.json examples/headform-SYNTHETIC.csv
+      - run: python -m neuroshield inspect-bench-intake examples/bench-reference-SYNTHETIC-profile.json examples/bench-reference-SYNTHETIC-manifest.json examples/bench-reference-SYNTHETIC.csv
+      - run: python -m neuroshield compare-bench-pair examples/bench-reference-SYNTHETIC-profile.json examples/bench-reference-SYNTHETIC-manifest.json examples/bench-reference-SYNTHETIC.csv examples/bench-candidate-SYNTHETIC-profile.json examples/bench-candidate-SYNTHETIC-manifest.json examples/bench-candidate-SYNTHETIC.csv --out ../paired-bench-SYNTHETIC.json
