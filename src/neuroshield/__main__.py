@@ -55,8 +55,43 @@ def main():
     kn_bench.add_argument("--stage", required=True)
     kn_bench.add_argument("--top-k", type=int, default=5)
     kn_bench.add_argument("--out", required=True)
+    cp = command.add_parser("corpora", help="Offline curated research reference catalogs (no source documents downloaded)")
+    cp_sub = cp.add_subparsers(dest="corpora_action", required=True)
+    for action in ("audit", "list", "gaps", "stage", "search", "bench"):
+        sub = cp_sub.add_parser(action)
+        sub.add_argument("--root", default=".")
+        if action in ("list", "search"):
+            sub.add_argument("--domain", choices=("all", "biomechanics", "neural", "evidence"), default="all")
+        if action == "search":
+            sub.add_argument("query")
+            sub.add_argument("--top-k", type=int, default=5)
+        if action == "stage":
+            sub.add_argument("--out", required=True)
+        if action == "bench":
+            sub.add_argument("--top-k", type=int, default=5)
+            sub.add_argument("--out", required=True)
     args = parser.parse_args()
-    if args.command == "knowledge":
+    if args.command == "corpora":
+        from . import corpora
+        from .knowledge import KnowledgeError
+        try:
+            if args.corpora_action == "audit":
+                result = corpora.audit(args.root)
+            elif args.corpora_action == "list":
+                result = corpora.list_sources(args.root, args.domain)
+            elif args.corpora_action == "gaps":
+                result = corpora.qualification_gaps(args.root)
+            elif args.corpora_action == "stage":
+                result = corpora.stage_metadata(args.root, args.out)
+            elif args.corpora_action == "search":
+                result = corpora.search(args.root, args.query, args.domain, args.top_k)
+            else:
+                result = corpora.benchmark(args.root, args.top_k)
+                Path(args.out).write_text(json.dumps(result, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+        except (KnowledgeError, OSError) as exc:
+            parser.error(str(exc))
+        print(json.dumps(result, indent=2, allow_nan=False))
+    elif args.command == "knowledge":
         from .knowledge import KnowledgeError, audit, stage, search, benchmark
         try:
             if args.knowledge_action == "audit":

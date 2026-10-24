@@ -9,3 +9,5 @@ Read `README.md`, `docs/research-contract.md`, and `docs/knowledge-and-retrieval
 5. **External references:** pin versions, review licenses, cite file/line, never copy restricted code or copyright standards into this Apache-2.0 project.
 6. **No retrieval-based overclaim:** XERJ, `rg` and lexical baseline are optional discovery tools. All retrieved suggestions must be checked against current repository code and tests. Benchmark before making XERJ a dependency.
 7. **Review increments:** preserve negative tests, physical uncertainty, benchmark regressions, and separate source freshness from proof. Prefer small PRs.
+
+8. **External corpora:** read `docs/external-corpora-and-qualification.md` before modifying `knowledge/corpora/`; metadata-only references require manual file-level license review before import. Run `python -m neuroshield corpora audit --root .` and `python -m neuroshield corpora bench --root . --out ../corpora-benchmark.json`. Never increase evidence tier from a reference link or search hit.

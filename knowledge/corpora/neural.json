@@ -1,0 +1,48 @@
+{
+  "schema": "neuroshield.corpora.v1",
+  "domain": "neural",
+  "sources": [
+    {
+      "id": "eeg-bids-v17",
+      "corpus": "neural",
+      "title": "BIDS EEG recording channels electrodes and coordinate systems",
+      "url": "https://bids-specification.readthedocs.io/en/v1.7.0/04-modality-specific-files/03-electroencephalography.html",
+      "publisher": "BIDS community",
+      "version": "BIDS specification v1.7.0 EEG chapter",
+      "version_kind": "explicit_version",
+      "relevance": "EEG channel names and units, electrode locations, coordinate reference frames, events and recording metadata.",
+      "access": "metadata_only",
+      "license_status": "pending_manual_review",
+      "evidence_role": "reference_only",
+      "can_promote_evidence": false
+    },
+    {
+      "id": "openneuro-data-policy",
+      "corpus": "neural",
+      "title": "OpenNeuro user guide for EEG dataset provenance and consent",
+      "url": "https://docs.openneuro.org/user_guide.html",
+      "publisher": "OpenNeuro",
+      "version": "Living documentation, revision not pinned",
+      "version_kind": "living_page",
+      "relevance": "Research datasets, BIDS structure, consent authorization, anonymization and CC0 archive submission policy; no athlete datasets are imported.",
+      "access": "metadata_only",
+      "license_status": "pending_manual_review",
+      "evidence_role": "reference_only",
+      "can_promote_evidence": false
+    },
+    {
+      "id": "openneuro-eeg-example",
+      "corpus": "neural",
+      "title": "OpenNeuro Read EEG public dataset metadata example",
+      "url": "https://openneuro.org/datasets/ds007058",
+      "publisher": "OpenNeuro",
+      "version": "ds007058 version 1.1.1",
+      "version_kind": "explicit_version",
+      "relevance": "Public EEG study metadata and CC0 dataset example, unrelated to concussion diagnosis; raw EEG data not imported.",
+      "access": "metadata_only",
+      "license_status": "pending_manual_review",
+      "evidence_role": "reference_only",
+      "can_promote_evidence": false
+    }
+  ]
+}

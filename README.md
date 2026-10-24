@@ -109,3 +109,18 @@ Indexing copies only a narrow allowlist of **committed** text files from `HEAD`,
 - The browser API continues to serve **only synthetic physics and synthetic physiological signals**. `export-audit-trace` produces unrounded synthetic values offline; it is **not** an EEG/IMU stream.
 - Physical rig data (if collected later) must use an offline, explicitly NONHUMAN headform bundle. `validate-headform` checks headers, SI units, monotonic clocks, finite values, possible missing samples and content hashes only. It does **not** check physical sensor calibration or certify sensor synchronization. It rejects human-origin recordings.
 - See [`docs/headform-data-contract.md`](docs/headform-data-contract.md) for coordinate frame, calibration and future independent verification requirements.
+
+
+## V0.6: separated external reference catalogs (research navigation only)
+
+Three link-only corpora for biomechanics, neural recordings and evidence/qualification are tracked under `knowledge/corpora/`. They **do not** contain downloaded models, EEG, protected standards text or measured impact data. Their sources have not completed license review. See [`docs/external-corpora-and-qualification.md`](docs/external-corpora-and-qualification.md).
+
+```bash
+python -m neuroshield corpora audit --root .
+python -m neuroshield corpora search --root . --domain biomechanics 'headform impact test'
+python -m neuroshield corpora gaps --root .
+python -m neuroshield corpora bench --root . --out ../corpora-benchmark.json
+python -m neuroshield corpora stage --root . --out ../neuroshield-metadata-index
+```
+
+Staging requires committed, unmodified catalog files and writes exclusively metadata outside this repository. Optional XERJ indexing of these per-domain snapshots is an independently reviewed workflow. Citation navigation and passing metadata tests do not upgrade the unvalidated S0 helmet model.
