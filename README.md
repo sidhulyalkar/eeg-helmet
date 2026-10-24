@@ -1,6 +1,6 @@
 # NeuroShield Research Workbench
 
-**V0.4: an open-source, local-first, entirely synthetic biomechanics and electrophysiology research demonstration.**
+**V0.5: an open-source, local-first, entirely synthetic biomechanics and electrophysiology research demonstration.**
 
 > **Safety and scientific scope:** This is **not a medical device, protective helmet design, concussion detector, brain-strain estimator, or certification test**. Never install the concept CAD on protective equipment. No real athlete data are accepted by the demo server. There is no headform calibration, injury model, NOCSAE/NFL testing, or evidence of concussion reduction. All reported mechanics remain S0, unvalidated.
 
@@ -80,6 +80,20 @@ The 16-case fixture currently passes these **nonclinical mathematical tolerances
 - [`docs/architecture-and-next-experiments.md`](docs/architecture-and-next-experiments.md): architecture, experimental roadmap, sensors, and future neurOS integration.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`SECURITY.md`](SECURITY.md): developer practices and responsible reporting.
 - [`docs/source-sha256-manifest.json`](docs/source-sha256-manifest.json): **historical V0.2 snapshot**, not a current-branch verification manifest. V0.3 audit reports separately contain hashes of the numerical source and parameter policy.
+
+## V0.5 evidence knowledge and optional XERJ
+
+`AGENTS.md`, `docs/knowledge-and-retrieval.md` and `knowledge/registry.json` provide a reviewed-code navigation map, an S0 evidence-boundary registry and a frozen navigation benchmark. Nothing in retrieval upgrades the scientific evidence level. **XERJ is optional** and is not a dependency.
+
+```bash
+python -m neuroshield knowledge audit --root .
+python -m neuroshield knowledge stage --root . --out ../neuroshield-committed-corpus
+python -m neuroshield knowledge search --stage ../neuroshield-committed-corpus "solver energy balance"
+python -m neuroshield knowledge bench --root . --stage ../neuroshield-committed-corpus --out ../navigation-benchmark.json
+# Optionally, after inspecting staged sources: xerj autoindex ../neuroshield-committed-corpus --prefix eeg-helmet
+```
+
+Indexing copies only a narrow allowlist of **committed** text files from `HEAD`, to a new directory outside the repository. It rejects symlinks, changed stage hashes and oversized files, and intentionally omits examples, artifacts, noncommitted files and human records. It is not a general privacy scanner: review sources before sharing. See the [knowledge and retrieval guide](docs/knowledge-and-retrieval.md).
 
 ## Next gates
 

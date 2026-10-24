@@ -1,0 +1,57 @@
+{
+  "schema": "neuroshield.knowledge.v1",
+  "project": "NeuroShield / EEG Helmet",
+  "authority_policy": "Curated navigational map only; no clinical inference, no verified helmet safety, no evidence promotion without independent review",
+  "sources": [
+    {"id": "physics", "kind": "code", "path": "src/neuroshield/physics.py"},
+    {"id": "solver", "kind": "code", "path": "src/neuroshield/independent_solver.py"},
+    {"id": "qualifier", "kind": "code", "path": "src/neuroshield/independent_qualification.py"},
+    {"id": "testing", "kind": "test", "path": "tests/test_independent_solver.py"},
+    {"id": "headform", "kind": "code", "path": "src/neuroshield/headform.py"},
+    {"id": "headform_contract", "kind": "protocol", "path": "docs/headform-data-contract.md"},
+    {"id": "clinical_boundaries", "kind": "protocol", "path": "docs/research-contract.md"},
+    {"id": "synthetic_signals", "kind": "code", "path": "src/neuroshield/signals.py"},
+    {"id": "privacy_policy", "kind": "code", "path": "src/neuroshield/privacy.py"},
+    {"id": "session_contract", "kind": "code", "path": "src/neuroshield/session.py"},
+    {"id": "simulation_exploration", "kind": "code", "path": "src/neuroshield/design_space.py"},
+    {"id": "architecture", "kind": "documentation", "path": "docs/architecture-and-next-experiments.md"},
+    {"id": "kinematics", "kind": "code", "path": "src/neuroshield/kinematics.py"}
+  ],
+  "claims": [
+    {
+      "id": "C-SIM-001", "kind": "model_assumption", "statement": "The facemask-shell-head collision simulation is a reduced-order three-body synthetic model, not a calibrated protective helmet.",
+      "evidence_tier": "S0", "inference_scope": "synthetic_research_only", "source_ids": ["physics", "clinical_boundaries"],
+      "limitations": "Prescribed external load, illustrative geometry, parameters and stops; no commercial equipment certification or injury thresholds."
+    },
+    {
+      "id": "C-NUM-001", "kind": "numerical_qualification", "statement": "A separately expressed RK4 solver permits numerical comparison with the existing toy-model integrator.",
+      "evidence_tier": "S0", "inference_scope": "synthetic_research_only", "source_ids": ["solver", "qualifier", "testing"],
+      "limitations": "Independent numerical implementation shares the same unvalidated physical assumptions and cannot verify concussion protection."
+    },
+    {
+      "id": "C-HEADFORM-001", "kind": "implementation", "statement": "Offline nonhuman headform CSV and acquisition metadata receive structural validation and provenance checks.",
+      "evidence_tier": "S0", "inference_scope": "synthetic_research_only", "source_ids": ["headform", "headform_contract"],
+      "limitations": "Data-contract validation alone does not calibrate instruments, verify timing accuracy or establish physical model agreement."
+    },
+    {
+      "id": "C-NEURAL-001", "kind": "implementation", "statement": "Current EEG and EMG streams are generated synthetically for interface demonstrations.",
+      "evidence_tier": "S0", "inference_scope": "synthetic_research_only", "source_ids": ["synthetic_signals", "session_contract"],
+      "limitations": "There are no real neural measurements, diagnostic classifiers, human datasets or validated EEG biomarkers."
+    },
+    {
+      "id": "C-PRIVACY-001", "kind": "implementation", "statement": "Current consent policy primitives are educational and do not constitute production medical-data security.",
+      "evidence_tier": "S0", "inference_scope": "synthetic_research_only", "source_ids": ["privacy_policy", "clinical_boundaries"],
+      "limitations": "No production identity system, storage encryption, independent audit, consent revocation propagation or athlete authorization."
+    },
+    {
+      "id": "C-OPT-001", "kind": "future_research", "statement": "Synthetic multiobjective design sweeps are exploratory parameter studies rather than helmet safety rankings.",
+      "evidence_tier": "S0", "inference_scope": "synthetic_research_only", "source_ids": ["simulation_exploration", "physics", "clinical_boundaries"],
+      "limitations": "Toy-model Pareto improvements do not demonstrate physical head-neck or concussion risk reduction."
+    },
+    {
+      "id": "C-KIN-001", "kind": "implementation", "statement": "Quaternion head-to-torso orientation utilities are available as mathematical tools for later sensor work.",
+      "evidence_tier": "S0", "inference_scope": "synthetic_research_only", "source_ids": ["kinematics", "architecture"],
+      "limitations": "No physical IMU calibration, coordinate registration, sensor clock validation or clinical use is established."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "neuroshield.knowledge.v1",
+  "status": "FROZEN_NAVIGATION_BENCHMARK",
+  "questions": [
+    {"id": "Q01", "query": "Which function simulates facemask shell and head impacts?", "expected_paths": ["src/neuroshield/physics.py"]},
+    {"id": "Q02", "query": "Where is the independent RK4 reference integrator?", "expected_paths": ["src/neuroshield/independent_solver.py"]},
+    {"id": "Q03", "query": "Which module checks energy balance and cross solver qualification?", "expected_paths": ["src/neuroshield/independent_qualification.py"]},
+    {"id": "Q04", "query": "Where is the headform CSV validation implementation?", "expected_paths": ["src/neuroshield/headform.py"]},
+    {"id": "Q05", "query": "What are headform instrument coordinate frames and calibration requirements?", "expected_paths": ["docs/headform-data-contract.md"]},
+    {"id": "Q06", "query": "Which code generates synthetic EEG EMG signals?", "expected_paths": ["src/neuroshield/signals.py"]},
+    {"id": "Q07", "query": "Where are consent scope and access policy rules?", "expected_paths": ["src/neuroshield/privacy.py"]},
+    {"id": "Q08", "query": "How does multiobjective Pareto design sweep work?", "expected_paths": ["src/neuroshield/design_space.py"]},
+    {"id": "Q09", "query": "Where is the S0 evidence ladder and no clinical claims contract?", "expected_paths": ["docs/research-contract.md"]},
+    {"id": "Q10", "query": "Where is head to torso quaternion orientation calculated?", "expected_paths": ["src/neuroshield/kinematics.py"]},
+    {"id": "Q11", "query": "Which validator ensures a synthetic session format?", "expected_paths": ["src/neuroshield/session.py"]},
+    {"id": "Q12", "query": "Where are tests of independent numerical solver?", "expected_paths": ["tests/test_independent_solver.py"]}
+  ]
+}

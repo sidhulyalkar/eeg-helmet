@@ -9,3 +9,8 @@ build/
 real-data/
 private-data/
 *.raw
+
+# Optional local retrieval/database artifacts
+.xerj/
+*xerj-staged*/
+*navigation-benchmark.json

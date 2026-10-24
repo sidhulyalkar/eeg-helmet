@@ -39,8 +39,39 @@ def main():
     fixture.add_argument("--out", required=True)
     cad = command.add_parser("cad-preview", help="Create a NONFUNCTIONAL OpenSCAD geometry visualization")
     cad.add_argument("--out", required=True)
+    kn = command.add_parser("knowledge", help="Offline evidence registry and committed-source retrieval workflow")
+    kn_sub = kn.add_subparsers(dest="knowledge_action", required=True)
+    kn_audit = kn_sub.add_parser("audit", help="Validate local S0 evidence registry structure")
+    kn_audit.add_argument("--root", default=".")
+    kn_stage = kn_sub.add_parser("stage", help="Stage allowlisted committed HEAD files outside checkout")
+    kn_stage.add_argument("--root", default=".")
+    kn_stage.add_argument("--out", required=True)
+    kn_search = kn_sub.add_parser("search", help="Search staged committed sources with a lexical baseline")
+    kn_search.add_argument("--stage", required=True)
+    kn_search.add_argument("--top-k", type=int, default=5)
+    kn_search.add_argument("query")
+    kn_bench = kn_sub.add_parser("bench", help="Run frozen retrieval benchmark against staged corpus")
+    kn_bench.add_argument("--root", default=".")
+    kn_bench.add_argument("--stage", required=True)
+    kn_bench.add_argument("--top-k", type=int, default=5)
+    kn_bench.add_argument("--out", required=True)
     args = parser.parse_args()
-    if args.command == "serve":
+    if args.command == "knowledge":
+        from .knowledge import KnowledgeError, audit, stage, search, benchmark
+        try:
+            if args.knowledge_action == "audit":
+                result = audit(args.root)
+            elif args.knowledge_action == "stage":
+                result = stage(args.root, args.out)
+            elif args.knowledge_action == "search":
+                result = search(args.stage, args.query, args.top_k)
+            else:
+                result = benchmark(args.root, args.stage, args.top_k)
+                Path(args.out).write_text(json.dumps(result, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+        except KnowledgeError as exc:
+            parser.error(str(exc))
+        print(json.dumps(result, indent=2, allow_nan=False))
+    elif args.command == "serve":
         serve(port=args.port)
     elif args.command == "export":
         result = comparison(args.scenario, Parameters.suggested())

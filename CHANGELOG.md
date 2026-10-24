@@ -1,3 +1,10 @@
+## V0.5 research knowledge and retrieval layer
+
+- Add offline S0 claims/sources registry with fail-closed structural audit.
+- Stage only allowlisted Git `HEAD` source blobs for optional local XERJ indexing.
+- Add transparent lexical search, twelve frozen navigation questions, Hit@5/MRR report and negative privacy/provenance tests.
+- Add `AGENTS.md`, retrieval guide and CI smoke steps. XERJ remains an optional unqualified experiment, not a required runtime or scientific authority.
+
 ## V0.4.0: timebase accuracy and NONHUMAN bench-data contract (2026-10-23)
 - Pre-step aligned head state, head acceleration, angular acceleration, mount displacement and neck torque on one timebase; avoids a silent 1-sample offset.
 - Unrounded primary peak observables and opt-in full-precision synthetic audit traces, including a SHA-256 digest and explicit sample semantics.
