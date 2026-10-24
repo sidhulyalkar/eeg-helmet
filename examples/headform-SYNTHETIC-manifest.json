@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1.0",
+  "origin": "SYNTHETIC_HEADFORM_FIXTURE",
+  "fixture_id": "synthetic-demonstration-only",
+  "condition": "reference",
+  "impact_location": "facemask",
+  "rig_id": "NO_RIG_SIMULATED",
+  "sensor_alias": "FAKE_VALUES",
+  "calibration_reference": "NOT_CALIBRATED_SYNTHETIC",
+  "test_protocol": "NOT_A_REAL_PROTOCOL",
+  "coordinate_frame": "right_handed_headform_body",
+  "units": {
+    "time": "s",
+    "linear_acceleration": "m/s^2",
+    "angular_acceleration": "rad/s^2",
+    "angular_velocity": "rad/s"
+  }
+}

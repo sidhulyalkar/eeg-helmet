@@ -28,7 +28,8 @@ def _pair_force(p1, v1, p2, v2, stiffness, damping, limit=None):
     return value, reached
 
 
-def simulate(scenario: str = "oblique", params: Parameters | None = None, *, dt: float = DT) -> dict:
+def simulate(scenario: str = "oblique", params: Parameters | None = None, *, dt: float = DT,
+             include_audit_traces: bool = False) -> dict:
     """Solve illustrative mechanics; dt is configurable for convergence challenges.
 
     Numerical step-size checks do not establish physical model validity.
@@ -38,6 +39,8 @@ def simulate(scenario: str = "oblique", params: Parameters | None = None, *, dt:
     steps = round(TOTAL_S / dt)
     if abs(steps * dt - TOTAL_S) > 1e-10:
         raise ValueError("dt must divide the simulation horizon exactly")
+    if not isinstance(include_audit_traces, bool):
+        raise ValueError("include_audit_traces must be a boolean")
     if scenario not in SCENARIOS:
         raise ValueError(f"Unknown scenario '{scenario}'")
     p = params or Parameters()
@@ -51,6 +54,16 @@ def simulate(scenario: str = "oblique", params: Parameters | None = None, *, dt:
     omega = [0.0] * 3
     times, head_g, angular_accel, head_omega, neck_deg = [], [], [], [], []
     mount_mm, response_proxy, neck_torque_nm, input_force = [], [], [], []
+    # Primary audit peaks are computed from raw state and force evaluations,
+    # never from the rounded arrays used to draw the web dashboard.
+    peak_unrounded = {name: 0.0 for name in (
+        "peak_head_accel_g", "peak_angular_accel_rad_s2",
+        "peak_head_angular_speed_rad_s", "peak_neck_torque_proxy_nm",
+        "peak_mount_deflection_mm")}
+    audit = {name: [] for name in (
+        "time_s", "head_linear_g", "head_angular_accel_rad_s2",
+        "head_omega_rad_s", "head_relative_torso_rad",
+        "facemask_mount_m", "neck_torque_proxy_nm", "external_force_n")}
     max_stop = False
     energy_dissipated = 0.0
     horizon = steps + 1
@@ -81,16 +94,29 @@ def simulate(scenario: str = "oblique", params: Parameters | None = None, *, dt:
         torques[external_idx] += moment
         accels = [fs[i] / m[i] for i in range(3)]
         angular_accels = [torques[i] / inertia[i] for i in range(3)]
-        # Semi-implicit Euler, fixed 0.5 ms; adequate for this bounded toy system.
-        for i in range(3):
-            vx[i] += accels[i] * dt
-            x[i] += vx[i] * dt
-            omega[i] += angular_accels[i] * dt
-            theta[i] += omega[i] * dt
-        energy_dissipated += dt * (p.mount_c_ns_m * (vx[0] - vx[1])**2 +
-                                   p.liner_c_ns_m * (vx[1] - vx[2])**2 +
-                                   p.mount_c_ns_m * ARM_COUPLING**2 * (omega[0] - omega[1])**2 +
-                                   p.liner_c_ns_m * ARM_COUPLING**2 * (omega[1] - omega[2])**2)
+        # Observe ALL channels at the current state t[n], BEFORE integrating
+        # to t[n+1]. Angular acceleration and velocity now share the timebase.
+        # The last sample is t=TOTAL_S, with no spurious extra integration.
+        raw = {
+            "peak_head_accel_g": accels[2] / G,
+            "peak_angular_accel_rad_s2": angular_accels[2],
+            "peak_head_angular_speed_rad_s": omega[2],
+            "peak_neck_torque_proxy_nm": neck_torque,
+            "peak_mount_deflection_mm": (x[0] - x[1]) * 1000.0,
+        }
+        for name, value in raw.items():
+            peak_unrounded[name] = max(peak_unrounded[name], abs(value))
+        if include_audit_traces:
+            for name, value in {
+                "time_s": t, "head_linear_g": accels[2] / G,
+                "head_angular_accel_rad_s2": angular_accels[2],
+                "head_omega_rad_s": omega[2],
+                "head_relative_torso_rad": theta[2],
+                "facemask_mount_m": x[0] - x[1],
+                "neck_torque_proxy_nm": neck_torque,
+                "external_force_n": incoming,
+            }.items():
+                audit[name].append(value)
         max_stop |= hit_stop or rot_stop
         times.append(round(t * 1000, 4))
         head_g.append(round(accels[2] / G, 4))
@@ -100,15 +126,25 @@ def simulate(scenario: str = "oblique", params: Parameters | None = None, *, dt:
         mount_mm.append(round((x[0] - x[1]) * 1000, 4))
         neck_torque_nm.append(round(neck_torque, 4))
         input_force.append(round(incoming, 2))
-        # Engineering *visualization* quantity only. Not strain or concussion probability.
         response_proxy.append(round(min(2.0, 0.55 * abs(angular_accels[2]) / 4000.0 +
                                         0.45 * abs(accels[2]) / (G * 75)), 5))
+        if n < steps:
+            for i in range(3):
+                vx[i] += accels[i] * dt
+                x[i] += vx[i] * dt
+                omega[i] += angular_accels[i] * dt
+                theta[i] += omega[i] * dt
+            # Still only a visualization proxy, NOT an energy conservation audit.
+            energy_dissipated += dt * (p.mount_c_ns_m * (vx[0] - vx[1])**2 +
+                                       p.liner_c_ns_m * (vx[1] - vx[2])**2 +
+                                       p.mount_c_ns_m * ARM_COUPLING**2 * (omega[0] - omega[1])**2 +
+                                       p.liner_c_ns_m * ARM_COUPLING**2 * (omega[1] - omega[2])**2)
     metrics = {
-        "peak_head_accel_g": round(max(abs(z) for z in head_g), 2),
-        "peak_angular_accel_rad_s2": round(max(abs(z) for z in angular_accel), 1),
-        "peak_head_angular_speed_rad_s": round(max(abs(z) for z in head_omega), 2),
-        "peak_neck_torque_proxy_nm": round(max(abs(z) for z in neck_torque_nm), 2),
-        "peak_mount_deflection_mm": round(max(abs(z) for z in mount_mm), 2),
+        "peak_head_accel_g": round(peak_unrounded["peak_head_accel_g"], 2),
+        "peak_angular_accel_rad_s2": round(peak_unrounded["peak_angular_accel_rad_s2"], 1),
+        "peak_head_angular_speed_rad_s": round(peak_unrounded["peak_head_angular_speed_rad_s"], 2),
+        "peak_neck_torque_proxy_nm": round(peak_unrounded["peak_neck_torque_proxy_nm"], 2),
+        "peak_mount_deflection_mm": round(peak_unrounded["peak_mount_deflection_mm"], 2),
         "dissipated_energy_proxy_j": round(energy_dissipated, 2),
         "mount_limit_engaged": max_stop,
     }
@@ -125,13 +161,17 @@ def simulate(scenario: str = "oblique", params: Parameters | None = None, *, dt:
               "neck_torque_proxy_nm": neck_torque_nm, "external_force_n": input_force}
     fingerprint = scientific_fingerprint(scenario, parameters, s, dt, MASS, INERTIA)
     return {
-        "schema_version": "0.1.0",
+        "schema_version": "0.1.1",
         "provenance": {"source": "deterministic_synthetic_simulation", "clinically_validated": False,
                        "assumptions": "3 lumped bodies; 1 translational + 1 rotational axis; fixed torso; no brain tissue model",
-                       "scientific_fingerprint": fingerprint, "execution_trace_sha256": canonical_hash(traces)},
+                       "scientific_fingerprint": fingerprint, "execution_trace_sha256": canonical_hash(traces),
+                       "sample_semantics": "pre_step_state_and_acceleration_at_time_t",
+                       "audit_trace_sha256": canonical_hash(audit) if include_audit_traces else None},
         "scenario": scenario, "scenario_detail": s,
         "parameters": parameters,
         "sample_interval_ms": dt * 1000,
         "traces": traces,
-        "metrics": metrics, "warnings": warnings,
+        "metrics": metrics, "metrics_unrounded": peak_unrounded,
+        **({"audit_traces": audit} if include_audit_traces else {}),
+        "warnings": warnings,
     }

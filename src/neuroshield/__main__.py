@@ -17,6 +17,9 @@ def main():
     sim = command.add_parser("export", help="Write synthetic comparison JSON")
     sim.add_argument("--scenario", choices=SCENARIOS, default="oblique")
     sim.add_argument("--out", required=True)
+    audit_trace = command.add_parser("export-audit-trace", help="Full-precision aligned S0 impact trace, no human data")
+    audit_trace.add_argument("--scenario", choices=SCENARIOS, default="oblique")
+    audit_trace.add_argument("--out", required=True)
     sweep_parser = command.add_parser("sweep", help="Exploratory Pareto grid over unvalidated model; no safety conclusions")
     sweep_parser.add_argument("--out", required=True)
     sample = command.add_parser("validate-csv", help="Validate schema/units of a local IMU CSV, without uploading")
@@ -27,6 +30,9 @@ def main():
     iq = command.add_parser("qualify-independent", help="Cross-integrator / energy-budget audit (synthetic model only)")
     iq.add_argument("--scenario", choices=("all", *SCENARIOS), default="all")
     iq.add_argument("--out", required=True)
+    bench = command.add_parser("validate-headform", help="Local-only NONHUMAN headform metadata and CSV structure check")
+    bench.add_argument("manifest")
+    bench.add_argument("csv")
     session = command.add_parser("validate-session", help="Check local synthetic-only session contract")
     session.add_argument("path")
     fixture = command.add_parser("synthetic-session", help="Write a synthetic-only multimodal fixture")
@@ -40,6 +46,11 @@ def main():
         result = comparison(args.scenario, Parameters.suggested())
         Path(args.out).write_text(json.dumps(result, indent=2), encoding="utf-8")
         print(f"Saved synthetic research output to {args.out}")
+    elif args.command == "export-audit-trace":
+        from .physics import simulate
+        result = simulate(args.scenario, include_audit_traces=True)
+        Path(args.out).write_text(json.dumps(result, indent=2, allow_nan=False), encoding="utf-8")
+        print(f"Saved full-precision synthetic audit trace to {args.out}")
     elif args.command == "sweep":
         from .design_space import sweep
         result=sweep()
@@ -57,6 +68,9 @@ def main():
         print(f"Independent S0 numerical check: {result['status']} ({result['passed']}/{result['case_count']}) => {args.out}")
         if result["status"] != "PASS_NUMERICAL_ONLY":
             raise SystemExit(1)
+    elif args.command == "validate-headform":
+        from .headform import validate_headform_bundle
+        print(json.dumps(validate_headform_bundle(args.manifest, args.csv), indent=2))
     elif args.command == "validate-session":
         from .session import validate_session_file
         print(json.dumps(validate_session_file(args.path), indent=2))

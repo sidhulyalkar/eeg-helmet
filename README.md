@@ -1,6 +1,6 @@
 # NeuroShield Research Workbench
 
-**V0.3: an open-source, local-first, entirely synthetic biomechanics and electrophysiology research demonstration.**
+**V0.4: an open-source, local-first, entirely synthetic biomechanics and electrophysiology research demonstration.**
 
 > **Safety and scientific scope:** This is **not a medical device, protective helmet design, concussion detector, brain-strain estimator, or certification test**. Never install the concept CAD on protective equipment. No real athlete data are accepted by the demo server. There is no headform calibration, injury model, NOCSAE/NFL testing, or evidence of concussion reduction. All reported mechanics remain S0, unvalidated.
 
@@ -32,6 +32,7 @@ The service binds to loopback only. There is no real-data upload API, user accou
 | `independent_qualification.py` | 16-case cross-solver, RK4 refinement and energy-balance audit with strict numerical gates | **Numerical-only** PASS/FAIL |
 | `kinematics.py` | Quaternion head-to-torso orientation and gap-aware interpolation | Not calibrated to sensors |
 | `session.py` / `ingestion.py` | Synthetic-only session data contract and local CSV shape/unit validator | No actual acquisition |
+| `headform.py` | Strict, offline NONHUMAN headform bench metadata/CSV validator, sample-gap flags and content hashes | Structural checks only, not measured-data calibration |
 | `privacy.py` | Basic purpose/scope consent decision checks | Not production-grade access control |
 | `cad.py` | Nonfunctional OpenSCAD geometry concept | **NEVER INSTALL** on equipment |
 
@@ -47,8 +48,14 @@ python -m neuroshield sweep --out pareto-SYNTHETIC.json
 # Historical V0.2 single-integrator refinement test
 python -m neuroshield qualify --scenario oblique --out numerical-oblique.json
 
-# V0.3 cross-integrator & energy audit, default 4 scenarios x 4 designs
+# V0.3+ cross-integrator & energy audit, default 4 scenarios x 4 designs
 python -m neuroshield qualify-independent --scenario all --out numerical-audit.json
+
+# V0.4 full-precision primary trace; aligned t[n] state and acceleration
+python -m neuroshield export-audit-trace --scenario oblique --out audit-SYNTHETIC.json
+
+# Read-only NONHUMAN bench contract. The included sample is synthetic, not measured.
+python -m neuroshield validate-headform examples/headform-SYNTHETIC-manifest.json examples/headform-SYNTHETIC.csv
 
 # Synthetic-only session interchange
 python -m neuroshield synthetic-session --out session-SYNTHETIC.json
@@ -65,7 +72,7 @@ python -m neuroshield cad-preview --out concept-preview.scad
 
 The independent check compares an original semi-implicit Euler implementation with a separately written RK4 integrator **of the same toy equations**. It checks maximum symmetric peak-metric discrepancy, RK4 refinement between 0.25 and 0.125 ms, mechanical energy balance and agreement on mount-stop engagement. Cases fail the command when a threshold is exceeded. CI exercises all 16 combinations on Linux, Windows and macOS.
 
-The 16-case fixture currently passes these **nonclinical mathematical tolerances**: 5% cross-solver difference, 1% reference refinement difference, 0.5% normalized energy residual and identical stop-engagement classification. Read `examples/numerical-audit-summary-SYNTHETIC.json` for per-case values; regenerate a full report via the CLI. **Passing is not S1 physical verification**. Both solvers could be consistently wrong about actual helmet dynamics. The baseline solver also rounds peak observables; this precision limitation is reported rather than hidden.
+The 16-case fixture currently passes these **nonclinical mathematical tolerances**: 5% cross-solver difference, 1% reference refinement difference, 0.5% normalized energy residual and identical stop-engagement classification. Read `examples/numerical-audit-summary-SYNTHETIC.json` for per-case values; regenerate a full report via the CLI. **Passing is not S1 physical verification**. Both solvers could be consistently wrong about actual helmet dynamics. The baseline solver now computes full-precision peaks prior to presentation rounding, and each trace sample is labeled at the same pre-integration time. Optional raw numerical audit traces are available without exposing them through the demo API.
 
 ## Source layout and research contract
 
@@ -76,9 +83,15 @@ The 16-case fixture currently passes these **nonclinical mathematical tolerances
 
 ## Next gates
 
-1. **Physics credibility:** unrounded and time-aligned primary observables, independently reproduced full-system benchmarks, parameter sensitivity and energy accounting for all discontinuities.
+1. **Physics credibility:** independently reproduced full-system analytical benchmarks, worst-case parameter sensitivity and energy accounting at all discontinuities. V0.4 fixes pre-step time alignment and precision in the primary output but not physical calibration.
 2. **Bench validation:** responsibly licensed helmet/headform configurations, measured acceleration traces, force/torque calibration, cervical loading and stop-failure tests.
 3. **Neural recording feasibility:** ethics-approved stationary EEG/EMG studies, rigorous contact-quality and motion-artifact analysis, device clock synchronization and informed consent.
 4. **Clinical evidence:** external prospective research with appropriate specialists and independent assessment. Never infer concussion diagnosis or return-to-play clearance from synthetic kinematics.
 
 **License:** Apache-2.0; see [`LICENSE`](LICENSE). No claims of fitness for protective use.
+
+### V0.4 data-plane safeguards
+
+- The browser API continues to serve **only synthetic physics and synthetic physiological signals**. `export-audit-trace` produces unrounded synthetic values offline; it is **not** an EEG/IMU stream.
+- Physical rig data (if collected later) must use an offline, explicitly NONHUMAN headform bundle. `validate-headform` checks headers, SI units, monotonic clocks, finite values, possible missing samples and content hashes only. It does **not** check physical sensor calibration or certify sensor synchronization. It rejects human-origin recordings.
+- See [`docs/headform-data-contract.md`](docs/headform-data-contract.md) for coordinate frame, calibration and future independent verification requirements.
