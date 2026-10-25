@@ -1,3 +1,10 @@
+## V0.8.0 — Preregistered S0 waveform screen
+
+- Added local, nonhuman paired full-window waveform metrics (peak/time, time-weighted RMS, integrals, normalized RMSE, correlation), provenance hashes and explicit per-modality alerts.
+- Added immutable-by-convention analysis plan schema and exact-clock/no-posthoc-shifting quality gates; independent preregistration timing still requires external verification.
+- Added always-blocked synthetic-to-measured model validation gate until calibrated 3D-to-1D mapping and a held-out protocol exist.
+- Added 16 focused negative tests, CI smoke, research evidence registry and acquisition decision note. All example traces remain synthetic and S0.
+
 ## V0.7.0 — Local-only, nonhuman bench intake
 
 - Added hash-bound acquisition profile for external nonhuman headform traces; declared rights and calibration remain independently unverified.

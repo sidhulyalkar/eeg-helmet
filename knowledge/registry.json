@@ -82,6 +82,21 @@
       "id": "bench_protocol",
       "kind": "protocol",
       "path": "docs/nonhuman-bench-intake-v0.7.md"
+    },
+    {
+      "id": "waveform_screen",
+      "kind": "code",
+      "path": "src/neuroshield/waveform_qualification.py"
+    },
+    {
+      "id": "waveform_tests",
+      "kind": "test",
+      "path": "tests/test_waveform_qualification.py"
+    },
+    {
+      "id": "waveform_protocol",
+      "kind": "protocol",
+      "path": "docs/preregistered-waveform-screen-v0.8.md"
     }
   ],
   "claims": [
@@ -183,6 +198,19 @@
         "bench_protocol"
       ],
       "limitations": "No actual external bench data, independent lab calibration, human signals, certified safety effect or trustworthy injury-risk estimate. Metadata is self-reported."
+    },
+    {
+      "id": "C-WAVE-001",
+      "kind": "implementation",
+      "statement": "A preregistered, offline paired headform waveform screen computes descriptive resultant kinematics, trace-shape metrics and alert thresholds without enabling model-to-measurement validation.",
+      "evidence_tier": "S0",
+      "inference_scope": "synthetic_research_only",
+      "source_ids": [
+        "waveform_screen",
+        "waveform_tests",
+        "waveform_protocol"
+      ],
+      "limitations": "No independent measurement, lab calibration, real model-fit validation, protective efficacy or clinical inference; plan hashes alone do not establish independent pre-registration."
     }
   ]
 }
