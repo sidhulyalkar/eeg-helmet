@@ -1,6 +1,6 @@
 # NeuroShield Research Workbench
 
-**V0.7 research workbench: local-first synthetic demonstrations, with offline-only interfaces for future nonhuman bench data. All distributed example signals remain synthetic.**
+**V0.8 research workbench: local-first synthetic demonstrations, with offline-only interfaces for future nonhuman bench data. All distributed example signals remain synthetic.**
 
 > **Safety and scientific scope:** This is **not a medical device, protective helmet design, concussion detector, brain-strain estimator, or certification test**. Never install the concept CAD on protective equipment. No real athlete data are accepted by the demo server. There is no headform calibration, injury model, NOCSAE/NFL testing, or evidence of concussion reduction. All reported mechanics remain S0, unvalidated.
 
@@ -34,6 +34,7 @@ The service binds to loopback only. There is no real-data upload API, user accou
 | `session.py` / `ingestion.py` | Synthetic-only session data contract and local CSV shape/unit validator | No actual acquisition |
 | `headform.py` | Strict, offline NONHUMAN headform bench metadata/CSV validator, sample-gap flags and content hashes | Structural checks only, not measured-data calibration |
 | `bench_intake.py` | Optional hash-bound acquisition sidecar, local QC and paired kinematic summaries | Synthetic demonstrations, NEVER physical safety qualification |
+| `waveform_qualification.py` | Preregistered local paired waveform screen, sample-clock and threshold gates | Descriptive S0 only; external model validation explicitly blocked |
 | `privacy.py` | Basic purpose/scope consent decision checks | Not production-grade access control |
 | `cad.py` | Nonfunctional OpenSCAD geometry concept | **NEVER INSTALL** on equipment |
 
@@ -64,6 +65,19 @@ python -m neuroshield inspect-bench-intake \
   examples/bench-reference-SYNTHETIC-manifest.json \
   examples/bench-reference-SYNTHETIC.csv
 # See docs/nonhuman-bench-intake-v0.7.md for paired reference/candidate command.
+
+# V0.8 preregistered paired waveform screen (SYNTHETIC ONLY)
+python -m neuroshield compare-bench-waveforms \
+  examples/paired-waveform-plan-SYNTHETIC.json \
+  examples/bench-reference-SYNTHETIC-profile.json \
+  examples/bench-reference-SYNTHETIC-manifest.json \
+  examples/bench-reference-SYNTHETIC.csv \
+  examples/bench-candidate-SYNTHETIC-profile.json \
+  examples/bench-candidate-SYNTHETIC-manifest.json \
+  examples/bench-candidate-SYNTHETIC.csv \
+  --out ../paired-waveforms-SYNTHETIC.json
+python -m neuroshield model-measurement-gate --out ../model-validation-BLOCKED.json
+# See docs/preregistered-waveform-screen-v0.8.md for interpretation and limits.
 
 # Synthetic-only session interchange
 python -m neuroshield synthetic-session --out session-SYNTHETIC.json

@@ -45,6 +45,14 @@ def main():
     paired.add_argument("candidate_manifest")
     paired.add_argument("candidate_csv")
     paired.add_argument("--out", required=True)
+    wave = command.add_parser("compare-bench-waveforms", help="Preregistered offline paired waveform screen, no protection claim")
+    wave.add_argument("plan")
+    for prefix in ("reference", "candidate"):
+        for suffix in ("profile", "manifest", "csv"):
+            wave.add_argument(f"{prefix}_{suffix}")
+    wave.add_argument("--out", required=True)
+    gate = command.add_parser("model-measurement-gate", help="Explain why synthetic 1D solver cannot yet validate 3D headform recordings")
+    gate.add_argument("--out", required=True)
     session = command.add_parser("validate-session", help="Check local synthetic-only session contract")
     session.add_argument("path")
     fixture = command.add_parser("synthetic-session", help="Write a synthetic-only multimodal fixture")
@@ -159,6 +167,19 @@ def main():
             (args.candidate_profile, args.candidate_manifest, args.candidate_csv))
         Path(args.out).write_text(json.dumps(report, indent=2, allow_nan=False) + "\n", encoding="utf-8")
         print(f"Descriptive NONHUMAN benchmark: {report['status']} => {args.out}")
+    elif args.command == "compare-bench-waveforms":
+        from .waveform_qualification import evaluate_pair
+        result = evaluate_pair(args.plan,
+            (args.reference_profile, args.reference_manifest, args.reference_csv),
+            (args.candidate_profile, args.candidate_manifest, args.candidate_csv))
+        Path(args.out).write_text(json.dumps(result, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+        print(f"Preregistered S0 waveform screen: {result['screen']} => {args.out}")
+    elif args.command == "model-measurement-gate":
+        from .waveform_qualification import model_vs_measurement_gate
+        from .physics import simulate
+        result = model_vs_measurement_gate(simulate("oblique")["provenance"], {"source_origin":"SYNTHETIC_HEADFORM_FIXTURE"})
+        Path(args.out).write_text(json.dumps(result, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+        print("Model-versus-measurement qualification: BLOCKED")
     elif args.command == "validate-session":
         from .session import validate_session_file
         print(json.dumps(validate_session_file(args.path), indent=2))

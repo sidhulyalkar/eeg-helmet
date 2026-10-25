@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1.0",
+  "plan_id": "demo-facemask-paired-waveform-v0.8",
+  "scope": "NONHUMAN_PAIRED_HEADFORM",
+  "alignment_policy": "IDENTICAL_TIMESTAMPS_NO_POSTHOC_SHIFT",
+  "window_s": [0.0, 0.025],
+  "limits": {
+    "linear_acceleration_m_s2": {"max_peak_increase_pct": 0.0, "max_rms_increase_pct": 0.0},
+    "angular_acceleration_rad_s2": {"max_peak_increase_pct": 0.0, "max_rms_increase_pct": 0.0},
+    "angular_velocity_rad_s": {"max_peak_increase_pct": 0.0, "max_rms_increase_pct": 0.0}
+  }
+}

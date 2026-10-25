@@ -13,3 +13,5 @@ Read `README.md`, `docs/research-contract.md`, and `docs/knowledge-and-retrieval
 8. **External corpora:** read `docs/external-corpora-and-qualification.md` before modifying `knowledge/corpora/`; metadata-only references require manual file-level license review before import. Run `python -m neuroshield corpora audit --root .` and `python -m neuroshield corpora bench --root . --out ../corpora-benchmark.json`. Never increase evidence tier from a reference link or search hit.
 
 9. **Nonhuman bench files:** read `docs/nonhuman-bench-intake-v0.7.md`. Only examples containing clearly synthetic values may be committed. Never promote self-declared calibration and permissions to independent physical validation.
+
+10. **V0.8 waveforms:** read `docs/preregistered-waveform-screen-v0.8.md` before waveform or measurement fit changes. Never optimize post-impact signal alignment to inflate agreement. The S0 synthetic model must not be presented as physically validated.
