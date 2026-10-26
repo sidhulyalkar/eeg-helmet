@@ -1,0 +1,12 @@
+{
+  "schema_version": "neuroshield.frame-projection/0.1",
+  "scope": "NONHUMAN_HEADFORM_ONLY",
+  "source_frame": "right_handed_headform_body",
+  "target_frame": "rigid_headform_target",
+  "source_to_target_rotation": [[1, 0, 0], [0, 1, 0], [0, 0, 1]],
+  "sensor_to_target_m": [0.0, 0.0, 0.0],
+  "projection_axis_target": [1.0, 0.0, 0.0],
+  "input_acceleration_semantics": "GRAVITY_REMOVED_LINEAR_ACCELERATION",
+  "window_s": [0.0, 0.025],
+  "registration_reference": "SYNTHETIC_NOT_INDEPENDENTLY_REGISTERED"
+}
