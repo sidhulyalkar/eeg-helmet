@@ -51,3 +51,10 @@
 - Added three curated external-reference catalogs: biomechanics, neural recording, evidence/qualification. All references are link-only and require separate license review.
 - Added cross-linked S0 hypothesis gap register, metadata-only search, fixed integration benchmark and committed-HEAD-only per-domain staging for optional XERJ.
 - Added negative permission/provenance tests and portable CLI/CI smoke checks. No real sensors, external models, standards text, human data, clinical scoring or S1 promotion.
+
+## Proposed V1.1 agent-oriented research interoperability (unreleased)
+
+- Add offline synthetic-only agent tasks, capability discovery, bundled JSON Schema and reproducible reports.
+- Include source-code fingerprints, checksums and minimal RO-Crate 1.3 research metadata, without signing/authenticity claims.
+- Reject human inputs, unknown operations, malformed commands, path tricks and tampered bundles in negative tests.
+- Document future MCP, XERJ, neurOS and governed laboratory research workflows. No physical validation or S1 promotion.

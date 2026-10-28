@@ -97,6 +97,21 @@
       "id": "waveform_protocol",
       "kind": "protocol",
       "path": "docs/preregistered-waveform-screen-v0.8.md"
+    },
+    {
+      "id": "agent_contract",
+      "kind": "code",
+      "path": "src/neuroshield/agent_protocol.py"
+    },
+    {
+      "id": "agent_contract_tests",
+      "kind": "test",
+      "path": "tests/test_agent_protocol.py"
+    },
+    {
+      "id": "agent_contract_guide",
+      "kind": "protocol",
+      "path": "docs/agentic-research-architecture.md"
     }
   ],
   "claims": [
@@ -211,6 +226,19 @@
         "waveform_protocol"
       ],
       "limitations": "No independent measurement, lab calibration, real model-fit validation, protective efficacy or clinical inference; plan hashes alone do not establish independent pre-registration."
+    },
+    {
+      "id": "C-AGENT-001",
+      "kind": "implementation",
+      "statement": "The local research-agent protocol executes fixed synthetic-only tasks and generates deterministic source-bound computational reports.",
+      "evidence_tier": "S0",
+      "inference_scope": "synthetic_research_only",
+      "source_ids": [
+        "agent_contract",
+        "agent_contract_tests",
+        "agent_contract_guide"
+      ],
+      "limitations": "Task schemas and checksums neither authenticate users nor verify laboratory calibration, data permissions, protective performance or physical predictive accuracy."
     }
   ]
 }
