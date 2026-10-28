@@ -17,7 +17,7 @@ dependencies = []
 neuroshield = "neuroshield.__main__:main"
 
 [tool.setuptools.package-data]
-neuroshield = ["web/*"]
+neuroshield = ["web/*", "schemas/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

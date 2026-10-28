@@ -30,3 +30,8 @@ jobs:
       - run: python -m neuroshield compare-bench-waveforms examples/paired-waveform-plan-SYNTHETIC.json examples/bench-reference-SYNTHETIC-profile.json examples/bench-reference-SYNTHETIC-manifest.json examples/bench-reference-SYNTHETIC.csv examples/bench-candidate-SYNTHETIC-profile.json examples/bench-candidate-SYNTHETIC-manifest.json examples/bench-candidate-SYNTHETIC.csv --out ../paired-waveforms-SYNTHETIC.json
       - run: python -m neuroshield model-measurement-gate --out ../model-validation-BLOCKED.json
       - run: python -m neuroshield.frame_projection examples/frame-projection-plan-SYNTHETIC.json examples/bench-reference-SYNTHETIC-profile.json examples/bench-reference-SYNTHETIC-manifest.json examples/bench-reference-SYNTHETIC.csv --expected-plan-sha256 440182752f4b1c75a3dd47d878e73826bcf697339cfa19663c5eba642f4260d3 --out ../frame-projection-SYNTHETIC.json
+      - run: python -m neuroshield.agent_protocol capabilities
+      - run: python -m neuroshield.agent_protocol schema
+      - run: python -m neuroshield.agent_protocol validate examples/agent-task-SYNTHETIC.json
+      - run: python -m neuroshield.agent_protocol run examples/agent-task-SYNTHETIC.json --out ../agent-run-smoke
+      - run: python -m neuroshield.agent_protocol verify ../agent-run-smoke
