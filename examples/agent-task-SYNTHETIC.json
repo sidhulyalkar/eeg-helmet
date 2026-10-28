@@ -1,0 +1,16 @@
+{
+  "schema_version": "neuroshield.agent-task/0.1",
+  "task_id": "oblique-smoke-001",
+  "operation": "simulate_synthetic",
+  "data_class": "SYNTHETIC_ONLY",
+  "inputs": {
+    "scenario": "oblique",
+    "parameters": {
+      "mount_k_n_m": 70000,
+      "mount_c_ns_m": 310,
+      "mount_travel_mm": 7,
+      "liner_k_n_m": 52000,
+      "liner_c_ns_m": 330
+    }
+  }
+}

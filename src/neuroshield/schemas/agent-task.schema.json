@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sidhulyalkar/eeg-helmet/blob/main/src/neuroshield/schemas/agent-task.schema.json",
+  "title": "NeuroShield offline synthetic research-agent task",
+  "description": "A deliberately bounded S0-only task for the in-process NeuroShield synthetic runner. This schema is not an authorization mechanism.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/simulationTask"
+    },
+    {
+      "$ref": "#/$defs/numericalTask"
+    }
+  ],
+  "$defs": {
+    "baseProperties": {
+      "schema_version": {"const": "neuroshield.agent-task/0.1"},
+      "task_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$", "maxLength": 64},
+      "data_class": {"const": "SYNTHETIC_ONLY"}
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mount_k_n_m": {"type": "number", "minimum": 30000, "maximum": 250000},
+        "mount_c_ns_m": {"type": "number", "minimum": 20, "maximum": 900},
+        "mount_travel_mm": {"type": "number", "minimum": 1, "maximum": 15},
+        "liner_k_n_m": {"type": "number", "minimum": 25000, "maximum": 130000},
+        "liner_c_ns_m": {"type": "number", "minimum": 30, "maximum": 800}
+      }
+    },
+    "simulationTask": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "task_id", "operation", "data_class", "inputs"],
+      "properties": {
+        "schema_version": {"const": "neuroshield.agent-task/0.1"},
+        "task_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$", "maxLength": 64},
+        "data_class": {"const": "SYNTHETIC_ONLY"},
+        "operation": {"const": "simulate_synthetic"},
+        "inputs": {
+          "type": "object",
+          "required": ["scenario", "parameters"],
+          "additionalProperties": false,
+          "properties": {
+            "scenario": {"enum": ["facemask", "oblique", "lateral", "rear"]},
+            "parameters": {"$ref": "#/$defs/parameters"}
+          }
+        }
+      }
+    },
+    "numericalTask": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "task_id", "operation", "data_class", "inputs"],
+      "properties": {
+        "schema_version": {"const": "neuroshield.agent-task/0.1"},
+        "task_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$", "maxLength": 64},
+        "data_class": {"const": "SYNTHETIC_ONLY"},
+        "operation": {"const": "audit_synthetic_numerics"},
+        "inputs": {
+          "type": "object",
+          "required": ["scenario"],
+          "additionalProperties": false,
+          "properties": {
+            "scenario": {"enum": ["all", "facemask", "oblique", "lateral", "rear"]}
+          }
+        }
+      }
+    }
+  }
+}
