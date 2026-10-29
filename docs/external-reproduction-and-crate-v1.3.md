@@ -20,7 +20,7 @@ Optional standalone external validator (do not mix its dependency into the runti
 
 ```bash
 python -m pip install roc-validator==0.12.2
-rocrate-validator validate ../portable-research-bundle --packaging-mode attached
+rocrate-validator validate ../portable-research-bundle
 ```
 
 Validate the **bundle directory**, not a detached copy of its metadata file. The validator is a third-party package; any CI pass should identify its version, settings and exact run.
