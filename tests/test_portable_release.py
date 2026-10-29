@@ -71,6 +71,14 @@ class PortableReleaseTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,"datePublished"):
                 verify_bundle(dst)
 
+    def test_verification_still_reads_historical_software_version(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as tmp:
+            dst=Path(tmp)/"crate"
+            create_bundle(TASK,dst)
+            with patch("neuroshield.agent_protocol.__version__", "9.9.9"):
+                self.assertEqual(verify_bundle(dst)["scientific_evidence_level"],"S0")
+
     def test_scientific_identity_is_not_time_dependent(self):
         with tempfile.TemporaryDirectory() as tmp:
             a,b=Path(tmp)/"a",Path(tmp)/"b"
