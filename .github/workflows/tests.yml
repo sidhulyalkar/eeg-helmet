@@ -56,4 +56,4 @@ jobs:
           python-version: "3.13"
       - run: python -m pip install -e . roc-validator==0.12.2
       - run: python -m neuroshield.agent_protocol run examples/agent-task-SYNTHETIC.json --out ../crate-for-validation
-      - run: rocrate-validator validate ../crate-for-validation
+      - run: python scripts/check_rocrate_conformance.py ../crate-for-validation
