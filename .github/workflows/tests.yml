@@ -36,3 +36,24 @@ jobs:
       - run: python -m neuroshield.agent_protocol run examples/agent-task-SYNTHETIC.json --out ../agent-run-smoke
       - run: python -m neuroshield.agent_protocol verify ../agent-run-smoke
       - run: python -m neuroshield.reproduction ../agent-run-smoke --out ../agent-replay-smoke.json
+
+
+  distribution-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python scripts/smoke_installed_wheel.py
+
+  external-crate-validator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python -m pip install -e . roc-validator==0.12.2
+      - run: python -m neuroshield.agent_protocol run examples/agent-task-SYNTHETIC.json --out ../crate-for-validation
+      - run: python scripts/check_rocrate_conformance.py ../crate-for-validation

@@ -10,9 +10,11 @@ import argparse
 import hashlib
 import json
 import re
+from datetime import date, datetime, timezone
 from importlib.resources import files
 from pathlib import Path
 
+from . import __version__
 from .models import Parameters, SCENARIOS
 from .provenance import canonical_hash
 
@@ -160,13 +162,16 @@ def read_request(path: str | Path) -> dict:
     return validate_request(_bounded_json(Path(path), MAX_REQUEST_BYTES))
 
 
-def _crate_metadata(task: dict, result: dict) -> dict:
-    """Minimal RO-Crate 1.3 JSON-LD shape; not independently conformance-tested."""
+def _crate_metadata(task: dict, result: dict, publication_date: str | None = None, software_version: str | None = None) -> dict:
+    """RO-Crate 1.3 core metadata; None preserves V1.1 legacy bundle checks."""
     return {"@context": "https://w3id.org/ro/crate/1.3/context", "@graph": [
         {"@id": "ro-crate-metadata.json", "@type": "CreativeWork",
          "conformsTo": {"@id": "https://w3id.org/ro/crate/1.3"}, "about": {"@id": "./"}},
         {"@id": "./", "@type": "Dataset", "name": "NeuroShield synthetic research task",
          "description": "Unvalidated S0 research artifact, no real human or lab data",
+         **({"datePublished": publication_date,
+             "license": "No output license is granted by this metadata; the NeuroShield software uses Apache-2.0."}
+            if publication_date is not None else {}),
          "hasPart": [{"@id": "task.json"}, {"@id": "result.json"}, {"@id": "checksums.json"}]},
         {"@id": "task.json", "@type": "File", "encodingFormat": "application/json",
          "name": "Validated synthetic task"},
@@ -177,27 +182,35 @@ def _crate_metadata(task: dict, result: dict) -> dict:
         {"@id": "#task-action", "@type": "CreateAction", "object": {"@id": "task.json"},
          "result": {"@id": "result.json"}, "instrument": {"@id": "#neuroshield"}},
         {"@id": "#neuroshield", "@type": "SoftwareApplication", "name": "NeuroShield agent_protocol",
-         "description": "Offline fixed-operation synthetic research runner"},
+         "description": "Offline fixed-operation synthetic research runner",
+         **({"url": "https://github.com/sidhulyalkar/eeg-helmet",
+              "version": __version__ if software_version is None else software_version} if publication_date is not None else {})},
     ]}
 
 
 def create_bundle(request: object, destination: str | Path) -> dict:
     """Write one new synthetic-only bundle. Never overwrite an existing directory."""
     task = validate_request(request)
+    report = execute(task)
     path = Path(destination)
     if path.exists() or path.is_symlink():
         raise FileExistsError("Output path already exists; refuse overwrite")
-    report = execute(task)
     path.mkdir(parents=False, exist_ok=False)
     task_bytes = _json_bytes(task)
     result_bytes = _json_bytes(report)
-    checksum = {"schema_version": "neuroshield.artifact-checksums/0.1", "files": {
+    # Publication date describes this export only; it is not part of the
+    # reproducible task/result identity. A clock-independent historical task
+    # remains scientifically comparable after a later export date.
+    publication_date = datetime.now(timezone.utc).date().isoformat()
+    crate_bytes = _json_bytes(_crate_metadata(task, report, publication_date))
+    checksum = {"schema_version": "neuroshield.artifact-checksums/0.2", "files": {
         "task.json": hashlib.sha256(task_bytes).hexdigest(),
-        "result.json": hashlib.sha256(result_bytes).hexdigest()}}
+        "result.json": hashlib.sha256(result_bytes).hexdigest(),
+        "ro-crate-metadata.json": hashlib.sha256(crate_bytes).hexdigest()}}
     (path / "task.json").write_bytes(task_bytes)
     (path / "result.json").write_bytes(result_bytes)
+    (path / "ro-crate-metadata.json").write_bytes(crate_bytes)
     (path / "checksums.json").write_bytes(_json_bytes(checksum))
-    (path / "ro-crate-metadata.json").write_bytes(_json_bytes(_crate_metadata(task, report)))
     return {"status": report["status"], "task_sha256": report["task_sha256"],
             "result_sha256": report["result_sha256"], "bundle_dir": str(path)}
 
@@ -208,9 +221,13 @@ def verify_bundle(path: str | Path) -> dict:
     if not root.is_dir() or root.is_symlink():
         raise ValueError("Expected a bundle directory")
     check = _bounded_json(root / "checksums.json", 4096)
-    if not isinstance(check, dict) or set(check) != {"schema_version", "files"} or check["schema_version"] != "neuroshield.artifact-checksums/0.1" or not isinstance(check["files"], dict) or set(check["files"]) != {"task.json", "result.json"}:
+    if not isinstance(check, dict) or set(check) != {"schema_version", "files"} or check["schema_version"] not in ("neuroshield.artifact-checksums/0.1", "neuroshield.artifact-checksums/0.2") or not isinstance(check["files"], dict):
         raise ValueError("Invalid checksum manifest")
-    for file in ("task.json", "result.json"):
+    legacy = check["schema_version"].endswith("/0.1")
+    expected_files = {"task.json", "result.json"} if legacy else {"task.json", "result.json", "ro-crate-metadata.json"}
+    if set(check["files"]) != expected_files:
+        raise ValueError("Invalid checksum manifest")
+    for file in sorted(expected_files):
         f = root / file
         if f.is_symlink() or not f.is_file() or f.stat().st_size > MAX_REPORT_BYTES:
             raise ValueError("Missing or unsafe artifact")
@@ -227,7 +244,20 @@ def verify_bundle(path: str | Path) -> dict:
     if report["scientific_evidence_level"] != "S0" or report["data_class"] != "SYNTHETIC_ONLY":
         raise ValueError("Evidence or data classification escalated")
     crate = _bounded_json(root / "ro-crate-metadata.json", 65536)
-    if crate != _crate_metadata(task, report):
+    published = None
+    software_version = None
+    if not legacy:
+        try:
+            graph = crate["@graph"]
+            published = next(x for x in graph if x.get("@id") == "./")["datePublished"]
+            if not isinstance(published, str) or date.fromisoformat(published).isoformat() != published:
+                raise ValueError("Invalid RO-Crate publication date")
+            software_version = next(x for x in graph if x.get("@id") == "#neuroshield")["version"]
+            if not isinstance(software_version, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9.+_-]{0,63}", software_version):
+                raise ValueError("Invalid RO-Crate software version")
+        except (KeyError, TypeError, StopIteration, ValueError, AttributeError) as exc:
+            raise ValueError("Missing or invalid RO-Crate datePublished") from exc
+    if crate != _crate_metadata(task, report, published, software_version):
         raise ValueError("RO-Crate metadata mismatch")
     return {"status": "LOCAL_INTEGRITY_VERIFIED_NOT_AUTHENTICATED", "scientific_evidence_level": "S0",
             "task_sha256": canonical_hash(task), "result_sha256": receipt}
