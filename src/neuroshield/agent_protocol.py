@@ -162,7 +162,7 @@ def read_request(path: str | Path) -> dict:
     return validate_request(_bounded_json(Path(path), MAX_REQUEST_BYTES))
 
 
-def _crate_metadata(task: dict, result: dict, publication_date: str | None = None) -> dict:
+def _crate_metadata(task: dict, result: dict, publication_date: str | None = None, software_version: str | None = None) -> dict:
     """RO-Crate 1.3 core metadata; None preserves V1.1 legacy bundle checks."""
     return {"@context": "https://w3id.org/ro/crate/1.3/context", "@graph": [
         {"@id": "ro-crate-metadata.json", "@type": "CreativeWork",
@@ -184,7 +184,7 @@ def _crate_metadata(task: dict, result: dict, publication_date: str | None = Non
         {"@id": "#neuroshield", "@type": "SoftwareApplication", "name": "NeuroShield agent_protocol",
          "description": "Offline fixed-operation synthetic research runner",
          **({"url": "https://github.com/sidhulyalkar/eeg-helmet",
-              "version": __version__} if publication_date is not None else {})},
+              "version": __version__ if software_version is None else software_version} if publication_date is not None else {})},
     ]}
 
 
@@ -245,15 +245,19 @@ def verify_bundle(path: str | Path) -> dict:
         raise ValueError("Evidence or data classification escalated")
     crate = _bounded_json(root / "ro-crate-metadata.json", 65536)
     published = None
+    software_version = None
     if not legacy:
         try:
             graph = crate["@graph"]
             published = next(x for x in graph if x.get("@id") == "./")["datePublished"]
             if not isinstance(published, str) or date.fromisoformat(published).isoformat() != published:
                 raise ValueError("Invalid RO-Crate publication date")
+            software_version = next(x for x in graph if x.get("@id") == "#neuroshield")["version"]
+            if not isinstance(software_version, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9.+_-]{0,63}", software_version):
+                raise ValueError("Invalid RO-Crate software version")
         except (KeyError, TypeError, StopIteration, ValueError, AttributeError) as exc:
             raise ValueError("Missing or invalid RO-Crate datePublished") from exc
-    if crate != _crate_metadata(task, report, published):
+    if crate != _crate_metadata(task, report, published, software_version):
         raise ValueError("RO-Crate metadata mismatch")
     return {"status": "LOCAL_INTEGRITY_VERIFIED_NOT_AUTHENTICATED", "scientific_evidence_level": "S0",
             "task_sha256": canonical_hash(task), "result_sha256": receipt}
