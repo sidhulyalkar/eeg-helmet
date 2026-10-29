@@ -146,3 +146,16 @@ python -m neuroshield corpora stage --root . --out ../neuroshield-metadata-index
 ```
 
 Staging requires committed, unmodified catalog files and writes exclusively metadata outside this repository. Optional XERJ indexing of these per-domain snapshots is an independently reviewed workflow. Citation navigation and passing metadata tests do not upgrade the unvalidated S0 helmet model.
+
+## Agent-ready offline research tasks (V1.1 development)
+
+`neuroshield.agent_protocol` exposes a **fixed synthetic-only** computational interface, not an autonomous laboratory or network API. It provides capability discovery, a bundled JSON Schema, source-bound deterministic results, and minimal RO-Crate 1.3 metadata.
+
+```bash
+python -m neuroshield.agent_protocol capabilities
+python -m neuroshield.agent_protocol schema
+python -m neuroshield.agent_protocol run examples/agent-task-SYNTHETIC.json --out ../agent-run-demo
+python -m neuroshield.agent_protocol verify ../agent-run-demo
+```
+
+All research outputs remain **S0**. Artifact checksums verify local integrity, not authorship, calibration, licensing or physical validity. Agent hosts need separately governed authorization, isolation and resource control; this enables no network server, human-data ingestion or hardware actuation. See [the agent research architecture](docs/agentic-research-architecture.md).

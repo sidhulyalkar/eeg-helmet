@@ -1,0 +1,7 @@
+{
+  "schema_version": "neuroshield.agent-task/0.1",
+  "task_id": "numerics-all-001",
+  "operation": "audit_synthetic_numerics",
+  "data_class": "SYNTHETIC_ONLY",
+  "inputs": {"scenario": "all"}
+}
