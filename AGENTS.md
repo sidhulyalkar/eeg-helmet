@@ -17,3 +17,5 @@ Read `README.md`, `docs/research-contract.md`, and `docs/knowledge-and-retrieval
 10. **V0.8 waveforms:** read `docs/preregistered-waveform-screen-v0.8.md` before waveform or measurement fit changes. Never optimize post-impact signal alignment to inflate agreement. The S0 synthetic model must not be presented as physically validated.
 
 11. **Agent research interface:** read `docs/agentic-research-architecture.md` before adding operations. Use a fixed allowlist, exact schemas, synthetic-only data and deterministic outputs. Do not permit agent-selected commands, URL fetching, human data, scientific evidence promotion, hardware actuation or arbitrary file access through this interface. Require adversarial tests for any new operation.
+
+11. **Agent reproducibility:** check `docs/independent-reproduction-v1.2.md`. `agent_protocol.verify` checks internal integrity only; `python -m neuroshield.reproduction` re-executes the allowlisted S0 task. Do not claim cryptographic signatures, external reproducibility, or scientific validation based solely on local replay.
