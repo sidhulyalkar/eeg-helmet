@@ -132,7 +132,7 @@ class AgentContractTests(unittest.TestCase):
             crate = json.loads((out / "ro-crate-metadata.json").read_text())
             crate["@graph"][1]["name"] = "Unverified physical experiment"
             (out / "ro-crate-metadata.json").write_text(json.dumps(crate))
-            with self.assertRaisesRegex(ValueError, "metadata mismatch"):
+            with self.assertRaisesRegex(ValueError, "checksum mismatch|metadata mismatch"):
                 verify_bundle(out)
 
     def test_rejects_duplicate_json_fields_and_nonfinite(self):

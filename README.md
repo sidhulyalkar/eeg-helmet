@@ -172,3 +172,8 @@ python -m neuroshield.reproduction ../replay-demo --out ../replay-report.json
 ```
 
 Replay checks source SHA-256, re-executes the fixed allowlisted synthetic task and distinguishes exact reproduction, bounded floating-point variation, changed source, and failed reproduction. It does **not** prove authenticity, RO-Crate conformance, physical model validity or helmet safety. See [`docs/independent-reproduction-v1.2.md`](docs/independent-reproduction-v1.2.md).
+
+
+## V1.3 release portability and external reproducibility
+
+Use `python scripts/smoke_installed_wheel.py` to build a wheel and test the installed artifact from a clean environment outside the checkout. The agent task JSON Schema is included in the wheel, and a separate GitHub Actions job runs an independent RO-Crate 1.3 validator on a synthetic bundle. New bundles include a UTC `datePublished` and checksum-bound metadata; the historical V1.1 checksum format remains readable. Scientific tasks and outputs remain S0. See [the external reproduction guide](docs/external-reproduction-and-crate-v1.3.md).
