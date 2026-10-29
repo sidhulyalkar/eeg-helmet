@@ -159,3 +159,16 @@ python -m neuroshield.agent_protocol verify ../agent-run-demo
 ```
 
 All research outputs remain **S0**. Artifact checksums verify local integrity, not authorship, calibration, licensing or physical validity. Agent hosts need separately governed authorization, isolation and resource control; this enables no network server, human-data ingestion or hardware actuation. See [the agent research architecture](docs/agentic-research-architecture.md).
+
+
+## V1.2 independent synthetic research replay
+
+V1.1 `verify` checks artifact self-consistency, **not** re-execution. Run the separate offline V1.2 verifier to compare a pinned bundle against the installed scientific source:
+
+```bash
+python -m neuroshield.agent_protocol run examples/agent-task-SYNTHETIC.json --out ../replay-demo
+python -m neuroshield.agent_protocol verify ../replay-demo
+python -m neuroshield.reproduction ../replay-demo --out ../replay-report.json
+```
+
+Replay checks source SHA-256, re-executes the fixed allowlisted synthetic task and distinguishes exact reproduction, bounded floating-point variation, changed source, and failed reproduction. It does **not** prove authenticity, RO-Crate conformance, physical model validity or helmet safety. See [`docs/independent-reproduction-v1.2.md`](docs/independent-reproduction-v1.2.md).
