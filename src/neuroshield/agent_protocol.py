@@ -14,6 +14,7 @@ from datetime import date, datetime, timezone
 from importlib.resources import files
 from pathlib import Path
 
+from . import __version__
 from .models import Parameters, SCENARIOS
 from .provenance import canonical_hash
 
@@ -168,7 +169,9 @@ def _crate_metadata(task: dict, result: dict, publication_date: str | None = Non
          "conformsTo": {"@id": "https://w3id.org/ro/crate/1.3"}, "about": {"@id": "./"}},
         {"@id": "./", "@type": "Dataset", "name": "NeuroShield synthetic research task",
          "description": "Unvalidated S0 research artifact, no real human or lab data",
-         **({"datePublished": publication_date} if publication_date is not None else {}),
+         **({"datePublished": publication_date,
+             "license": "No output license is granted by this metadata; the NeuroShield software uses Apache-2.0."}
+            if publication_date is not None else {}),
          "hasPart": [{"@id": "task.json"}, {"@id": "result.json"}, {"@id": "checksums.json"}]},
         {"@id": "task.json", "@type": "File", "encodingFormat": "application/json",
          "name": "Validated synthetic task"},
@@ -179,7 +182,9 @@ def _crate_metadata(task: dict, result: dict, publication_date: str | None = Non
         {"@id": "#task-action", "@type": "CreateAction", "object": {"@id": "task.json"},
          "result": {"@id": "result.json"}, "instrument": {"@id": "#neuroshield"}},
         {"@id": "#neuroshield", "@type": "SoftwareApplication", "name": "NeuroShield agent_protocol",
-         "description": "Offline fixed-operation synthetic research runner"},
+         "description": "Offline fixed-operation synthetic research runner",
+         **({"url": "https://github.com/sidhulyalkar/eeg-helmet",
+              "version": __version__} if publication_date is not None else {})},
     ]}
 
 
