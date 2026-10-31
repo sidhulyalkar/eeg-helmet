@@ -1,3 +1,9 @@
+## V1.4.0 — Outside-researcher reproduction challenge
+
+- Fixed two-case, S0-only offline reproduction exercise with failure-preserving summary and no user-input code, URLs or real data.
+- Replays bundled results against installed scientific kernels and checks exact expected tasks, not merely hashes.
+- Adds clean-wheel challenge smoke, cross-platform CI, adversarial tests, and contributor feedback template. Does not claim actual outside independent reproduction or physical validation.
+
 ## V0.8.0 — Preregistered S0 waveform screen
 
 - Added local, nonhuman paired full-window waveform metrics (peak/time, time-weighted RMS, integrals, normalized RMSE, correlation), provenance hashes and explicit per-modality alerts.
