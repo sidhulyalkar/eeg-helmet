@@ -139,7 +139,10 @@ class ExerciseTests(unittest.TestCase):
         self.run_fake()
         import shutil
         shutil.rmtree(self.directory / "impact")
-        (self.directory / "impact").symlink_to(self.directory / "numerics", target_is_directory=True)
+        try:
+            (self.directory / "impact").symlink_to(self.directory / "numerics", target_is_directory=True)
+        except (OSError, NotImplementedError):
+            self.skipTest("Directory symlinks are unavailable without elevated permissions")
         self.assertEqual(self.verify_fake()["status"], "NOT_REPRODUCED")
 
     def test_can_repeat_verify_without_writing(self):
