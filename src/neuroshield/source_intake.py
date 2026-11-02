@@ -11,6 +11,7 @@ import re
 from pathlib import Path
 
 from . import corpora
+from .provenance import canonical_hash
 
 SCHEMA = "neuroshield.intake-ledger.v1"
 ACCESS = {"public_files_listed", "restricted_files", "publication_only"}
@@ -56,7 +57,8 @@ def review(root: str | Path) -> dict:
     entries = record["sources"]
     if not isinstance(entries, list) or not 1 <= len(entries) <= 50:
         raise ValueError("Expected 1..50 source intake records")
-    existing = {s["id"]: s for group in corpora.load_catalog(root).values() for s in group}
+    catalogs = corpora.load_catalog(root)
+    existing = {s["id"]: s for group in catalogs.values() for s in group}
     seen, results = set(), []
     for entry in entries:
         if not isinstance(entry, dict) or set(entry) != REQUIRED:
@@ -83,6 +85,7 @@ def review(root: str | Path) -> dict:
             "status": "BLOCKED" if blockers else "REVIEW_REQUIRED",
             "blockers": blockers,
             "source_url": existing[ident]["url"],
+            "source_version": existing[ident]["version"],
             "scientific_evidence_level": "S0",
             "data_import_authorized": False,
         })
@@ -90,6 +93,8 @@ def review(root: str | Path) -> dict:
         "schema": SCHEMA,
         "status": "BLOCKED_EXTERNAL_QUALIFICATION" if any(r["status"] == "BLOCKED" for r in results) else "REVIEW_REQUIRED",
         "source_count": len(results),
+        "ledger_identity_sha256": canonical_hash(record),
+        "biomechanics_catalog_identity_sha256": canonical_hash(catalogs["biomechanics"]),
         "sources": results,
         "scientific_evidence_level": "S0",
         "note": "Metadata assertions are not verified rights, calibration or study results. No network, downloads, imports or safety claims.",
