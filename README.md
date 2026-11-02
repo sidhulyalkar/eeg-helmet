@@ -177,3 +177,7 @@ Replay checks source SHA-256, re-executes the fixed allowlisted synthetic task a
 ## V1.3 release portability and external reproducibility
 
 Use `python scripts/smoke_installed_wheel.py` to build a wheel and test the installed artifact from a clean environment outside the checkout. The agent task JSON Schema is included in the wheel, and a separate GitHub Actions job runs an independent RO-Crate 1.3 validator on a synthetic bundle. New bundles include a UTC `datePublished` and checksum-bound metadata; the historical V1.1 checksum format remains readable. Scientific tasks and outputs remain S0. See [the external reproduction guide](docs/external-reproduction-and-crate-v1.3.md).
+
+## V1.5 external biomechanics source intake
+
+New metadata-only leads for public Borealis nonhuman sled data, restricted EPFL hockey headform IMUs and Virginia Tech's experimental headform vibration method are cataloged separately. Use `python -m neuroshield.source_intake --root .` to see outstanding permissions, calibration and scientific-review blockers. See [the sourcing review](docs/biomechanics-source-intake-v1.5.md). No external measurements have been imported or physically validated, and no concussion-protection claims are supported.
