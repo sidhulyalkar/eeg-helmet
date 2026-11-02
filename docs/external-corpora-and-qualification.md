@@ -55,7 +55,11 @@ These are illustrative CLI commands and **were not executed as part of V0.6**. V
 
 Before adopting XERJ for larger corpora: freeze a new, independently authored question set before tuning; use identical source versions and question splits for lexical (`rg`/baseline), XERJ lexical, and semantic/hybrid; normalize rankings to unique source IDs; report Hit@5/MRR, query latency, index time/size and answer-citation accuracy. A missing executable is **NOT TESTED**, never a failure or a pass.
 
-## V1.5 external biomechanics intake status\n\nSee [the source intake ledger](biomechanics-source-intake-v1.5.md) for three new candidate sources (Borealis e-scooter Hybrid III data, restricted EPFL hockey IMU data, and Virginia Tech's experimental vibration note), source suitability, and explicit access/calibration blockers. Run `python -m neuroshield.source_intake --root .` for a deterministic, no-network S0 readiness report. These leads are *not* permitted raw-data imports or physical model validation.\n\n## License and provenance workflow
+## V1.5 external biomechanics intake status
+
+See [the source intake ledger](biomechanics-source-intake-v1.5.md) for three new candidate sources (Borealis e-scooter Hybrid III data, restricted EPFL hockey IMU data, and Virginia Tech's experimental vibration note), source suitability, and explicit access/calibration blockers. Run `python -m neuroshield.source_intake --root .` for a deterministic, no-network S0 readiness report. These leads are *not* permitted raw-data imports or physical model validation.
+
+## License and provenance workflow
 
 1. Retain hyperlinks and small original authored summaries only. `metadata_only` is not a reviewed license.
 2. Before downloading the NFL FE toolkit, NOCSAE standard contents or other third-party files, record the **actual file-level terms** (including derivatives/commercial usage) and immutable revision/hash in a separate approval process.
