@@ -107,8 +107,8 @@ def inspect_csv(path: str | Path, *, source_id: str, origin: str,
                     t = float(row[time_column]) * TIME_UNITS[time_unit]
                 except (ValueError, OverflowError) as exc:
                     raise ValueError("Declared timestamp contains nonnumeric values") from exc
-                if not math.isfinite(t) or t < 0 or (previous is not None and t <= previous):
-                    raise ValueError("Declared timestamp must be finite, nonnegative and increasing")
+                if not math.isfinite(t) or (previous is not None and t <= previous):
+                    raise ValueError("Declared timestamp must be finite and strictly increasing")
                 if previous is not None:
                     intervals.append(t - previous)
                 else:
