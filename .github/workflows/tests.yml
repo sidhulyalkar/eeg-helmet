@@ -1,5 +1,10 @@
 name: Research prototype checks
 on: [push, pull_request]
+# Keep only the latest commit's checks for each branch. Push and PR use the same
+# branch group, avoiding duplicate OS/Python jobs for superseded revisions.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 jobs:
   test:
     strategy:
