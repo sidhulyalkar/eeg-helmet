@@ -1,0 +1,44 @@
+{
+  "schema": "neuroshield.intake-ledger.v1",
+  "sources": [
+    {
+      "source_id": "borealis-escooter-headneck-2024",
+      "listing_access": "public_files_listed",
+      "dataset_scope": "nonhuman_hybrid_iii_sled_crashes",
+      "file_license_reviewed": false,
+      "permission_to_analyze_verified": false,
+      "file_sha256_verified": false,
+      "calibration_reviewed": false,
+      "coordinate_frames_verified": false,
+      "signal_units_verified": false,
+      "independent_lab_reviewed": false,
+      "limits": "Six e-scooter curb-crash tests are not six football facemask replicates; per-file reuse terms, channel headers and instrument calibration must be checked."
+    },
+    {
+      "source_id": "zenodo-hockey-imu-2026",
+      "listing_access": "restricted_files",
+      "dataset_scope": "hockey_helmet_to_headform_imu_transfer",
+      "file_license_reviewed": false,
+      "permission_to_analyze_verified": false,
+      "file_sha256_verified": false,
+      "calibration_reviewed": false,
+      "coordinate_frames_verified": false,
+      "signal_units_verified": false,
+      "independent_lab_reviewed": false,
+      "limits": "Restricted access; no raw files available in this repository; no authorization for acquisition or reuse."
+    },
+    {
+      "source_id": "vt-cranium-resonance-index-2026",
+      "listing_access": "publication_only",
+      "dataset_scope": "high_frequency_headform_vibration_method",
+      "file_license_reviewed": false,
+      "permission_to_analyze_verified": false,
+      "file_sha256_verified": false,
+      "calibration_reviewed": false,
+      "coordinate_frames_verified": false,
+      "signal_units_verified": false,
+      "independent_lab_reviewed": false,
+      "limits": "Technical note defines an experimental vibration metric, not an injury criterion or independent raw acceleration dataset."
+    }
+  ]
+}
