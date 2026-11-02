@@ -188,3 +188,7 @@ python -m neuroshield.reproduction_challenge verify ../neuroshield-repro-01
 ```
 
 The exercise retains failures, pins its two experiments (an oblique synthetic impact and a 16-case numerical audit), verifies exact task identities and reruns their bundles. This is computational reproduction **only**, not independent human validation, authentication or physical helmet evidence. Outside scientists should follow [the guide](docs/reproduction-challenge-v1.4.md) and [feedback template](examples/reproduction-feedback-template.md). Avoid publishing private measurements or machine-specific secrets.
+
+## V1.5 external biomechanics source intake
+
+New metadata-only leads for public Borealis nonhuman sled data, restricted EPFL hockey headform IMUs and Virginia Tech's experimental headform vibration method are cataloged separately. Use `python -m neuroshield.source_intake --root .` to see outstanding permissions, calibration and scientific-review blockers. See [the sourcing review](docs/biomechanics-source-intake-v1.5.md). No external measurements have been imported or physically validated, and no concussion-protection claims are supported.

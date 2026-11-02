@@ -35,7 +35,7 @@ class CorpusTests(unittest.TestCase):
 
     def test_audit_all_three(self):
         r = corpora.audit(self.root)
-        self.assertEqual(r["corpora"], {"biomechanics": 6, "neural": 3, "evidence": 3})
+        self.assertEqual(r["corpora"], {"biomechanics": 9, "neural": 3, "evidence": 3})
         self.assertEqual(r["max_evidence_tier"], "S0")
         self.assertFalse(r["physical_validation"])
 
@@ -96,7 +96,7 @@ class CorpusTests(unittest.TestCase):
         self.init_git()
         output = Path(self.tmp.name) / "staged"
         r = corpora.stage_metadata(self.root, output)
-        self.assertEqual(r["source_count"], 12)
+        self.assertEqual(r["source_count"], 15)
         manifest = json.loads((output / "CORPORA-MANIFEST.json").read_text())
         self.assertEqual(manifest["repository_commit"], r["repository_commit"])
         content = (output / "biomechanics" / "nocsae-nd081.txt").read_text()
@@ -112,7 +112,7 @@ class CorpusTests(unittest.TestCase):
         p.write_bytes(normalized.replace(b"\n", b"\r\n"))
         output = Path(self.tmp.name) / "crlf-staged"
         result = corpora.stage_metadata(self.root, output)
-        self.assertEqual(result["source_count"], 12)
+        self.assertEqual(result["source_count"], 15)
 
     def test_reject_staging_dirty_catalog(self):
         self.init_git()

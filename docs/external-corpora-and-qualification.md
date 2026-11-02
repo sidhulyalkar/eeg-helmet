@@ -6,7 +6,7 @@
 
 | Namespace | Primary question | Current records |
 | --- | --- | --- |
-| `biomechanics` | What apparatus, models and external impact measurements could test facemask designs? | Six links to NFL, NOCSAE, Virginia Tech material |
+| `biomechanics` | What apparatus, models and external impact measurements could test facemask designs? | Nine curated links to NFL, NOCSAE, Virginia Tech and external datasets |
 | `neural` | What recording format, provenance, consent, coordinates and EEG channels would a future signal experiment need? | Three links to BIDS and OpenNeuro material |
 | `evidence` | What distinguishes a research claim from a clinical or certification determination? | Three links to CDC, FDA and NOCSAE material |
 
@@ -54,6 +54,10 @@ These are illustrative CLI commands and **were not executed as part of V0.6**. V
 `corpora bench` evaluates a fixed set of 12 short *metadata lookup* queries grouped by domain. The expected IDs are defined in `knowledge/corpora/questions.json`. They were authored with the seed catalog, so high performance is an **integration smoke test**, not independent evidence of general retrieval quality. It is not comparable to the earlier V0.5 **code navigation** benchmark.
 
 Before adopting XERJ for larger corpora: freeze a new, independently authored question set before tuning; use identical source versions and question splits for lexical (`rg`/baseline), XERJ lexical, and semantic/hybrid; normalize rankings to unique source IDs; report Hit@5/MRR, query latency, index time/size and answer-citation accuracy. A missing executable is **NOT TESTED**, never a failure or a pass.
+
+## V1.5 external biomechanics intake status
+
+See [the source intake ledger](biomechanics-source-intake-v1.5.md) for three new candidate sources (Borealis e-scooter Hybrid III data, restricted EPFL hockey IMU data, and Virginia Tech's experimental vibration note), source suitability, and explicit access/calibration blockers. Run `python -m neuroshield.source_intake --root .` for a deterministic, no-network S0 readiness report. These leads are *not* permitted raw-data imports or physical model validation.
 
 ## License and provenance workflow
 
