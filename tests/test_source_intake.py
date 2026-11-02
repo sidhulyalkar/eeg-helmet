@@ -35,6 +35,17 @@ class SourceIntakeTests(unittest.TestCase):
         self.assertEqual(result["source_count"], 3)
         self.assertTrue(all(not s["data_import_authorized"] for s in result["sources"]))
 
+    def test_ledger_and_catalog_hashes_are_stable_and_change_with_metadata(self):
+        before = review(self.root)
+        self.assertEqual(before["ledger_identity_sha256"], review(self.root)["ledger_identity_sha256"])
+        self.assertEqual(len(before["ledger_identity_sha256"]), 64)
+        self.assertEqual(len(before["biomechanics_catalog_identity_sha256"]), 64)
+        self.assertEqual(len(before["sources"][0]["source_version"]) > 0, True)
+        self.edit(lambda a: a["sources"][0].update(limits=a["sources"][0]["limits"] + " Review pending."))
+        after = review(self.root)
+        self.assertNotEqual(before["ledger_identity_sha256"], after["ledger_identity_sha256"])
+        self.assertEqual(before["biomechanics_catalog_identity_sha256"], after["biomechanics_catalog_identity_sha256"])
+
     def test_restricted_and_publication_blockers(self):
         results = {r["source_id"]: r for r in review(self.root)["sources"]}
         self.assertIn("SOURCE_FILES_RESTRICTED", results["zenodo-hockey-imu-2026"]["blockers"])
