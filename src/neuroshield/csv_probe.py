@@ -147,12 +147,12 @@ def inspect_csv(path: str | Path, *, source_id: str, origin: str,
     elif clock["status"] == "POSSIBLE_GAPS_OR_JITTER":
         issues.append("REVIEW_SAMPLE_CLOCK_GAPS_OR_JITTER")
     return {"schema_version": SCHEMA, "status": "STRUCTURAL_REVIEW_REQUIRED",
-            "scientific_evidence_level": "S0", "source_id": source_id,
+            "scientific_evidence_level": "S0", "source_id_declaration": source_id,
             "origin_declaration": origin, "raw_file_sha256": digest,
             "raw_file_bytes": before.st_size, "data_rows": rows,
             "column_count": len(header), "delimiter": delimiter,
             "columns": columns, "timebase": clock, "structural_flags": issues,
-            "mapping_approved": False, "calibration_verified": False,
+            "source_identity_verified": False, "mapping_approved": False, "calibration_verified": False,
             "data_import_authorized": False, "physical_validation": False,
             "limitations": "File-level legal rights, source identity, instrumentation, calibration, signal units, gravity/filter conventions, and coordinate frames require independent review. No measured values are returned."}
 
