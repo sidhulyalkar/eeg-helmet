@@ -62,6 +62,15 @@ class CsvProbeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "increasing"):
             self.inspect(time_column=0, time_unit="ms")
 
+    def test_negative_pretrigger_times_are_valid(self):
+        with self.path.open("w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f)
+            w.writerow(["relative_time_ms", "headform_a"])
+            w.writerows([[x, 1.0] for x in (-3, -2, -1, 0, 1, 2)])
+        report = self.inspect(time_column=0, time_unit="ms")
+        self.assertEqual(report["timebase"]["status"], "STRUCTURE_ONLY")
+        self.assertAlmostEqual(report["timebase"]["first_time_s"], -.003)
+
     def test_reject_nan_timestamp(self):
         with self.path.open("a", newline="", encoding="utf-8") as f:
             csv.writer(f).writerow(["NaN", 0, 0])
