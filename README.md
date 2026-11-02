@@ -1,6 +1,6 @@
 # NeuroShield Research Workbench
 
-**V0.8 research workbench: local-first synthetic demonstrations, with offline-only interfaces for future nonhuman bench data. All distributed example signals remain synthetic.**
+**V1.4 research workbench: local-first synthetic demonstrations, with offline-only interfaces for future nonhuman bench data. All distributed example signals remain synthetic.**
 
 > **Safety and scientific scope:** This is **not a medical device, protective helmet design, concussion detector, brain-strain estimator, or certification test**. Never install the concept CAD on protective equipment. No real athlete data are accepted by the demo server. There is no headform calibration, injury model, NOCSAE/NFL testing, or evidence of concussion reduction. All reported mechanics remain S0, unvalidated.
 
@@ -177,3 +177,14 @@ Replay checks source SHA-256, re-executes the fixed allowlisted synthetic task a
 ## V1.3 release portability and external reproducibility
 
 Use `python scripts/smoke_installed_wheel.py` to build a wheel and test the installed artifact from a clean environment outside the checkout. The agent task JSON Schema is included in the wheel, and a separate GitHub Actions job runs an independent RO-Crate 1.3 validator on a synthetic bundle. New bundles include a UTC `datePublished` and checksum-bound metadata; the historical V1.1 checksum format remains readable. Scientific tasks and outputs remain S0. See [the external reproduction guide](docs/external-reproduction-and-crate-v1.3.md).
+
+## V1.4: independent reproduction exercise
+
+Run the fixed offline synthetic challenge from an installed wheel or clean checkout:
+
+```bash
+python -m neuroshield.reproduction_challenge run ../neuroshield-repro-01
+python -m neuroshield.reproduction_challenge verify ../neuroshield-repro-01
+```
+
+The exercise retains failures, pins its two experiments (an oblique synthetic impact and a 16-case numerical audit), verifies exact task identities and reruns their bundles. This is computational reproduction **only**, not independent human validation, authentication or physical helmet evidence. Outside scientists should follow [the guide](docs/reproduction-challenge-v1.4.md) and [feedback template](examples/reproduction-feedback-template.md). Avoid publishing private measurements or machine-specific secrets.

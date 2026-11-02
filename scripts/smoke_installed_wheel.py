@@ -50,7 +50,10 @@ def main():
         call(interpreter, "-m", "neuroshield.agent_protocol", "run", task, "--out", bundle, cwd=root, env=clean_env)
         call(interpreter, "-m", "neuroshield.agent_protocol", "verify", bundle, cwd=root, env=clean_env)
         call(interpreter, "-m", "neuroshield.reproduction", bundle, "--out", root / "replay.json", cwd=root, env=clean_env)
-        print("Installed wheel: schema, run, verify and replay passed outside source checkout")
+        challenge = root / "challenge"
+        call(interpreter, "-m", "neuroshield.reproduction_challenge", "run", challenge, cwd=root, env=clean_env)
+        call(interpreter, "-m", "neuroshield.reproduction_challenge", "verify", challenge, cwd=root, env=clean_env)
+        print("Installed wheel: schema, run, verify, replay and reproduction challenge passed outside source checkout")
 
 
 if __name__ == "__main__":
