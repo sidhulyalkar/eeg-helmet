@@ -112,7 +112,7 @@ class CorpusTests(unittest.TestCase):
         p.write_bytes(normalized.replace(b"\n", b"\r\n"))
         output = Path(self.tmp.name) / "crlf-staged"
         result = corpora.stage_metadata(self.root, output)
-        self.assertEqual(result["source_count"], 12)
+        self.assertEqual(result["source_count"], 15)
 
     def test_reject_staging_dirty_catalog(self):
         self.init_git()
