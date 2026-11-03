@@ -36,6 +36,17 @@ class ModelDiagnosticsTests(unittest.TestCase):
                     "safety_or_injury_inference_permitted"):
             self.assertIs(result[key], False)
 
+    def test_scenario_angle_is_display_metadata_not_vector_loading(self):
+        from neuroshield.models import SCENARIOS
+        from neuroshield.physics import simulate
+        original = simulate("oblique")["metrics_unrounded"]
+        changed = dict(SCENARIOS["oblique"], angle_deg=90)
+        with patch.dict(SCENARIOS, {"oblique":changed}):
+            altered = simulate("oblique")["metrics_unrounded"]
+        self.assertEqual(original, altered)
+        self.assertFalse(self.result["scenario_angle_deg_is_dynamical_input"])
+        self.assertIn("SCENARIO_ANGLE_METADATA_NOT_FORCE_DIRECTION", self.result["warnings"])
+
     def test_peak_proxies_explicitly_not_direct_measurements(self):
         for item in self.result["model_observable_rows"]:
             self.assertFalse(item["directly_comparable_to_physical_3d_measurement"])
