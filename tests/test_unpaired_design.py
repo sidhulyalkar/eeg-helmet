@@ -118,6 +118,36 @@ class UnpairedDesignTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Repeated raw"):
             validate_plan(self.plan)
 
+    def test_perfect_lab_factor_confounds_are_flagged(self):
+        for trial in self.plan["trials"]:
+            suffix = trial["factor_level"]
+            trial["test_day_id"] = f"day-{suffix}"
+            trial["headform_id"] = f"headform-{suffix}"
+            trial["rig_id"] = f"rig-{suffix}"
+        result = evaluate_design(self.plan)
+        for warning in ("FACTOR_CONFOUNDED_WITH_TEST_DAY", "FACTOR_CONFOUNDED_WITH_HEADFORM",
+                        "FACTOR_CONFOUNDED_WITH_RIG"):
+            self.assertIn(warning, result["warnings"])
+
+    def test_repeated_helmet_across_strata_detected(self):
+        self.plan["trials"][3]["helmet_unit_id"] = self.plan["trials"][0]["helmet_unit_id"]
+        result = evaluate_design(self.plan)
+        self.assertIn("HELMET_UNIT_REUSED_ACROSS_EXPERIMENT", result["warnings"])
+
+    def test_unknown_run_order_remains_visible(self):
+        self.plan["trials"][0]["run_order"] = None
+        report = evaluate_design(self.plan)
+        self.assertIn("RUN_ORDER_NOT_FULLY_DECLARED", report["warnings"])
+        self.assertIn("UNKNOWN_OR_PARTIAL_RUN_ORDER", report["strata"][0]["cells"][1]["warnings"])
+
+    def test_malformed_dispositions_fail_with_value_error(self):
+        for field, value in (("record_reason", ["NONE"]), ("record_status", 7)):
+            with self.subTest(field=field):
+                p = fixture()
+                p["trials"][0][field] = value
+                with self.assertRaises(ValueError):
+                    validate_plan(p)
+
     def test_recorded_requires_sha(self):
         self.plan["trials"][0].update(record_status="RECORDED", record_reason="NONE")
         with self.assertRaisesRegex(ValueError, "Recorded trials"):
