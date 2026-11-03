@@ -1,8 +1,18 @@
 # NeuroShield Research Workbench
 
-**V1.4 research workbench: local-first synthetic demonstrations, with offline-only interfaces for future nonhuman bench data. All distributed example signals remain synthetic.**
+**V1.9 scientific navigation over V1.8 scientific modules. All included examples remain synthetic, and physical model evidence remains S0.**
 
 > **Safety and scientific scope:** This is **not a medical device, protective helmet design, concussion detector, brain-strain estimator, or certification test**. Never install the concept CAD on protective equipment. No real athlete data are accepted by the demo server. There is no headform calibration, injury model, NOCSAE/NFL testing, or evidence of concussion reduction. All reported mechanics remain S0, unvalidated.
+
+## Start with a scientific question
+
+New contributors: read the [ten-minute onboarding guide](docs/START_HERE.md) and [current scientific architecture](docs/SCIENTIFIC_ARCHITECTURE.md). Eight discoverable workflows now link research questions to module ownership, tests, scientific protocols and S0 limitations.
+
+    python -m neuroshield.research_map audit --root .
+    python -m neuroshield.research_map list --root .
+    python -m neuroshield.research_map show nonhuman-measurement-contracts
+
+These commands are read-only navigation. They never execute research jobs, import external files or approve scientific evidence.
 
 ## Run locally
 
@@ -101,7 +111,7 @@ The 16-case fixture currently passes these **nonclinical mathematical tolerances
 - [`docs/research-contract.md`](docs/research-contract.md): S0→S4 evidence ladder, numerical threshold definitions, and clinical/privacy boundaries.
 - [`docs/architecture-and-next-experiments.md`](docs/architecture-and-next-experiments.md): architecture, experimental roadmap, sensors, and future neurOS integration.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`SECURITY.md`](SECURITY.md): developer practices and responsible reporting.
-- [`docs/source-sha256-manifest.json`](docs/source-sha256-manifest.json): **historical V0.2 snapshot**, not a current-branch verification manifest. V0.3 audit reports separately contain hashes of the numerical source and parameter policy.
+- Experiment-specific numerical and replay reports provide their own versioned source identities; no historical manifest should be used to qualify the current branch.
 
 ## V0.5 evidence knowledge and optional XERJ
 
