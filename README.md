@@ -81,6 +81,14 @@ Before treating impacts as independent trials, review the declared pairing, test
 
 This **metadata-only, nonhuman matched-block** preflight refuses pooled incompatible impact conditions and warns about pseudoreplication and carryover. It does not verify randomization, compute significance, read samples or approve an experiment. See [the protocol](docs/study-design-preflight-v1.10.md).
 
+## V1.11: check unmatched experimental conditions
+
+When impact trials cannot defensibly be paired, use a separate **unpaired/factorial design preflight** instead of inventing reference-candidate blocks:
+
+    python -m neuroshield.unpaired_design examples/unpaired-design-SYNTHETIC.json --out ../unpaired-review.json
+
+This six-trial fixture is fictional, with no original measurements. The receipt preserves unacquired data, exclusions and trial failures; shows per-condition coverage; flags order, apparatus and repeated-equipment confounders; and authorizes no statistical or protective-performance inference. See [the V1.11 scientific protocol](docs/unpaired-factorial-preflight-v1.11.md).
+
 ## Reproduce and contribute
 
 Run the [fixed outside-researcher challenge](docs/reproduction-challenge-v1.4.md) and preserve failed attempts. The [agent-ready research architecture](docs/agentic-research-architecture.md) describes the limited safe execution interface. Computed results can be bundled with RO-Crate 1.3 metadata, but successful conformance checks do not authenticate measurements or prove scientific claims.
