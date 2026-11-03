@@ -30,6 +30,8 @@ when the baseline metric is materially nonzero. The tool preserves an unnormaliz
 
 A pairwise **cosine similarity** across parameter-sensitivity columns can flag nearly identical effects on the chosen output set. Thresholds (0.98 pattern similarity, 0.01 weak RMS elasticity, 0.25 derivative-step difference) are **heuristics**, not hypothesis tests, confidence bounds or physical significance thresholds.
 
+**Important additional model-form limitation:** The built-in scenario `angle_deg` is descriptive metadata, not a vector force-direction input to the equations. Scenario differences arise from manually specified force magnitude, pulse duration, moment arm, and impact body, not a validated 3D oblique impact geometry. Thus an `oblique` scenario label alone cannot justify angle-dependent real-world predictions. The regression suite changes this angle field and verifies the simulated peak values stay identical.
+
 ## Absolute model-versus-measurement limits
 
 | Toy peak output | What it is | Why direct measured comparison is blocked |
