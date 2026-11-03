@@ -124,8 +124,8 @@ def validate_plan(plan: dict) -> dict:
     if not isinstance(plan["assignment_status"], str) or plan["assignment_status"] not in {"NOT_RECORDED", "AUTHOR_DECLARED_UNVERIFIED"}:
         raise ValueError("Assignment must remain explicitly unverified")
     nominal = _number(plan["nominal_speed_m_s"], "nominal speed", .01, 100)
-    speed_tolerance = _number(plan["speed_tolerance_m_s"], "speed tolerance", 0, 2)
-    angle_tolerance = _number(plan["angle_tolerance_deg"], "angle tolerance", 0, 10)
+    speed_tolerance = _number(plan["speed_tolerance_m_s"], "speed tolerance", 0, .5)
+    angle_tolerance = _number(plan["angle_tolerance_deg"], "angle tolerance", 0, 1)
     if not isinstance(plan["primary_outcome"], str) or plan["primary_outcome"] not in METRICS:
         raise ValueError("Primary outcome must be a named measured physical quantity")
     secondary = plan["secondary_outcomes"]
@@ -174,7 +174,7 @@ def validate_plan(plan: dict) -> dict:
                 raise ValueError("Run order must be unique, positive, within planned count")
             seen["run_order"].add(order)
         angle = _number(trial["impact_angle_deg"], "impact angle", -180, 180, missing=True)
-        speed = _number(trial["impact_speed_m_s"], "impact speed", 0, 100, missing=True)
+        speed = _number(trial["impact_speed_m_s"], "impact speed", .01, 100, missing=True)
         if speed is not None and abs(speed - nominal) > speed_tolerance + 1e-9:
             raise ValueError("Declared impact speed outside prespecified deviation")
         grouped[trial["stratum_id"]].append(angle)
