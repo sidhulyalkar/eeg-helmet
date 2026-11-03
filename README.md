@@ -89,6 +89,14 @@ When impact trials cannot defensibly be paired, use a separate **unpaired/factor
 
 This six-trial fixture is fictional, with no original measurements. The receipt preserves unacquired data, exclusions and trial failures; shows per-condition coverage; flags order, apparatus and repeated-equipment confounders; and authorizes no statistical or protective-performance inference. See [the V1.11 scientific protocol](docs/unpaired-factorial-preflight-v1.11.md).
 
+## V1.12: can the toy model's parameters be distinguished?
+
+Before fitting numerical parameters to headform measurements, inspect how each parameter affects modeled peaks. The [model sensitivity guide](docs/model-sensitivity-and-observables-v1.12.md) explains the deliberately **synthetic-only** diagnostic, local derivative stability and why a one-axis neck-torque proxy cannot be equated with a measured six-axis neck moment.
+
+    python -m neuroshield.model_diagnostics --scenario all --preset default --out ../model-sensitivity-SYNTHETIC.json
+
+This command never reads external measurements or claims that the five mechanical parameters are physically identifiable.
+
 ## Reproduce and contribute
 
 Run the [fixed outside-researcher challenge](docs/reproduction-challenge-v1.4.md) and preserve failed attempts. The [agent-ready research architecture](docs/agentic-research-architecture.md) describes the limited safe execution interface. Computed results can be bundled with RO-Crate 1.3 metadata, but successful conformance checks do not authenticate measurements or prove scientific claims.

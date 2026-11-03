@@ -15,18 +15,20 @@
         "src/neuroshield/physics.py",
         "src/neuroshield/design_space.py",
         "src/neuroshield/provenance.py",
-        "src/neuroshield/qualification.py"
+        "src/neuroshield/qualification.py",
+        "src/neuroshield/model_diagnostics.py"
       ],
       "tests": [
         "tests/test_core.py",
-        "tests/test_qualification.py"
+        "tests/test_qualification.py",
+        "tests/test_model_diagnostics.py"
       ],
       "protocol": "docs/research-contract.md",
       "related_claim_ids": [
         "C-SIM-001",
         "C-OPT-001"
       ],
-      "not_established": "No instrumented helmet calibration, concussion injury inference, equipment certification or proven protective effect."
+      "not_established": "No headform calibration, global or practical parameter identifiability, direct comparability between 1D/proxy peaks and 3D head/upper-neck measurements, concussion inference, or certified protection."
     },
     {
       "id": "numerical-verification",

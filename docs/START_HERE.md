@@ -40,6 +40,10 @@ Each map entry names the owning code, linked regression tests, relevant protocol
 
 A truly matched comparison uses the V1.10 [matched-block preflight](study-design-preflight-v1.10.md). An unpaired/factorial experiment uses the V1.11 [factorial preflight](unpaired-factorial-preflight-v1.11.md). Neither automatically performs statistical inference, and both require independently reviewed measurement provenance before physical conclusions. **Do not convert one design into another to make a tool accept it.**
 
+## Audit the toy model before fitting it
+
+Run `python -m neuroshield.model_diagnostics --scenario all --preset default` and read the [observable/identifiability guidance](model-sensitivity-and-observables-v1.12.md). This reveals **local synthetic sensitivity**, not physical identifiability, calibrated neck loads, 3D head kinematics or safety.
+
 ## A scientific contribution in six steps
 
 1. Read the [scientific architecture](SCIENTIFIC_ARCHITECTURE.md) and [evidence contract](research-contract.md).
