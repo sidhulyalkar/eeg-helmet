@@ -1,3 +1,11 @@
+## V1.9.0 — Scientific workflow discoverability and owner-map audit
+
+- Add stable START_HERE and SCIENTIFIC_ARCHITECTURE documents for researchers, contributors and agent users.
+- Map eight research workflows to scientific questions, software readiness, S0 evidence ceiling, modules/tests, methods and related claims.
+- Require every top-level scientific module to have a discoverable owner; adversarial tests reject evidence promotion, missing protocols, unsafe paths and unreviewed execution commands.
+- Run the owner-map audit on every OS/Python CI matrix entry and align distribution metadata to version 1.9.0.
+- Correct stale first-page README and historical architecture notes. No physical model validation, new human-data capability or automatic evidence promotion is introduced.
+
 ## V1.8.0 — Offline provider file inventory and byte consistency
 
 - Review saved Dataverse metadata for a pinned released Borealis dataset version, selected headform trial file, measurement-specific README and repository README.
