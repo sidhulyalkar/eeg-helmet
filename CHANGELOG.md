@@ -1,3 +1,15 @@
+## V1.6.0 — Local nonhuman CSV structure and clock probe
+
+- Add an opt-in, offline CSV inspection step for researcher-held, explicitly declared nonhuman/synthetic datasets, with file SHA-256, header hashes, row/column counts, and optional reviewed clock mapping.
+- Refuse malformed/oversized/non-UTF8 inputs, duplicate headings, nonmonotonic timestamps and symlinked files; flag gaps and jitter without resampling or exposing raw samples.
+- Label user-declared source identifiers as unverified, and preserve S0, file-level rights, calibration, coordinate frame, model-fit and medical/protective-performance blockers.
+- Add 13 adversarial unit tests, synthetic-only CI smoke, and Borealis-oriented acquisition documentation without downloading or redistributing external measurements.
+
+## V1.5 research source intake
+
+- Catalog three new nonhuman biomechanics research leads and a direct NOCSAE faceguard standards landing page.
+- Add source/ledger fingerprints and explicit file rights, instrument calibration, uncertainty and independent-laboratory blockers. No automatic data import or evidence-tier promotion.
+
 ## V1.4.0 — Outside-researcher reproduction challenge
 
 - Fixed two-case, S0-only offline reproduction exercise with failure-preserving summary and no user-input code, URLs or real data.

@@ -192,3 +192,8 @@ The exercise retains failures, pins its two experiments (an oblique synthetic im
 ## V1.5 external biomechanics source intake
 
 New metadata-only leads for public Borealis nonhuman sled data, restricted EPFL hockey headform IMUs and Virginia Tech's experimental headform vibration method are cataloged separately. Use `python -m neuroshield.source_intake --root .` to see outstanding permissions, calibration and scientific-review blockers. See [the sourcing review](docs/biomechanics-source-intake-v1.5.md). No external measurements have been imported or physically validated, and no concussion-protection claims are supported.
+
+
+## V1.6 local nonhuman CSV inspection
+
+`python -m neuroshield.csv_probe` is a read-only, offline structure probe for *explicitly declared* synthetic or nonhuman headform CSVs. It emits file fingerprints, header hashes, column counts and optional clock QC, never raw sample values or a claimed scientific mapping. See [the inspection guide](docs/local-nonhuman-csv-inspection-v1.6.md). It **does not** fetch Borealis data, verify file-level permissions, calibrate sensors or upgrade the S0 research evidence tier.

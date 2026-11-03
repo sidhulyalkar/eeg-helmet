@@ -1,5 +1,10 @@
 name: Research prototype checks
 on: [push, pull_request]
+# Keep only the latest commit's checks for each branch. Push and PR use the same
+# branch group, avoiding duplicate OS/Python jobs for superseded revisions.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 jobs:
   test:
     strategy:
@@ -18,6 +23,7 @@ jobs:
       - run: python -m neuroshield knowledge audit --root .
       - run: python -m neuroshield corpora audit --root .
       - run: python -m neuroshield.source_intake --root .
+      - run: python -m neuroshield.csv_probe examples/headform-SYNTHETIC.csv --source-id synthetic-headform-local --origin SYNTHETIC_HEADFORM_FIXTURE --time-column 0 --time-unit s --out ../csv-probe-SYNTHETIC.json
       - run: python -m neuroshield corpora bench --root . --out ../corpora-benchmark.json
       - run: python -m neuroshield corpora stage --root . --out ../neuroshield-corpora-staged
       - run: python -m neuroshield knowledge stage --root . --out ../neuroshield-committed-corpus

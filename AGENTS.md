@@ -21,3 +21,5 @@ Read `README.md`, `docs/research-contract.md`, and `docs/knowledge-and-retrieval
 12. **Agent reproducibility:** check `docs/independent-reproduction-v1.2.md`. `agent_protocol.verify` checks internal integrity only; `python -m neuroshield.reproduction` re-executes the allowlisted S0 task. Do not claim cryptographic signatures, external reproducibility, or scientific validation based solely on local replay.
 
 13. **Source readiness V1.5:** run `python -m neuroshield.source_intake --root .` after changing `knowledge/corpora/intake-ledger.json` or biomechanics source cards. Treat all flags as self-declared review metadata; do not download restricted files, import raw human data, authorize reuse, or promote S0 via an agent decision.
+
+14. **V1.6 source CSV probe:** inspect `docs/local-nonhuman-csv-inspection-v1.6.md`; do not guess external provider channel names or units, include third-party raw measurements in Git, expose human data or treat structural QC as laboratory calibration. Unit tests must exercise explicit timebase mappings, malformed input, nonhuman declaration and no-overwrite policy.
