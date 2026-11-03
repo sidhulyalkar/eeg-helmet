@@ -1,0 +1,197 @@
+{
+  "schema_version": "neuroshield.research-workflows/0.1",
+  "authority": "CURATED_DISCOVERY_ONLY_NO_EVIDENCE_PROMOTION",
+  "scientific_evidence_ceiling": "S0",
+  "workflows": [
+    {
+      "id": "impact-model",
+      "question": "How does a declared three-body toy model respond to fixed synthetic head and facemask impact conditions?",
+      "software_readiness": "synthetic_runnable",
+      "input_class": "synthetic_only",
+      "evidence_tier": "S0",
+      "example_command": "python -m neuroshield export --scenario oblique --out ../synthetic-oblique.json",
+      "code": [
+        "src/neuroshield/models.py",
+        "src/neuroshield/physics.py",
+        "src/neuroshield/design_space.py",
+        "src/neuroshield/provenance.py",
+        "src/neuroshield/qualification.py"
+      ],
+      "tests": [
+        "tests/test_core.py",
+        "tests/test_qualification.py"
+      ],
+      "protocol": "docs/research-contract.md",
+      "related_claim_ids": [
+        "C-SIM-001",
+        "C-OPT-001"
+      ],
+      "not_established": "No instrumented helmet calibration, concussion injury inference, equipment certification or proven protective effect."
+    },
+    {
+      "id": "numerical-verification",
+      "question": "Do independently written integrations of the same equations agree on peak responses, refinement and energy accounting?",
+      "software_readiness": "synthetic_runnable",
+      "input_class": "synthetic_only",
+      "evidence_tier": "S0",
+      "example_command": "python -m neuroshield qualify-independent --scenario all --out ../numerical-audit.json",
+      "code": [
+        "src/neuroshield/independent_solver.py",
+        "src/neuroshield/independent_qualification.py"
+      ],
+      "tests": [
+        "tests/test_independent_solver.py"
+      ],
+      "protocol": "docs/research-contract.md",
+      "related_claim_ids": [
+        "C-NUM-001"
+      ],
+      "not_established": "Cross-solver consistency does not establish model-form correctness or physical predictive accuracy."
+    },
+    {
+      "id": "external-source-discovery",
+      "question": "Which documented nonhuman dataset and exact provider files may be eligible for later independent scientific review?",
+      "software_readiness": "metadata_review_only",
+      "input_class": "public_metadata_only",
+      "evidence_tier": "S0",
+      "example_command": "python -m neuroshield.source_intake --root .",
+      "code": [
+        "src/neuroshield/corpora.py",
+        "src/neuroshield/source_intake.py",
+        "src/neuroshield/dataverse_inventory.py",
+        "src/neuroshield/knowledge.py"
+      ],
+      "tests": [
+        "tests/test_corpora.py",
+        "tests/test_source_intake.py",
+        "tests/test_dataverse_inventory.py"
+      ],
+      "protocol": "docs/dataverse-nonhuman-intake-v1.8.md",
+      "related_claim_ids": [
+        "C-HEADFORM-001"
+      ],
+      "not_established": "Source metadata and checksums do not authenticate the provider, authorize access or validate instrument calibration."
+    },
+    {
+      "id": "nonhuman-measurement-contracts",
+      "question": "Can declared nonhuman headform and neck channels, frames, units and acquisition clocks be reviewed without guessing physical meaning?",
+      "software_readiness": "structural_review_only",
+      "input_class": "declared_nonhuman_or_synthetic",
+      "evidence_tier": "S0",
+      "example_command": "python -m neuroshield.measurement_mapping examples/measurement-mapping-SYNTHETIC.json examples/measurement-mapping-SYNTHETIC.csv --out ../mapping-review.json",
+      "code": [
+        "src/neuroshield/headform.py",
+        "src/neuroshield/bench_intake.py",
+        "src/neuroshield/csv_probe.py",
+        "src/neuroshield/measurement_mapping.py",
+        "src/neuroshield/frame_projection.py",
+        "src/neuroshield/kinematics.py",
+        "src/neuroshield/external_evidence.py"
+      ],
+      "tests": [
+        "tests/test_bench_intake.py",
+        "tests/test_csv_probe.py",
+        "tests/test_measurement_mapping.py",
+        "tests/test_frame_projection.py",
+        "tests/test_external_evidence.py"
+      ],
+      "protocol": "docs/reviewed-measurement-mapping-v1.7.md",
+      "related_claim_ids": [
+        "C-HEADFORM-001",
+        "C-BENCH-001",
+        "C-KIN-001"
+      ],
+      "not_established": "Declared calibration, coordinates and file-level permissions remain independently unverified, and physical mappings are not approved."
+    },
+    {
+      "id": "bench-waveform-screen",
+      "question": "What motion tradeoffs and waveform discrepancies appear when synthetic or locally reviewed headform trials are descriptively compared?",
+      "software_readiness": "synthetic_or_local_review_only",
+      "input_class": "declared_nonhuman_or_synthetic",
+      "evidence_tier": "S0",
+      "example_command": "python -m neuroshield model-measurement-gate --out ../model-validation-BLOCKED.json",
+      "code": [
+        "src/neuroshield/waveform_qualification.py",
+        "src/neuroshield/replicate_study.py"
+      ],
+      "tests": [
+        "tests/test_waveform_qualification.py",
+        "tests/test_replicate_study.py"
+      ],
+      "protocol": "docs/preregistered-waveform-screen-v0.8.md",
+      "related_claim_ids": [
+        "C-WAVE-001"
+      ],
+      "not_established": "No independently calibrated physical benchmark or validated model-to-measurement fit; no helmet safety ranking is supported."
+    },
+    {
+      "id": "synthetic-neural-events",
+      "question": "Can event timing and EEG and EMG interface conventions be demonstrated without confusing synthetic signals with biological recordings?",
+      "software_readiness": "synthetic_runnable",
+      "input_class": "synthetic_only",
+      "evidence_tier": "S0",
+      "example_command": "python -m neuroshield synthetic-session --out ../session-SYNTHETIC.json",
+      "code": [
+        "src/neuroshield/signals.py",
+        "src/neuroshield/session.py",
+        "src/neuroshield/ingestion.py",
+        "src/neuroshield/privacy.py"
+      ],
+      "tests": [
+        "tests/test_core.py",
+        "tests/test_qualification.py"
+      ],
+      "protocol": "docs/research-contract.md",
+      "related_claim_ids": [
+        "C-NEURAL-001",
+        "C-PRIVACY-001"
+      ],
+      "not_established": "There are no actual EEG or EMG recordings, validated neural classifiers, clinical labels or production consent-security mechanisms."
+    },
+    {
+      "id": "agent-reproduction",
+      "question": "Can separate installations repeat bounded synthetic research tasks and preserve all source identities and failures?",
+      "software_readiness": "synthetic_runnable",
+      "input_class": "synthetic_only",
+      "evidence_tier": "S0",
+      "example_command": "python -m neuroshield.agent_protocol capabilities",
+      "code": [
+        "src/neuroshield/agent_protocol.py",
+        "src/neuroshield/reproduction.py",
+        "src/neuroshield/reproduction_challenge.py"
+      ],
+      "tests": [
+        "tests/test_agent_protocol.py",
+        "tests/test_reproduction.py",
+        "tests/test_reproduction_challenge.py"
+      ],
+      "protocol": "docs/agentic-research-architecture.md",
+      "related_claim_ids": [
+        "C-AGENT-001"
+      ],
+      "not_established": "Computational replay is not proof of an outside human reproduction, data-source authenticity or empirical physics validation."
+    },
+    {
+      "id": "visualization-and-cad",
+      "question": "How can synthetic experiments and an intentionally nonfunctional helmet geometry concept be examined visually?",
+      "software_readiness": "prototype_visualization",
+      "input_class": "synthetic_only",
+      "evidence_tier": "S0",
+      "example_command": "python -m neuroshield cad-preview --out ../concept-preview.scad",
+      "code": [
+        "src/neuroshield/analysis.py",
+        "src/neuroshield/server.py",
+        "src/neuroshield/cad.py"
+      ],
+      "tests": [
+        "tests/test_server.py",
+        "tests/test_core.py"
+      ],
+      "protocol": "cad/README.md",
+      "related_claim_ids": [
+        "C-SIM-001"
+      ],
+      "not_established": "CAD and browser simulations are not protective equipment designs and establish no structural integrity, safety or certification."
+    }
+  ]
+}
