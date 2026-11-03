@@ -1,3 +1,10 @@
+## V1.12.0 — S0 model-form sensitivity and observability diagnostics
+
+- Perturb each illustrative stiffness/damping/travel parameter at two small finite-difference steps across up to four synthetic impact scenarios; preserve source-bound run fingerprints and check local derivative stability.
+- Report per-parameter elasticity, weak influence and near-collinear parameter-pattern heuristics, without inferring structural or practical identifiability from them.
+- Explicitly reject direct physical comparisons between scalar model peaks/neck-torque proxy and unreviewed 3D headform or upper-neck load-cell measurements.
+- Add 16 adversarial tests, link model ownership in the scientific workflow registry, and run cross-platform sensitivity smoke in CI. No measured data, parameter fitting or protective claims.
+
 ## V1.11.0 — Unpaired/factorial nonhuman study-design preflight
 
 - Add an offline, strict-schema, S0-only unpaired experiment review separate from the V1.10 matched-impact contract.
