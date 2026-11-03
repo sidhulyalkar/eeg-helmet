@@ -1,3 +1,10 @@
+## V1.8.0 — Offline provider file inventory and byte consistency
+
+- Review saved Dataverse metadata for a pinned released Borealis dataset version, selected headform trial file, measurement-specific README and repository README.
+- Expose provider file IDs, size, restriction status, MD5/SHA metadata and local snapshot SHA-256; refuse wrong DOI, drafts, invalid checksums, duplicate selected files, unsafe names and malformed metadata.
+- Compare a locally authorized original file's bytes with provider metadata **without parsing sensor samples**; retain explicit checksum mismatch and non-authenticity flags. MD5 matches never imply scientific provenance.
+- Add adversarial tests, CI coverage and a laboratory-review guide; no third-party raw files or automatic downloads. All data remain S0.
+
 ## V1.7.0 — Explicit S0 measurement-mapping proposal
 
 - Hash-bind clock and 3-axis physical quantity channels to the local CSV with exact per-quantity units, proper right-handed frame rotations and stable measurement reference points.

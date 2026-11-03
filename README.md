@@ -201,3 +201,7 @@ New metadata-only leads for public Borealis nonhuman sled data, restricted EPFL 
 ## V1.7 explicitly proposed nonhuman measurement mapping
 
 Run `python -m neuroshield.measurement_mapping examples/measurement-mapping-SYNTHETIC.json examples/measurement-mapping-SYNTHETIC.csv --out ../mapping-review-SYNTHETIC.json` to inspect SHA-256-pinned head/neck channel definitions, SI conversion, right-handed rotations, and unchanged reference points. Only synthetic fixtures produce a numerical summary. Real nonhuman files remain S0, read-only and review-required; mapping, calibration, and source rights are never automatically approved. See [the guide](docs/reviewed-measurement-mapping-v1.7.md) and bundled JSON Schema.
+
+## V1.8 provider metadata and local byte-consistency review
+
+Use `python -m neuroshield.dataverse_inventory inspect` on a *locally saved* public Dataverse API response to pin the Borealis dataset version and provider file IDs for a selected nonhuman crash test. `verify-file` can compare a legally obtained local CSV against the provider-listed checksum without parsing measurements. The repository does not automatically download or authenticate files or promote S0. See [the V1.8 guide](docs/dataverse-nonhuman-intake-v1.8.md).
