@@ -1,0 +1,142 @@
+{
+  "schema_version": "neuroshield.study-design/0.1",
+  "study_id": "synthetic-study-01",
+  "question": "Under a fixed synthetic frontal impact setup, does the candidate change peak linear acceleration?",
+  "origin": "SYNTHETIC_HEADFORM_FIXTURE",
+  "analysis_unit": "matched_impact_block",
+  "preregistration_digest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "preregistration_status": "AUTHOR_DECLARED_TIMESTAMP_UNVERIFIED",
+  "assignment_policy": "counterbalanced_declared",
+  "primary_outcome": "head_peak_linear_acceleration_m_s2",
+  "secondary_outcomes": [
+    "head_peak_angular_acceleration_rad_s2",
+    "upper_neck_peak_moment_n_m"
+  ],
+  "max_speed_deviation_m_s": 0.2,
+  "blocks": [
+    {
+      "block_id": "block-0",
+      "stratum_id": "frontal-5ms",
+      "rig_id": "rig-alpha",
+      "headform_id": "headform-0",
+      "test_day_id": "day-0",
+      "impact_location": "forehead",
+      "impact_angle_deg": 0,
+      "temperature_c": 21,
+      "target_speed_m_s": 5,
+      "trials": [
+        {
+          "trial_id": "trial-0-reference",
+          "arm": "reference",
+          "order": 1,
+          "measured_speed_m_s": 5,
+          "helmet_unit_id": "helmet-0-reference",
+          "acquisition_id": "acquisition-0-reference",
+          "raw_sha256": "0000000000000000000000000000000000000000000000000000000000000001"
+        },
+        {
+          "trial_id": "trial-0-candidate",
+          "arm": "candidate",
+          "order": 2,
+          "measured_speed_m_s": 5.05,
+          "helmet_unit_id": "helmet-0-candidate",
+          "acquisition_id": "acquisition-0-candidate",
+          "raw_sha256": "0000000000000000000000000000000000000000000000000000000000000002"
+        }
+      ]
+    },
+    {
+      "block_id": "block-1",
+      "stratum_id": "frontal-5ms",
+      "rig_id": "rig-alpha",
+      "headform_id": "headform-0",
+      "test_day_id": "day-0",
+      "impact_location": "forehead",
+      "impact_angle_deg": 0,
+      "temperature_c": 21,
+      "target_speed_m_s": 5,
+      "trials": [
+        {
+          "trial_id": "trial-1-candidate",
+          "arm": "candidate",
+          "order": 1,
+          "measured_speed_m_s": 5.05,
+          "helmet_unit_id": "helmet-1-candidate",
+          "acquisition_id": "acquisition-1-candidate",
+          "raw_sha256": "0000000000000000000000000000000000000000000000000000000000000004"
+        },
+        {
+          "trial_id": "trial-1-reference",
+          "arm": "reference",
+          "order": 2,
+          "measured_speed_m_s": 5,
+          "helmet_unit_id": "helmet-1-reference",
+          "acquisition_id": "acquisition-1-reference",
+          "raw_sha256": "0000000000000000000000000000000000000000000000000000000000000003"
+        }
+      ]
+    },
+    {
+      "block_id": "block-2",
+      "stratum_id": "frontal-5ms",
+      "rig_id": "rig-alpha",
+      "headform_id": "headform-1",
+      "test_day_id": "day-1",
+      "impact_location": "forehead",
+      "impact_angle_deg": 0,
+      "temperature_c": 21,
+      "target_speed_m_s": 5,
+      "trials": [
+        {
+          "trial_id": "trial-2-reference",
+          "arm": "reference",
+          "order": 1,
+          "measured_speed_m_s": 5,
+          "helmet_unit_id": "helmet-2-reference",
+          "acquisition_id": "acquisition-2-reference",
+          "raw_sha256": "0000000000000000000000000000000000000000000000000000000000000005"
+        },
+        {
+          "trial_id": "trial-2-candidate",
+          "arm": "candidate",
+          "order": 2,
+          "measured_speed_m_s": 5.05,
+          "helmet_unit_id": "helmet-2-candidate",
+          "acquisition_id": "acquisition-2-candidate",
+          "raw_sha256": "0000000000000000000000000000000000000000000000000000000000000006"
+        }
+      ]
+    },
+    {
+      "block_id": "block-3",
+      "stratum_id": "frontal-5ms",
+      "rig_id": "rig-alpha",
+      "headform_id": "headform-1",
+      "test_day_id": "day-1",
+      "impact_location": "forehead",
+      "impact_angle_deg": 0,
+      "temperature_c": 21,
+      "target_speed_m_s": 5,
+      "trials": [
+        {
+          "trial_id": "trial-3-candidate",
+          "arm": "candidate",
+          "order": 1,
+          "measured_speed_m_s": 5.05,
+          "helmet_unit_id": "helmet-3-candidate",
+          "acquisition_id": "acquisition-3-candidate",
+          "raw_sha256": "0000000000000000000000000000000000000000000000000000000000000008"
+        },
+        {
+          "trial_id": "trial-3-reference",
+          "arm": "reference",
+          "order": 2,
+          "measured_speed_m_s": 5,
+          "helmet_unit_id": "helmet-3-reference",
+          "acquisition_id": "acquisition-3-reference",
+          "raw_sha256": "0000000000000000000000000000000000000000000000000000000000000007"
+        }
+      ]
+    }
+  ]
+}

@@ -112,17 +112,19 @@
       "example_command": "python -m neuroshield model-measurement-gate --out ../model-validation-BLOCKED.json",
       "code": [
         "src/neuroshield/waveform_qualification.py",
-        "src/neuroshield/replicate_study.py"
+        "src/neuroshield/replicate_study.py",
+        "src/neuroshield/study_design.py"
       ],
       "tests": [
         "tests/test_waveform_qualification.py",
-        "tests/test_replicate_study.py"
+        "tests/test_replicate_study.py",
+        "tests/test_study_design.py"
       ],
       "protocol": "docs/preregistered-waveform-screen-v0.8.md",
       "related_claim_ids": [
         "C-WAVE-001"
       ],
-      "not_established": "No independently calibrated physical benchmark or validated model-to-measurement fit; no helmet safety ranking is supported."
+      "not_established": "Descriptive screens and metadata-only matched-impact preflights cannot establish randomized assignment, independent impacts, physical prediction accuracy or helmet safety."
     },
     {
       "id": "synthetic-neural-events",

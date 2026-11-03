@@ -1,3 +1,10 @@
+## V1.10.0 — Matched impact study-design and pseudoreplication preflight
+
+- Add a metadata-only, nonhuman S0 preflight to detect inappropriate pooling, reused acquisition identities, speed and apparatus mismatches, arm-order confounds, day/headform/rig clustering, and helmet reuse.
+- Declare matched impact blocks as units and primary/secondary outcomes before effect estimation; preserve unresolved randomization, temporal preregistration, wear, calibration and generalizability blockers.
+- Ship a completely fictional four-block demonstration and adversarial tests. Add module ownership to the workflow map and smoke-test in every OS/Python matrix job.
+- Do not compute p-values, interpret physical signals, certify equipment or infer clinical/protective effects.
+
 ## V1.9.0 — Scientific workflow discoverability and owner-map audit
 
 - Add stable START_HERE and SCIENTIFIC_ARCHITECTURE documents for researchers, contributors and agent users.
