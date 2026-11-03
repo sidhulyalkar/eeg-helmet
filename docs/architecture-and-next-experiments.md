@@ -1,3 +1,5 @@
+> **Historical V0.3 design note.** For the current architecture, evidence boundaries, module owners and researcher onboarding, see [SCIENTIFIC_ARCHITECTURE.md](SCIENTIFIC_ARCHITECTURE.md).
+
 # NeuroShield research platform: engineering architecture and next experimental gates
 
 **Current status:** V0.3 is a deterministic, non-clinical research demonstration. There is no approved hardware, recorded EEG, biomechanical truth, patient or athlete database, or clinical model.
