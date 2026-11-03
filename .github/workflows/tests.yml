@@ -24,6 +24,7 @@ jobs:
       - run: python -m neuroshield corpora audit --root .
       - run: python -m neuroshield.source_intake --root .
       - run: python -m neuroshield.csv_probe examples/headform-SYNTHETIC.csv --source-id synthetic-headform-local --origin SYNTHETIC_HEADFORM_FIXTURE --time-column 0 --time-unit s --out ../csv-probe-SYNTHETIC.json
+      - run: python -m neuroshield.measurement_mapping examples/measurement-mapping-SYNTHETIC.json examples/measurement-mapping-SYNTHETIC.csv --out ../mapping-review-SYNTHETIC.json
       - run: python -m neuroshield corpora bench --root . --out ../corpora-benchmark.json
       - run: python -m neuroshield corpora stage --root . --out ../neuroshield-corpora-staged
       - run: python -m neuroshield knowledge stage --root . --out ../neuroshield-committed-corpus

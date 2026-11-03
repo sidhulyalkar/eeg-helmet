@@ -53,6 +53,10 @@ def main():
         challenge = root / "challenge"
         call(interpreter, "-m", "neuroshield.reproduction_challenge", "run", challenge, cwd=root, env=clean_env)
         call(interpreter, "-m", "neuroshield.reproduction_challenge", "verify", challenge, cwd=root, env=clean_env)
+        call(interpreter, "-c",
+             "from importlib import resources; "
+             "assert resources.files('neuroshield').joinpath('schemas/measurement-mapping.schema.json').is_file()",
+             cwd=root, env=clean_env)
         print("Installed wheel: schema, run, verify, replay and reproduction challenge passed outside source checkout")
 
 

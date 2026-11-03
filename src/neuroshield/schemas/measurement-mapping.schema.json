@@ -1,0 +1,352 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sidhulyalkar/eeg-helmet/blob/main/src/neuroshield/schemas/measurement-mapping.schema.json",
+  "title": "NeuroShield S0 unverified headform/neck mapping proposal",
+  "description": "Structural JSON schema only; source hash, header binding, proper SO(3) rotations, timebase checks, and scientific gates require code review. Never authorizes external data import.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_id_declaration",
+    "origin_declaration",
+    "raw_file_sha256",
+    "delimiter",
+    "clock",
+    "groups",
+    "mapping_status",
+    "review_reference"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "neuroshield.measurement-mapping/0.1"
+    },
+    "source_id_declaration": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{2,63}$"
+    },
+    "origin_declaration": {
+      "enum": [
+        "SYNTHETIC_HEADFORM_FIXTURE",
+        "NONHUMAN_INSTRUMENTED_HEADFORM"
+      ]
+    },
+    "raw_file_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "delimiter": {
+      "enum": [
+        "comma",
+        "semicolon",
+        "tab"
+      ]
+    },
+    "clock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index",
+        "header_sha256",
+        "unit",
+        "time_reference"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "header_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "unit": {
+          "enum": [
+            "s",
+            "ms",
+            "us"
+          ]
+        },
+        "time_reference": {
+          "enum": [
+            "relative_trigger",
+            "instrument_recording_clock"
+          ]
+        }
+      }
+    },
+    "groups": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "quantity",
+          "indices_xyz",
+          "header_sha256_xyz",
+          "source_unit",
+          "source_frame",
+          "target_frame",
+          "rotation_target_from_source",
+          "measurement_point",
+          "target_point",
+          "calibration_reference",
+          "filter_reference",
+          "uncertainty_reference",
+          "gravity_policy"
+        ],
+        "properties": {
+          "quantity": {
+            "type": "string",
+            "enum": [
+              "head_linear_acceleration",
+              "head_angular_acceleration",
+              "head_angular_velocity",
+              "upper_neck_force",
+              "upper_neck_moment"
+            ]
+          },
+          "indices_xyz": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 255
+            },
+            "uniqueItems": true
+          },
+          "header_sha256_xyz": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "source_unit": {
+            "type": "string"
+          },
+          "source_frame": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:/#-]{2,179}$"
+          },
+          "target_frame": {
+            "type": "string",
+            "enum": [
+              "right_handed_headform_body",
+              "right_handed_upper_neck_frame"
+            ]
+          },
+          "rotation_target_from_source": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          "measurement_point": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:/#-]{2,179}$"
+          },
+          "target_point": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:/#-]{2,179}$"
+          },
+          "calibration_reference": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:/#-]{2,179}$"
+          },
+          "filter_reference": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:/#-]{2,179}$"
+          },
+          "uncertainty_reference": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:/#-]{2,179}$"
+          },
+          "gravity_policy": {
+            "type": "string",
+            "enum": [
+              "not_applicable",
+              "includes_gravity",
+              "removed_with_documentation",
+              "unreviewed"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "quantity": {
+                  "const": "head_linear_acceleration"
+                }
+              },
+              "required": [
+                "quantity"
+              ]
+            },
+            "then": {
+              "properties": {
+                "source_unit": {
+                  "enum": [
+                    "g",
+                    "m/s^2"
+                  ]
+                },
+                "target_frame": {
+                  "const": "right_handed_headform_body"
+                },
+                "gravity_policy": {
+                  "enum": [
+                    "includes_gravity",
+                    "removed_with_documentation",
+                    "unreviewed"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "quantity": {
+                  "const": "head_angular_acceleration"
+                }
+              },
+              "required": [
+                "quantity"
+              ]
+            },
+            "then": {
+              "properties": {
+                "source_unit": {
+                  "enum": [
+                    "rad/s^2",
+                    "deg/s^2"
+                  ]
+                },
+                "target_frame": {
+                  "const": "right_handed_headform_body"
+                },
+                "gravity_policy": {
+                  "enum": [
+                    "not_applicable"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "quantity": {
+                  "const": "head_angular_velocity"
+                }
+              },
+              "required": [
+                "quantity"
+              ]
+            },
+            "then": {
+              "properties": {
+                "source_unit": {
+                  "enum": [
+                    "rad/s",
+                    "deg/s"
+                  ]
+                },
+                "target_frame": {
+                  "const": "right_handed_headform_body"
+                },
+                "gravity_policy": {
+                  "enum": [
+                    "not_applicable"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "quantity": {
+                  "const": "upper_neck_force"
+                }
+              },
+              "required": [
+                "quantity"
+              ]
+            },
+            "then": {
+              "properties": {
+                "source_unit": {
+                  "enum": [
+                    "N",
+                    "kN"
+                  ]
+                },
+                "target_frame": {
+                  "const": "right_handed_upper_neck_frame"
+                },
+                "gravity_policy": {
+                  "enum": [
+                    "not_applicable"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "quantity": {
+                  "const": "upper_neck_moment"
+                }
+              },
+              "required": [
+                "quantity"
+              ]
+            },
+            "then": {
+              "properties": {
+                "source_unit": {
+                  "enum": [
+                    "N*m",
+                    "N*mm"
+                  ]
+                },
+                "target_frame": {
+                  "const": "right_handed_upper_neck_frame"
+                },
+                "gravity_policy": {
+                  "enum": [
+                    "not_applicable"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "mapping_status": {
+      "const": "proposed_unverified"
+    },
+    "review_reference": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:/#-]{2,179}$"
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "clock": {
+    "header_sha256": "d5705c0516fc28801a149697a18d69a54c9ec69a7d8d4ee54da0df441268f095",
+    "index": 0,
+    "time_reference": "relative_trigger",
+    "unit": "ms"
+  },
+  "delimiter": "comma",
+  "groups": [
+    {
+      "calibration_reference": "synthetic-calibration-unverified",
+      "filter_reference": "synthetic-filter-not-applied",
+      "gravity_policy": "removed_with_documentation",
+      "header_sha256_xyz": [
+        "5606493f4dc8a37e278cd2a23057b0c9acf2fa3b07ec0ce67f98b112835272d6",
+        "4fd196b32c8acde2579b84bc9ac0a4f922bcad877056db44548229a03ce08697",
+        "98a7b36e281b5cd185f6cb92ec53e3a987a30a0c972c53152b251283b50e1a98"
+      ],
+      "indices_xyz": [
+        1,
+        2,
+        3
+      ],
+      "measurement_point": "headform-sensor-origin",
+      "quantity": "head_linear_acceleration",
+      "rotation_target_from_source": [
+        [
+          0,
+          -1,
+          0
+        ],
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "source_frame": "fixture-sensor-xyz",
+      "source_unit": "g",
+      "target_frame": "right_handed_headform_body",
+      "target_point": "headform-sensor-origin",
+      "uncertainty_reference": "synthetic-uncertainty-unverified"
+    },
+    {
+      "calibration_reference": "synthetic-calibration-unverified",
+      "filter_reference": "synthetic-filter-not-applied",
+      "gravity_policy": "not_applicable",
+      "header_sha256_xyz": [
+        "4ac097555bfd3478f4d8c4684cc85d7efae6e07d025150a060903742d1178be2",
+        "7d778e57c9158835dafe137a91afc7f3cb35db5ebb833a2da8314d395f58299b",
+        "3acc48bd636f0257d8627809271d900ce2eda16e08b934a5fe66c24852d61649"
+      ],
+      "indices_xyz": [
+        4,
+        5,
+        6
+      ],
+      "measurement_point": "neck-loadcell-origin",
+      "quantity": "upper_neck_moment",
+      "rotation_target_from_source": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "source_frame": "fixture-sensor-xyz",
+      "source_unit": "N*mm",
+      "target_frame": "right_handed_upper_neck_frame",
+      "target_point": "neck-loadcell-origin",
+      "uncertainty_reference": "synthetic-uncertainty-unverified"
+    }
+  ],
+  "mapping_status": "proposed_unverified",
+  "origin_declaration": "SYNTHETIC_HEADFORM_FIXTURE",
+  "raw_file_sha256": "1cdc74859aaebe50a2bc381d5e84b0c396cc2fd3629eaaf8788b8b0ed3927994",
+  "review_reference": "synthetic-fixture-not-independent",
+  "schema_version": "neuroshield.measurement-mapping/0.1",
+  "source_id_declaration": "synthetic-headform-fixture"
+}

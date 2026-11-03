@@ -23,3 +23,5 @@ Read `README.md`, `docs/research-contract.md`, and `docs/knowledge-and-retrieval
 13. **Source readiness V1.5:** run `python -m neuroshield.source_intake --root .` after changing `knowledge/corpora/intake-ledger.json` or biomechanics source cards. Treat all flags as self-declared review metadata; do not download restricted files, import raw human data, authorize reuse, or promote S0 via an agent decision.
 
 14. **V1.6 source CSV probe:** inspect `docs/local-nonhuman-csv-inspection-v1.6.md`; do not guess external provider channel names or units, include third-party raw measurements in Git, expose human data or treat structural QC as laboratory calibration. Unit tests must exercise explicit timebase mappings, malformed input, nonhuman declaration and no-overwrite policy.
+
+15. **V1.7 measurement mapping:** require reviewed source channels, unit conversions, gravity conventions, proper SO(3) rotation, and explicit head-versus-neck coordinate origins. Never guess a force/moment reference-point translation or grant source rights, calibration, injury inferences or evidence promotion from an agent-authored mapping.
