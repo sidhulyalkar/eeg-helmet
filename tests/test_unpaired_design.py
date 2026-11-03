@@ -209,6 +209,19 @@ class UnpairedDesignTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Incompatible"):
             validate_plan(self.plan)
 
+    def test_overly_broad_physical_tolerance_cannot_hide_conditions(self):
+        for field, value in (("speed_tolerance_m_s", 1.5), ("angle_tolerance_deg", 8)):
+            with self.subTest(field=field):
+                p = fixture()
+                p[field] = value
+                with self.assertRaisesRegex(ValueError, "within"):
+                    validate_plan(p)
+
+    def test_zero_declared_impact_speed_is_rejected(self):
+        self.plan["trials"][0]["impact_speed_m_s"] = 0
+        with self.assertRaisesRegex(ValueError, "impact speed"):
+            validate_plan(self.plan)
+
     def test_reject_speed_violation(self):
         self.plan["trials"][0]["impact_speed_m_s"] = 7
         with self.assertRaisesRegex(ValueError, "speed"):
