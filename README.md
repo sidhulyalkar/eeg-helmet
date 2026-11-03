@@ -73,6 +73,14 @@ Public source listings do not prove file-level reuse rights or instrument validi
 
 Original third-party data, calibration evidence, human EEG and athlete identities must **not** be committed or automatically indexed. Source fingerprints and schema checks do not prove protective performance. Any change in research evidence tier requires qualified, independent scientific review outside the current software gates.
 
+## V1.10: check experimental design before computing effects
+
+Before treating impacts as independent trials, review the declared pairing, test order, laboratory day/headform/helmet clusters, impact regimes and prespecified outcomes:
+
+    python -m neuroshield.study_design examples/study-design-SYNTHETIC.json --out ../study-design-review.json
+
+This **metadata-only, nonhuman matched-block** preflight refuses pooled incompatible impact conditions and warns about pseudoreplication and carryover. It does not verify randomization, compute significance, read samples or approve an experiment. See [the protocol](docs/study-design-preflight-v1.10.md).
+
 ## Reproduce and contribute
 
 Run the [fixed outside-researcher challenge](docs/reproduction-challenge-v1.4.md) and preserve failed attempts. The [agent-ready research architecture](docs/agentic-research-architecture.md) describes the limited safe execution interface. Computed results can be bundled with RO-Crate 1.3 metadata, but successful conformance checks do not authenticate measurements or prove scientific claims.
