@@ -197,3 +197,7 @@ New metadata-only leads for public Borealis nonhuman sled data, restricted EPFL 
 ## V1.6 local nonhuman CSV inspection
 
 `python -m neuroshield.csv_probe` is a read-only, offline structure probe for *explicitly declared* synthetic or nonhuman headform CSVs. It emits file fingerprints, header hashes, column counts and optional clock QC, never raw sample values or a claimed scientific mapping. See [the inspection guide](docs/local-nonhuman-csv-inspection-v1.6.md). It **does not** fetch Borealis data, verify file-level permissions, calibrate sensors or upgrade the S0 research evidence tier.
+
+## V1.7 explicitly proposed nonhuman measurement mapping
+
+Run `python -m neuroshield.measurement_mapping examples/measurement-mapping-SYNTHETIC.json examples/measurement-mapping-SYNTHETIC.csv --out ../mapping-review-SYNTHETIC.json` to inspect SHA-256-pinned head/neck channel definitions, SI conversion, right-handed rotations, and unchanged reference points. Only synthetic fixtures produce a numerical summary. Real nonhuman files remain S0, read-only and review-required; mapping, calibration, and source rights are never automatically approved. See [the guide](docs/reviewed-measurement-mapping-v1.7.md) and bundled JSON Schema.

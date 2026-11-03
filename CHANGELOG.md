@@ -1,3 +1,10 @@
+## V1.7.0 — Explicit S0 measurement-mapping proposal
+
+- Hash-bind clock and 3-axis physical quantity channels to the local CSV with exact per-quantity units, proper right-handed frame rotations and stable measurement reference points.
+- Refuse reflections, skew, duplicate channels, non-monotonic/gapped clocks, changed source file/header and implicit head or neck point translations.
+- Permit aggregate SI demonstrations only on declared synthetic fixtures; external nonhuman recordings remain review-only and S0.
+- Include Draft 2020-12 JSON Schema, scientific mapping guide, adversarial regression tests, CI smoke and clean-wheel package resource check.
+
 ## V1.6.0 — Local nonhuman CSV structure and clock probe
 
 - Add an opt-in, offline CSV inspection step for researcher-held, explicitly declared nonhuman/synthetic datasets, with file SHA-256, header hashes, row/column counts, and optional reviewed clock mapping.
