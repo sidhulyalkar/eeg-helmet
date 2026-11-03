@@ -1,3 +1,11 @@
+## V1.11.0 — Unpaired/factorial nonhuman study-design preflight
+
+- Add an offline, strict-schema, S0-only unpaired experiment review separate from the V1.10 matched-impact contract.
+- Preserve all planned trials, including unacquired, failed and excluded observations, without reading raw signals or performing statistical inference.
+- Report condition/stratum coverage, missing cells, order and day/headform/rig confounders, reused equipment and absent acquisition evidence.
+- Ship a deliberately fictional six-trial example, new adversarial tests, workflow ownership and cross-platform CI smoke.
+- Dataset metadata is not laboratory calibration, randomized assignment, preregistration chronology, physical model validation or helmet protection evidence.
+
 ## V1.10.0 — Matched impact study-design and pseudoreplication preflight
 
 - Add a metadata-only, nonhuman S0 preflight to detect inappropriate pooling, reused acquisition identities, speed and apparatus mismatches, arm-order confounds, day/headform/rig clustering, and helmet reuse.
