@@ -1,217 +1,82 @@
 # NeuroShield Research Workbench
 
-**V1.9 scientific navigation over V1.8 scientific modules. All included examples remain synthetic, and physical model evidence remains S0.**
+**Open-source, reproducible research software for exploratory head-impact mechanics, nonhuman sensor-data methods and synthetic neural-sensing interfaces.**
 
-> **Safety and scientific scope:** This is **not a medical device, protective helmet design, concussion detector, brain-strain estimator, or certification test**. Never install the concept CAD on protective equipment. No real athlete data are accepted by the demo server. There is no headform calibration, injury model, NOCSAE/NFL testing, or evidence of concussion reduction. All reported mechanics remain S0, unvalidated.
+**Scientific evidence: S0 only.** This is *not* a certified protective helmet, medical device, concussion detector, clinically validated model, or safe-to-install hardware design. Simulation outputs do not demonstrate injury reduction. All distributed data examples are synthetic.
 
-## Start with a scientific question
+[Start here for researchers](docs/START_HERE.md) · [Scientific architecture](docs/SCIENTIFIC_ARCHITECTURE.md) · [Evidence contract](docs/research-contract.md) · [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md)
 
-New contributors: read the [ten-minute onboarding guide](docs/START_HERE.md) and [current scientific architecture](docs/SCIENTIFIC_ARCHITECTURE.md). Eight discoverable workflows now link research questions to module ownership, tests, scientific protocols and S0 limitations.
+## Run in five minutes
 
+Python 3.10+; no third-party runtime dependencies. From the repository root:
+
+    python -m pip install -e .
     python -m neuroshield.research_map audit --root .
     python -m neuroshield.research_map list --root .
+    python -m neuroshield qualify-independent --scenario all --out ../numerical-audit.json
+    python -m unittest discover -s tests -v
+
+The numerical audit compares independently expressed solvers of **the same assumed toy equations**. Passing demonstrates bounded computational consistency, not physical model validity. For a visual synthetic demonstration, run:
+
+    python -m neuroshield serve
+
+Then open http://127.0.0.1:8765. The demo binds to loopback only, does not upload human recordings and is not a medical-data application.
+
+## Choose a scientific workflow
+
+| Research question | Workflow ID | Supported mode |
+| --- | --- | --- |
+| What does the assumed three-body model predict? | impact-model | Synthetic simulation |
+| Do integration and energy audits agree? | numerical-verification | Synthetic numerical checks |
+| Which data sources deserve review? | external-source-discovery | Metadata and rights review only |
+| Are head/neck channels and frames declared consistently? | nonhuman-measurement-contracts | Structural review; no approved physical mapping |
+| How do paired motions and adverse responses compare? | bench-waveform-screen | Descriptive S0 screens |
+| Can neural signal interfaces be exercised? | synthetic-neural-events | Synthetic EEG/EMG only |
+| Can experiments be replayed and shared? | agent-reproduction | Bounded synthetic replay / RO-Crate |
+| How can results and geometry concepts be visualized? | visualization-and-cad | Non-installable demonstration |
+
+For example:
+
     python -m neuroshield.research_map show nonhuman-measurement-contracts
 
-These commands are read-only navigation. They never execute research jobs, import external files or approve scientific evidence.
+The **read-only** workflow map lists code owners, relevant tests, methods, related S0 claims and what is *not established*. The command does not execute the displayed example, grant data permission, change hardware, or raise the evidence level. New scientific modules must be assigned a workflow owner in CI.
 
-## Run locally
+## Status: what is and is not established
 
-Python 3.10+, no third-party runtime dependencies:
+| Capability | Software status | Scientific limitation |
+| --- | --- | --- |
+| Reduced-order facemask/shell/head mechanics | Runnable, deterministic, numerical test coverage | Uncalibrated to helmets and tissue |
+| Independent solver and energy accounting | Numerical cross-checks and convergence smoke tests | Shared assumptions may be wrong |
+| Dataset metadata inventory and file checksums | Offline source/byte-consistency utilities | Not authentication, license clearance or calibration |
+| Headform/neck measurement mappings | Pinned units/frames and structural checks | Real measurements not independently reviewed or validated |
+| Multi-trial waveform comparisons | Descriptive synthetic or governed local workflows | No safety rank, cervical injury threshold or clinical inference |
+| Neural EEG/EMG visualization | Synthetic signals and timing demos | No real EEG/EMG acquisition or neural biomarkers |
+| Agent research tasks and reproduction | Fixed, synthetic-only tasks and replayable bundles | No autonomous laboratory, real-data permissions or human independence |
 
-```bash
-python -m pip install -e .
-python -m unittest discover -s tests -v
-python -m neuroshield serve
-# Open http://127.0.0.1:8765
-```
+**No protective-performance, concussion-risk, injury-severity or return-to-play predictions are supported.** Nonhuman physical calibration and independent outside-researcher replication remain open research tasks.
 
-For offline development with setuptools installed, try `python -m pip install --no-build-isolation -e .`; on macOS/Linux you can skip installation with `PYTHONPATH=src python -m neuroshield serve`. On Windows PowerShell: `$env:PYTHONPATH='src'; python -m neuroshield serve`.
+## Repository guide
 
-The service binds to loopback only. There is no real-data upload API, user account system, database or remote telemetry. Privacy policy primitives are educational and **not** production authorization or medical-record security.
+    src/neuroshield/      Scientific kernels, offline QC, provenance, synthetic UI
+    tests/                Positive/negative regression and evidence-boundary checks
+    examples/             Clearly synthetic and reproducible fixtures
+    knowledge/            Source catalogs, S0 claim registry, research workflow map
+    docs/                 Current onboarding and historical scientific protocols
+    cad/                  Nonfunctional OpenSCAD study; NEVER install on helmets
+    .github/workflows/    Cross-platform tests, clean-wheel and RO-Crate checks
 
-## Workbench capabilities
+The project remains one installable **modular Python package**, not a premature network-service collection. Its scientific modules have no required LLM, GPU, XERJ or MCP dependency. Optional agent interfaces are governed *above* the deterministic scientific kernels.
 
-| Module | What it does | Evidence |
-|---|---|---|
-| `physics.py` | Three-body facemask/shell/head, two-axis, spring/damper/stop impact model | Synthetic toy mechanics |
-| `analysis.py` / `web/` | Four-panel synchronized replay with comparative metrics, force timeline and synthetic EEG/EMG | Visualization only |
-| `models.py` | Four controlled synthetic collision scenarios, bounded stiffness/damping/travel | Not product-specific |
-| `design_space.py` | Multi-scenario Pareto parameter exploration that retains worsening responses | Not a helmet safety ranking |
-| `qualification.py` | Four-step-size peak-metric refinement | Partial numerical check |
-| `independent_solver.py` | Separately expressed RK4 solver with conservative spring/stop energy, damping and applied work | Same unvalidated physical assumptions |
-| `independent_qualification.py` | 16-case cross-solver, RK4 refinement and energy-balance audit with strict numerical gates | **Numerical-only** PASS/FAIL |
-| `kinematics.py` | Quaternion head-to-torso orientation and gap-aware interpolation | Not calibrated to sensors |
-| `session.py` / `ingestion.py` | Synthetic-only session data contract and local CSV shape/unit validator | No actual acquisition |
-| `headform.py` | Strict, offline NONHUMAN headform bench metadata/CSV validator, sample-gap flags and content hashes | Structural checks only, not measured-data calibration |
-| `bench_intake.py` | Optional hash-bound acquisition sidecar, local QC and paired kinematic summaries | Synthetic demonstrations, NEVER physical safety qualification |
-| `waveform_qualification.py` | Preregistered local paired waveform screen, sample-clock and threshold gates | Descriptive S0 only; external model validation explicitly blocked |
-| `privacy.py` | Basic purpose/scope consent decision checks | Not production-grade access control |
-| `cad.py` | Nonfunctional OpenSCAD geometry concept | **NEVER INSTALL** on equipment |
+## External data and scientific evidence
 
-**No real EEG/EMG or IMU acquisition, cervical injury criterion, finite-element brain strain, concussion prediction, athlete-specific risk estimate or validated helmet design is implemented.**
+Public source listings do not prove file-level reuse rights or instrument validity. Our [Borealis/EPFL source-intake guide](docs/biomechanics-source-intake-v1.5.md), [local CSV inspector](docs/local-nonhuman-csv-inspection-v1.6.md), [head/neck mapping protocol](docs/reviewed-measurement-mapping-v1.7.md), and [Dataverse inventory guide](docs/dataverse-nonhuman-intake-v1.8.md) document a path to responsibly studying **nonhuman** external measurements.
 
-## Reproducible experiments
+Original third-party data, calibration evidence, human EEG and athlete identities must **not** be committed or automatically indexed. Source fingerprints and schema checks do not prove protective performance. Any change in research evidence tier requires qualified, independent scientific review outside the current software gates.
 
-```bash
-# Synthetic helmet comparison and multi-design exploration
-python -m neuroshield export --scenario oblique --out synthetic-oblique.json
-python -m neuroshield sweep --out pareto-SYNTHETIC.json
+## Reproduce and contribute
 
-# Historical V0.2 single-integrator refinement test
-python -m neuroshield qualify --scenario oblique --out numerical-oblique.json
+Run the [fixed outside-researcher challenge](docs/reproduction-challenge-v1.4.md) and preserve failed attempts. The [agent-ready research architecture](docs/agentic-research-architecture.md) describes the limited safe execution interface. Computed results can be bundled with RO-Crate 1.3 metadata, but successful conformance checks do not authenticate measurements or prove scientific claims.
 
-# V0.3+ cross-integrator & energy audit, default 4 scenarios x 4 designs
-python -m neuroshield qualify-independent --scenario all --out numerical-audit.json
+Read [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md) before modifying calculations, coordinate frames, data permissions or evidence contracts. The [research evidence registry](knowledge/registry.json) records explicit assumptions and unresolved limitations. See [the scientific architecture](docs/SCIENTIFIC_ARCHITECTURE.md) for verification-versus-validation rules and next experiments.
 
-# V0.4 full-precision primary trace; aligned t[n] state and acceleration
-python -m neuroshield export-audit-trace --scenario oblique --out audit-SYNTHETIC.json
-
-# Read-only NONHUMAN bench contract. The included sample is synthetic, not measured.
-python -m neuroshield validate-headform examples/headform-SYNTHETIC-manifest.json examples/headform-SYNTHETIC.csv
-
-# V0.7 BENCH DEMO (synthetic, not a real helmet or calibrated sensor)
-python -m neuroshield inspect-bench-intake \
-  examples/bench-reference-SYNTHETIC-profile.json \
-  examples/bench-reference-SYNTHETIC-manifest.json \
-  examples/bench-reference-SYNTHETIC.csv
-# See docs/nonhuman-bench-intake-v0.7.md for paired reference/candidate command.
-
-# V0.8 preregistered paired waveform screen (SYNTHETIC ONLY)
-python -m neuroshield compare-bench-waveforms \
-  examples/paired-waveform-plan-SYNTHETIC.json \
-  examples/bench-reference-SYNTHETIC-profile.json \
-  examples/bench-reference-SYNTHETIC-manifest.json \
-  examples/bench-reference-SYNTHETIC.csv \
-  examples/bench-candidate-SYNTHETIC-profile.json \
-  examples/bench-candidate-SYNTHETIC-manifest.json \
-  examples/bench-candidate-SYNTHETIC.csv \
-  --out ../paired-waveforms-SYNTHETIC.json
-python -m neuroshield model-measurement-gate --out ../model-validation-BLOCKED.json
-# See docs/preregistered-waveform-screen-v0.8.md for interpretation and limits.
-
-# Synthetic-only session interchange
-python -m neuroshield synthetic-session --out session-SYNTHETIC.json
-python -m neuroshield validate-session session-SYNTHETIC.json
-
-# Shape and unit validation on a *local* CSV; does not anonymize or authorize sharing
-python -m neuroshield validate-csv examples/kinematics-SYNTHETIC.csv
-
-# Geometry illustration, not a buildable helmet component
-python -m neuroshield cad-preview --out concept-preview.scad
-```
-
-### What numerical qualification means
-
-The independent check compares an original semi-implicit Euler implementation with a separately written RK4 integrator **of the same toy equations**. It checks maximum symmetric peak-metric discrepancy, RK4 refinement between 0.25 and 0.125 ms, mechanical energy balance and agreement on mount-stop engagement. Cases fail the command when a threshold is exceeded. CI exercises all 16 combinations on Linux, Windows and macOS.
-
-The 16-case fixture currently passes these **nonclinical mathematical tolerances**: 5% cross-solver difference, 1% reference refinement difference, 0.5% normalized energy residual and identical stop-engagement classification. Read `examples/numerical-audit-summary-SYNTHETIC.json` for per-case values; regenerate a full report via the CLI. **Passing is not S1 physical verification**. Both solvers could be consistently wrong about actual helmet dynamics. The baseline solver now computes full-precision peaks prior to presentation rounding, and each trace sample is labeled at the same pre-integration time. Optional raw numerical audit traces are available without exposing them through the demo API.
-
-## Source layout and research contract
-
-- [`docs/research-contract.md`](docs/research-contract.md): S0→S4 evidence ladder, numerical threshold definitions, and clinical/privacy boundaries.
-- [`docs/architecture-and-next-experiments.md`](docs/architecture-and-next-experiments.md): architecture, experimental roadmap, sensors, and future neurOS integration.
-- [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`SECURITY.md`](SECURITY.md): developer practices and responsible reporting.
-- Experiment-specific numerical and replay reports provide their own versioned source identities; no historical manifest should be used to qualify the current branch.
-
-## V0.5 evidence knowledge and optional XERJ
-
-`AGENTS.md`, `docs/knowledge-and-retrieval.md` and `knowledge/registry.json` provide a reviewed-code navigation map, an S0 evidence-boundary registry and a frozen navigation benchmark. Nothing in retrieval upgrades the scientific evidence level. **XERJ is optional** and is not a dependency.
-
-```bash
-python -m neuroshield knowledge audit --root .
-python -m neuroshield knowledge stage --root . --out ../neuroshield-committed-corpus
-python -m neuroshield knowledge search --stage ../neuroshield-committed-corpus "solver energy balance"
-python -m neuroshield knowledge bench --root . --stage ../neuroshield-committed-corpus --out ../navigation-benchmark.json
-# Optionally, after inspecting staged sources: xerj autoindex ../neuroshield-committed-corpus --prefix eeg-helmet
-```
-
-Indexing copies only a narrow allowlist of **committed** text files from `HEAD`, to a new directory outside the repository. It rejects symlinks, changed stage hashes and oversized files, and intentionally omits examples, artifacts, noncommitted files and human records. It is not a general privacy scanner: review sources before sharing. See the [knowledge and retrieval guide](docs/knowledge-and-retrieval.md).
-
-## Next gates
-
-1. **Physics credibility:** independently reproduced full-system analytical benchmarks, worst-case parameter sensitivity and energy accounting at all discontinuities. V0.4 fixes pre-step time alignment and precision in the primary output but not physical calibration.
-2. **Bench validation:** responsibly licensed helmet/headform configurations, measured acceleration traces, force/torque calibration, cervical loading and stop-failure tests.
-3. **Neural recording feasibility:** ethics-approved stationary EEG/EMG studies, rigorous contact-quality and motion-artifact analysis, device clock synchronization and informed consent.
-4. **Clinical evidence:** external prospective research with appropriate specialists and independent assessment. Never infer concussion diagnosis or return-to-play clearance from synthetic kinematics.
-
-**License:** Apache-2.0; see [`LICENSE`](LICENSE). No claims of fitness for protective use.
-
-### V0.4 data-plane safeguards
-
-- The browser API continues to serve **only synthetic physics and synthetic physiological signals**. `export-audit-trace` produces unrounded synthetic values offline; it is **not** an EEG/IMU stream.
-- Physical rig data (if collected later) must use an offline, explicitly NONHUMAN headform bundle. `validate-headform` checks headers, SI units, monotonic clocks, finite values, possible missing samples and content hashes only. It does **not** check physical sensor calibration or certify sensor synchronization. It rejects human-origin recordings.
-- See [`docs/headform-data-contract.md`](docs/headform-data-contract.md) for coordinate frame, calibration and future independent verification requirements.
-
-
-## V0.6: separated external reference catalogs (research navigation only)
-
-Three link-only corpora for biomechanics, neural recordings and evidence/qualification are tracked under `knowledge/corpora/`. They **do not** contain downloaded models, EEG, protected standards text or measured impact data. Their sources have not completed license review. See [`docs/external-corpora-and-qualification.md`](docs/external-corpora-and-qualification.md).
-
-```bash
-python -m neuroshield corpora audit --root .
-python -m neuroshield corpora search --root . --domain biomechanics 'headform impact test'
-python -m neuroshield corpora gaps --root .
-python -m neuroshield corpora bench --root . --out ../corpora-benchmark.json
-python -m neuroshield corpora stage --root . --out ../neuroshield-metadata-index
-```
-
-Staging requires committed, unmodified catalog files and writes exclusively metadata outside this repository. Optional XERJ indexing of these per-domain snapshots is an independently reviewed workflow. Citation navigation and passing metadata tests do not upgrade the unvalidated S0 helmet model.
-
-## Agent-ready offline research tasks (V1.1 development)
-
-`neuroshield.agent_protocol` exposes a **fixed synthetic-only** computational interface, not an autonomous laboratory or network API. It provides capability discovery, a bundled JSON Schema, source-bound deterministic results, and minimal RO-Crate 1.3 metadata.
-
-```bash
-python -m neuroshield.agent_protocol capabilities
-python -m neuroshield.agent_protocol schema
-python -m neuroshield.agent_protocol run examples/agent-task-SYNTHETIC.json --out ../agent-run-demo
-python -m neuroshield.agent_protocol verify ../agent-run-demo
-```
-
-All research outputs remain **S0**. Artifact checksums verify local integrity, not authorship, calibration, licensing or physical validity. Agent hosts need separately governed authorization, isolation and resource control; this enables no network server, human-data ingestion or hardware actuation. See [the agent research architecture](docs/agentic-research-architecture.md).
-
-
-## V1.2 independent synthetic research replay
-
-V1.1 `verify` checks artifact self-consistency, **not** re-execution. Run the separate offline V1.2 verifier to compare a pinned bundle against the installed scientific source:
-
-```bash
-python -m neuroshield.agent_protocol run examples/agent-task-SYNTHETIC.json --out ../replay-demo
-python -m neuroshield.agent_protocol verify ../replay-demo
-python -m neuroshield.reproduction ../replay-demo --out ../replay-report.json
-```
-
-Replay checks source SHA-256, re-executes the fixed allowlisted synthetic task and distinguishes exact reproduction, bounded floating-point variation, changed source, and failed reproduction. It does **not** prove authenticity, RO-Crate conformance, physical model validity or helmet safety. See [`docs/independent-reproduction-v1.2.md`](docs/independent-reproduction-v1.2.md).
-
-
-## V1.3 release portability and external reproducibility
-
-Use `python scripts/smoke_installed_wheel.py` to build a wheel and test the installed artifact from a clean environment outside the checkout. The agent task JSON Schema is included in the wheel, and a separate GitHub Actions job runs an independent RO-Crate 1.3 validator on a synthetic bundle. New bundles include a UTC `datePublished` and checksum-bound metadata; the historical V1.1 checksum format remains readable. Scientific tasks and outputs remain S0. See [the external reproduction guide](docs/external-reproduction-and-crate-v1.3.md).
-
-## V1.4: independent reproduction exercise
-
-Run the fixed offline synthetic challenge from an installed wheel or clean checkout:
-
-```bash
-python -m neuroshield.reproduction_challenge run ../neuroshield-repro-01
-python -m neuroshield.reproduction_challenge verify ../neuroshield-repro-01
-```
-
-The exercise retains failures, pins its two experiments (an oblique synthetic impact and a 16-case numerical audit), verifies exact task identities and reruns their bundles. This is computational reproduction **only**, not independent human validation, authentication or physical helmet evidence. Outside scientists should follow [the guide](docs/reproduction-challenge-v1.4.md) and [feedback template](examples/reproduction-feedback-template.md). Avoid publishing private measurements or machine-specific secrets.
-
-## V1.5 external biomechanics source intake
-
-New metadata-only leads for public Borealis nonhuman sled data, restricted EPFL hockey headform IMUs and Virginia Tech's experimental headform vibration method are cataloged separately. Use `python -m neuroshield.source_intake --root .` to see outstanding permissions, calibration and scientific-review blockers. See [the sourcing review](docs/biomechanics-source-intake-v1.5.md). No external measurements have been imported or physically validated, and no concussion-protection claims are supported.
-
-
-## V1.6 local nonhuman CSV inspection
-
-`python -m neuroshield.csv_probe` is a read-only, offline structure probe for *explicitly declared* synthetic or nonhuman headform CSVs. It emits file fingerprints, header hashes, column counts and optional clock QC, never raw sample values or a claimed scientific mapping. See [the inspection guide](docs/local-nonhuman-csv-inspection-v1.6.md). It **does not** fetch Borealis data, verify file-level permissions, calibrate sensors or upgrade the S0 research evidence tier.
-
-## V1.7 explicitly proposed nonhuman measurement mapping
-
-Run `python -m neuroshield.measurement_mapping examples/measurement-mapping-SYNTHETIC.json examples/measurement-mapping-SYNTHETIC.csv --out ../mapping-review-SYNTHETIC.json` to inspect SHA-256-pinned head/neck channel definitions, SI conversion, right-handed rotations, and unchanged reference points. Only synthetic fixtures produce a numerical summary. Real nonhuman files remain S0, read-only and review-required; mapping, calibration, and source rights are never automatically approved. See [the guide](docs/reviewed-measurement-mapping-v1.7.md) and bundled JSON Schema.
-
-## V1.8 provider metadata and local byte-consistency review
-
-Use `python -m neuroshield.dataverse_inventory inspect` on a *locally saved* public Dataverse API response to pin the Borealis dataset version and provider file IDs for a selected nonhuman crash test. `verify-file` can compare a legally obtained local CSV against the provider-listed checksum without parsing measurements. The repository does not automatically download or authenticate files or promote S0. See [the V1.8 guide](docs/dataverse-nonhuman-intake-v1.8.md).
+**License:** Apache-2.0. No fitness for protective, clinical or regulatory use is claimed.
