@@ -36,6 +36,10 @@ Explore the complete owner, test and protocol link for any area, for example:
 
 Each map entry names the owning code, linked regression tests, relevant protocol, related S0 claims, a copyable example command and an explicit **not established** statement. The map is read-only: it **never executes** a suggested command, downloads data, authorizes an instrument or changes the scientific evidence level.
 
+## Select the correct experimental design
+
+A truly matched comparison uses the V1.10 [matched-block preflight](study-design-preflight-v1.10.md). An unpaired/factorial experiment uses the V1.11 [factorial preflight](unpaired-factorial-preflight-v1.11.md). Neither automatically performs statistical inference, and both require independently reviewed measurement provenance before physical conclusions. **Do not convert one design into another to make a tool accept it.**
+
 ## A scientific contribution in six steps
 
 1. Read the [scientific architecture](SCIENTIFIC_ARCHITECTURE.md) and [evidence contract](research-contract.md).
