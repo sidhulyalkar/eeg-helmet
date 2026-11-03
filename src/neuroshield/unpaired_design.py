@@ -90,7 +90,7 @@ def read_plan(path: str | Path) -> dict:
 
 def validate_plan(plan: dict) -> dict:
     _exact(plan, FIELDS, "study design")
-    if (plan["schema_version"] != SCHEMA or plan["origin"] not in
+    if (plan["schema_version"] != SCHEMA or not isinstance(plan["origin"], str) or plan["origin"] not in
             {"NONHUMAN_INSTRUMENTED_HEADFORM", "SYNTHETIC_HEADFORM_FIXTURE"}):
         raise ValueError("Only explicit synthetic/nonhuman unpaired designs are supported")
     _token(plan["study_id"], "study ID")
@@ -121,12 +121,12 @@ def validate_plan(plan: dict) -> dict:
         raise ValueError("Require a format-valid declared protocol digest")
     if plan["preregistration_status"] != "AUTHOR_DECLARED_TIMESTAMP_UNVERIFIED":
         raise ValueError("Cannot assert authenticated preregistration chronology")
-    if plan["assignment_status"] not in {"NOT_RECORDED", "AUTHOR_DECLARED_UNVERIFIED"}:
+    if not isinstance(plan["assignment_status"], str) or plan["assignment_status"] not in {"NOT_RECORDED", "AUTHOR_DECLARED_UNVERIFIED"}:
         raise ValueError("Assignment must remain explicitly unverified")
     nominal = _number(plan["nominal_speed_m_s"], "nominal speed", .01, 100)
     speed_tolerance = _number(plan["speed_tolerance_m_s"], "speed tolerance", 0, 2)
     angle_tolerance = _number(plan["angle_tolerance_deg"], "angle tolerance", 0, 10)
-    if plan["primary_outcome"] not in METRICS:
+    if not isinstance(plan["primary_outcome"], str) or plan["primary_outcome"] not in METRICS:
         raise ValueError("Primary outcome must be a named measured physical quantity")
     secondary = plan["secondary_outcomes"]
     if (not isinstance(secondary, list) or not 1 <= len(secondary) <= 4
@@ -155,7 +155,7 @@ def validate_plan(plan: dict) -> dict:
         status = trial["record_status"]
         if not isinstance(status, str) or status not in STATUSES:
             raise ValueError("Invalid trial disposition")
-        if trial["record_reason"] not in REASONS[status]:
+        if not isinstance(trial["record_reason"], str) or trial["record_reason"] not in REASONS[status]:
             raise ValueError("Incompatible trial status and disposition reason")
         raw = trial["raw_sha256"]
         if raw is not None:
@@ -236,6 +236,16 @@ def evaluate_design(plan: dict) -> dict:
                 study_warnings.add("FACTOR_CONFOUNDED_WITH_SEQUENTIAL_TEST_ORDER")
         elif subset:
             study_warnings.add("RUN_ORDER_NOT_FULLY_DECLARED")
+        if all(count.values()):
+            for field, label in (
+                ("rig_id", "FACTOR_CONFOUNDED_WITH_RIG"),
+                ("headform_id", "FACTOR_CONFOUNDED_WITH_HEADFORM"),
+                ("test_day_id", "FACTOR_CONFOUNDED_WITH_TEST_DAY"),
+            ):
+                first = {t[field] for t in subset if t["factor_level"] == levels[0]}
+                second = {t[field] for t in subset if t["factor_level"] == levels[1]}
+                if first.isdisjoint(second):
+                    study_warnings.add(label)
         strata.append({"stratum_id": name, "total_declared_trials": len(subset), "cells": cells,
                        "descriptive_two_level_coverage_only": all(count.values()),
                        "effect_estimation_authorized": False})
@@ -243,6 +253,9 @@ def evaluate_design(plan: dict) -> dict:
         study_warnings.add("NO_CROSS_STRATUM_POOLING_WITHOUT_NEW_PROTOCOL")
     if any(t["record_status"] == "METADATA_ONLY" for t in plan["trials"]):
         study_warnings.add("UNACQUIRED_RAW_MEASUREMENTS")
+    helmets = [t["helmet_unit_id"] for t in plan["trials"] if t["helmet_unit_id"] is not None]
+    if len(helmets) != len(set(helmets)):
+        study_warnings.add("HELMET_UNIT_REUSED_ACROSS_EXPERIMENT")
     if len({t["headform_id"] for t in plan["trials"]}) == 1:
         study_warnings.add("SINGLE_HEADFORM_GENERALIZABILITY_LIMIT")
     if len({t["rig_id"] for t in plan["trials"]}) == 1:
