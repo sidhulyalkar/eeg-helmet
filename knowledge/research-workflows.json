@@ -105,26 +105,28 @@
     },
     {
       "id": "bench-waveform-screen",
-      "question": "What motion tradeoffs and waveform discrepancies appear when synthetic or locally reviewed headform trials are descriptively compared?",
+      "question": "Can matched or unpaired nonhuman impact designs be meaningfully described without conflating sampling, exposure order, equipment clustering or different impact strata?",
       "software_readiness": "synthetic_or_local_review_only",
       "input_class": "declared_nonhuman_or_synthetic",
       "evidence_tier": "S0",
-      "example_command": "python -m neuroshield model-measurement-gate --out ../model-validation-BLOCKED.json",
+      "example_command": "python -m neuroshield.unpaired_design examples/unpaired-design-SYNTHETIC.json --out ../unpaired-design-review.json",
       "code": [
         "src/neuroshield/waveform_qualification.py",
         "src/neuroshield/replicate_study.py",
-        "src/neuroshield/study_design.py"
+        "src/neuroshield/study_design.py",
+        "src/neuroshield/unpaired_design.py"
       ],
       "tests": [
         "tests/test_waveform_qualification.py",
         "tests/test_replicate_study.py",
-        "tests/test_study_design.py"
+        "tests/test_study_design.py",
+        "tests/test_unpaired_design.py"
       ],
       "protocol": "docs/preregistered-waveform-screen-v0.8.md",
       "related_claim_ids": [
         "C-WAVE-001"
       ],
-      "not_established": "Descriptive screens and metadata-only matched-impact preflights cannot establish randomized assignment, independent impacts, physical prediction accuracy or helmet safety."
+      "not_established": "Neither matched-block nor unpaired/factorial metadata checks establish calibrated physics, randomized assignment, independent sample sizes, causal helmet effects or helmet safety."
     },
     {
       "id": "synthetic-neural-events",

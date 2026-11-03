@@ -25,6 +25,7 @@ jobs:
       - run: python -m neuroshield knowledge audit --root .
       - run: python -m neuroshield.research_map audit --root .
       - run: python -m neuroshield.study_design examples/study-design-SYNTHETIC.json --out ../study-design-review-SYNTHETIC.json
+      - run: python -m neuroshield.unpaired_design examples/unpaired-design-SYNTHETIC.json --out ../unpaired-design-review-SYNTHETIC.json
       - run: python -m neuroshield corpora audit --root .
       - run: python -m neuroshield.source_intake --root .
       # Dataverse inventory is exercised with fabricated provider metadata in unit tests; no raw data are fetched.
