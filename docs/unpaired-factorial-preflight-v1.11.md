@@ -27,6 +27,7 @@ The output is a reproducible SHA-256-bound **design metadata** receipt: per-stra
 - Keep every planned trial record: RECORDED, METADATA_ONLY, FAILED or EXCLUDED. Failure/exclusion reasons must be declared. An unacquired source file must remain METADATA_ONLY, with no invented SHA.
 - A recorded raw SHA-256 remains an **author declaration**, not proof of source authenticity, license approval or instrument calibration.
 - Missing condition cells, fewer than two recorded impacts in a cell, missing speed/angle metadata, unknown order, identical apparatus clusters, reused helmets and perfect condition confounding with rig/headform/day or sequential test order are warnings.
+- Declared speed deviation cannot exceed 0.5 m/s and within-stratum angle tolerance cannot exceed 1°. These are conservative software guardrails, not standards-derived allowable helmet-test tolerances. Unknown impact speed or angle stays flagged, never imputed.
 - Contrasts are reported **within** each stratum only as coverage counts. No across-stratum pooled estimate, standard error, confidence interval, p-value or causal/protective interpretation is computed.
 - An author's protocol hash is not trusted evidence that a plan was frozen before experiments began. Neither randomization nor preregistration time is independently verified.
 - The tool is intentionally **not** an inference engine. A balanced cell count is insufficient to establish independent replication, assignment validity, physical transfer or generalizability.
