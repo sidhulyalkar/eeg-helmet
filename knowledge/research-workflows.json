@@ -187,17 +187,20 @@
       "code": [
         "src/neuroshield/analysis.py",
         "src/neuroshield/server.py",
-        "src/neuroshield/cad.py"
+        "src/neuroshield/cad.py",
+        "src/neuroshield/headform_concept.py"
       ],
       "tests": [
         "tests/test_server.py",
-        "tests/test_core.py"
+        "tests/test_core.py",
+        "tests/test_headform_concept.py"
       ],
       "protocol": "cad/README.md",
       "related_claim_ids": [
-        "C-SIM-001"
+        "C-SIM-001",
+        "C-CAD-001"
       ],
-      "not_established": "CAD and browser simulations are not protective equipment designs and establish no structural integrity, safety or certification."
+      "not_established": "CAD and browser simulations including the synthetic marker ellipsoid are not electrode position measurements or wearables, and establish no structural integrity, participant fit, physiological validity, safety or certification."
     },
     {
       "id": "open-eeg-ecosystem",
