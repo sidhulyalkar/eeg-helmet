@@ -135,6 +135,18 @@ class SyntheticHeadformTests(unittest.TestCase):
         with self.assertRaises(concept.HeadformConceptError):
             concept.write_concept(self.source, self.source, self.root / "new.json")
 
+    def test_reject_direct_symlinked_output_parent(self):
+        real = self.root / "real-output"
+        real.mkdir()
+        alias = self.root / "linked-output"
+        try:
+            alias.symlink_to(real, target_is_directory=True)
+        except (OSError, NotImplementedError):
+            self.skipTest("Platform does not permit directory symlinks")
+        with self.assertRaises(concept.HeadformConceptError):
+            concept.write_concept(self.source, alias / "preview.scad", real / "receipt.json")
+        self.assertFalse((real / "receipt.json").exists())
+
     def test_cli_prints_non_authorizing_receipt(self):
         output = StringIO()
         with redirect_stdout(output):
