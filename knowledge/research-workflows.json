@@ -198,6 +198,25 @@
         "C-SIM-001"
       ],
       "not_established": "CAD and browser simulations are not protective equipment designs and establish no structural integrity, safety or certification."
+    },
+    {
+      "id": "open-eeg-ecosystem",
+      "question": "Which external EEG design, acquisition, analysis and community projects are useful reference leads for an independent nonclinical research contribution?",
+      "software_readiness": "metadata_review_only",
+      "input_class": "public_metadata_only",
+      "evidence_tier": "S0",
+      "example_command": "python -m neuroshield.ecosystem audit --root .",
+      "code": [
+        "src/neuroshield/ecosystem.py"
+      ],
+      "tests": [
+        "tests/test_ecosystem.py"
+      ],
+      "protocol": "docs/open-eeg-ecosystem-and-community.md",
+      "related_claim_ids": [
+        "C-ECOSYSTEM-001"
+      ],
+      "not_established": "External project metadata is not a verified license review, source freshness guarantee, endorsement, EEG acquisition safety check, hardware validation, human research permission or scientific evidence."
     }
   ]
 }

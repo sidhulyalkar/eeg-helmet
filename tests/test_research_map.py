@@ -36,14 +36,15 @@ class ResearchMapTests(unittest.TestCase):
 
     def test_repo_map_has_module_ownership_and_s0(self):
         result = audit(ROOT)
-        self.assertEqual(result["workflow_count"], 8)
+        self.assertGreaterEqual(result["workflow_count"], 9)
+        self.assertIn("open-eeg-ecosystem", {w["id"] for w in load_workflows(ROOT)})
         self.assertEqual(result["scientific_evidence_ceiling"], "S0")
         self.assertFalse(result["permissions_granted"])
         self.assertGreaterEqual(result["mapped_module_count"], 25)
 
     def test_audit_is_deterministic(self):
         self.assertEqual(audit(self.root), audit(self.root))
-        self.assertEqual(len(load_workflows(self.root)), 8)
+        self.assertEqual(len(load_workflows(self.root)), len(self.manifest["workflows"]))
 
     def test_reject_evidence_promotion(self):
         self.manifest["workflows"][0]["evidence_tier"] = "S2"

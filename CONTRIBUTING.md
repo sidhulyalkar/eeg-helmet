@@ -32,3 +32,19 @@ From the repository root run:
     python -m unittest discover -s tests -v
 
 When adding a new public scientific module, update knowledge/research-workflows.json with its owner, tests and limitations. If the scope of a scientific claim changes, also update knowledge/registry.json. See docs/START_HERE.md and docs/SCIENTIFIC_ARCHITECTURE.md.
+
+
+## Open EEG ecosystem contributions
+
+For a hardware-free starting point, read the [open EEG ecosystem and global contribution plan](docs/open-eeg-ecosystem-and-community.md) and run:
+
+    python -m neuroshield.ecosystem audit --root .
+    python -m neuroshield.ecosystem list --category headwear
+    python -m neuroshield.ecosystem search "electrode contact"
+    python -m neuroshield.research_map show open-eeg-ecosystem
+
+The catalog is deliberately a **reference-only index**. Before adding a resource, verify a canonical HTTPS link, document its actual openness (open software, open hardware, public platform, hosted service or community), and state one concrete reason to inspect it plus its limitations. Keep `license_review: pending_file_level`, `reuse_authorized: false`, and `evidence_role: reference_only`. A link does not grant redistribution rights or electrical/medical approval.
+
+First contributions do not require a device: reproduce one synthetic workflow, find a misleading limitation, validate a reference card, document a failed setup, or improve readable and accessible instructions. Never include identifiable EEG, unpublished participant imagery/head scans, restricted papers, passwords, or personally identifying information in issues, pull requests, CI logs or search indexes.
+
+Use the repository's GitHub issue templates for reproducibility problems, independent scientific questions and upstream resource nominations. See [the community conduct expectations](CODE_OF_CONDUCT.md). We have not yet established a verified private conduct-reporting channel; this remains a governance task before broad hosted community recruitment.
