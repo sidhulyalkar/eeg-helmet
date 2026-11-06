@@ -36,4 +36,6 @@ Read `README.md`, `docs/research-contract.md`, and `docs/knowledge-and-retrieval
 
 20. **V1.12 model sensitivity:** read docs/model-sensitivity-and-observables-v1.12.md, run python -m neuroshield.model_diagnostics --scenario all --preset default, and do not claim local finite-difference similarity establishes practical identifiability or map 1D torque proxies directly onto 3D neck load-cell data. Never promote S0 from this audit.
 
+22. **Synthetic headform marker concept:** before changing `src/neuroshield/headform_concept.py`, read `docs/synthetic-headform-layout-v1.md`. The study uses generic nonhuman ellipsoid markers only. Never relabel these as 10-20 or actual human scalp electrodes, a safe headset, protective equipment or a human-recording interface. Keep deterministic export receipts and adversarial path, unit, frame and provenance tests.
+
 21. **External open EEG ecosystem:** read docs/open-eeg-ecosystem-and-community.md before adding projects to knowledge/ecosystem/projects.json. Run python -m neuroshield.ecosystem audit --root . and keep every entry metadata-only, license-pending and reference-only. Do not import linked source code, CAD files, proprietary hardware designs, private recordings or participant scans via agent retrieval.
