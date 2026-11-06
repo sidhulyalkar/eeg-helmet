@@ -22,6 +22,14 @@ The numerical audit compares independently expressed solvers of **the same assum
 
 Then open http://127.0.0.1:8765. The demo binds to loopback only, does not upload human recordings and is not a medical-data application.
 
+## First EEG headform geometry experiment (hardware-free)
+
+Explore a **synthetic, nonwearable ellipsoid with nine symbolic markers** using only Python. The generated OpenSCAD visualization is **not an electrode montage, fabricated headset, actual head shape or safety-approved design**:
+
+    python -m neuroshield.headform_concept examples/headform-sites-SYNTHETIC.json --out ../headform-marker-preview.scad --receipt ../headform-marker-receipt.json
+
+The receipt records declared units, geometry bounds, source hashes, markers and explicit limitations. See the [reproducible headform marker tutorial](docs/synthetic-headform-layout-v1.md), the [EEG project landscape](docs/open-eeg-ecosystem-and-community.md), and the [hardware-first safety boundaries](docs/eeg-headwear-build-guide.md). For a curated, offline external-project catalog, run `python -m neuroshield.ecosystem list --category headwear`.
+
 ## Choose a scientific workflow
 
 | Research question | Workflow ID | Supported mode |
