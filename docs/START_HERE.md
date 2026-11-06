@@ -24,6 +24,7 @@ The numerical audit checks mathematical consistency **within a synthetic model**
 | Investigate synthetic head/facemask mechanics | impact-model | Toy mechanics only |
 | Audit numerical integration | numerical-verification | Solver consistency, not real-world validity |
 | Find a documented nonhuman dataset | external-source-discovery | Metadata and file rights require review |
+| Explore public EEG software, headset and research projects | open-eeg-ecosystem | Read-only catalog; source reuse requires separate review |
 | Inspect sensor channels and coordinate frames | nonhuman-measurement-contracts | Calibration and mapping unverified |
 | Examine paired trial motion trade-offs | bench-waveform-screen | Descriptive S0 comparisons, never safety rankings |
 | Prototype EEG/EMG data interfaces | synthetic-neural-events | Synthetic physiology, no human recordings |
