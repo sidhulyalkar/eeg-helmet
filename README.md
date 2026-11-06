@@ -29,6 +29,7 @@ Then open http://127.0.0.1:8765. The demo binds to loopback only, does not uploa
 | What does the assumed three-body model predict? | impact-model | Synthetic simulation |
 | Do integration and energy audits agree? | numerical-verification | Synthetic numerical checks |
 | Which data sources deserve review? | external-source-discovery | Metadata and rights review only |
+| Which open EEG projects can I learn from or contribute alongside? | open-eeg-ecosystem | Curated references only; no reuse authorization |
 | Are head/neck channels and frames declared consistently? | nonhuman-measurement-contracts | Structural review; no approved physical mapping |
 | How do paired motions and adverse responses compare? | bench-waveform-screen | Descriptive S0 screens |
 | Can neural signal interfaces be exercised? | synthetic-neural-events | Synthetic EEG/EMG only |
