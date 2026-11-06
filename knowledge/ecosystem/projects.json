@@ -266,6 +266,42 @@
       "license_review": "pending_file_level",
       "evidence_role": "reference_only",
       "reuse_authorized": false
+    },
+    {
+      "id": "openearable-exg",
+      "title": "OpenEarable ExG ear biopotential sensing",
+      "category": "headwear",
+      "openness": "open_hardware_reference",
+      "url": "https://www.dmz.teco.edu/research/openearable_exg/",
+      "utility": "Ear-based EEG, EMG and EOG research hardware illustrates a mechanically different sensing form factor from scalp cap mounts.",
+      "limitation": "Ear-biopotential signals have different spatial sensitivity and cannot substitute for a full scalp montage or establish thought decoding.",
+      "license_review": "pending_file_level",
+      "evidence_role": "reference_only",
+      "reuse_authorized": false
+    },
+    {
+      "id": "portable-dry-electrode-review",
+      "title": "Portable dry-electrode EEG research review",
+      "category": "research_literature",
+      "openness": "public_research_reference",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12389868/",
+      "utility": "Surveys contact mechanics, materials, dry-electrode artifacts and research constraints to guide falsifiable design questions.",
+      "limitation": "A review summarizes selected reports and does not certify materials, quantify individual comfort or validate NeuroShield hardware.",
+      "license_review": "pending_file_level",
+      "evidence_role": "reference_only",
+      "reuse_authorized": false
+    },
+    {
+      "id": "field-eeg-quality-study",
+      "title": "Field EEG data quality in India and Tanzania",
+      "category": "research_literature",
+      "openness": "public_research_reference",
+      "url": "https://www.eneuro.org/content/12/7/ENEURO.0006-25.2025",
+      "utility": "Large field-study methods highlight technician training, quality dashboards and factors such as hair, motion and power noise.",
+      "limitation": "Findings depend on that study's devices, protocols and populations and should not be generalized into automatic safety or signal-quality thresholds.",
+      "license_review": "pending_file_level",
+      "evidence_role": "reference_only",
+      "reuse_authorized": false
     }
   ]
 }
