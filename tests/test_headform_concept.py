@@ -133,7 +133,7 @@ class SyntheticHeadformTests(unittest.TestCase):
         with self.assertRaises(concept.HeadformConceptError):
             concept.write_concept(self.source, self.source, self.root / "new.json")
 
-    def test_cli_prints_non-authorizing_receipt(self):
+    def test_cli_prints_non_authorizing_receipt(self):
         output = StringIO()
         with redirect_stdout(output):
             code = concept.main([str(self.source), "--out", str(self.root / "preview.scad"),
