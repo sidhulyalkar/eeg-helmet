@@ -16,11 +16,12 @@ AUTHORITY = "REFERENCE_ONLY_NO_REUSE_PERMISSION"
 CATEGORIES = {
     "headwear", "acquisition_hardware", "acquisition_software", "streaming",
     "analysis", "benchmark", "data_standard", "data_archive", "cad",
-    "retrieval", "community",
+    "retrieval", "community", "research_literature",
 }
 OPENNESS = {
     "open_hardware_reference", "open_source_reference", "open_standard",
     "public_data_platform", "community", "hosted_service",
+    "public_research_reference",
 }
 FIELDS = {
     "id", "title", "category", "openness", "url", "utility",
