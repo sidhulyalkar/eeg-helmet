@@ -93,15 +93,16 @@ Only after **manual inspection** of the staged files, and only on a local, trust
 ```bash
 # Requires an independently installed XERJ; these commands are NOT run by NeuroShield.
 # First read https://github.com/xerj-org/xerj/blob/main/docs/SECURITY_MODEL.md
-# If running an insecure local server, bind to loopback only; never expose it to a network.
-xerj --insecure --data-dir ../neuroshield-xerj-storage
-# In a *separate* shell, after the process is ready:
+# Configure an independently installed, authenticated local-only XERJ service
+# according to the installed version. Do not launch insecure or public services.
+xerj --help
+# Only after reviewing staged sources and verifying service authentication / bind:
 xerj autoindex ../neuroshield-code-snapshot --prefix eeg-helmet-code
 xerj autoindex ../neuroshield-source-cards/neural --prefix eeg-helmet-neural
 xerj search "EEG coordinate frame reference electrodes"
 ```
 
-Confirm CLI syntax with the installed `xerj --help`; this guide does not assert successful XERJ execution. Place the index/database **outside** any tree being indexed, including the repository. The `--insecure` option removes authentication and TLS and is for isolated loopback development **only**. Do not index `~/`, a working tree indiscriminately, raw EEG/EMG, consent forms, private lab notes, commercially restricted standards or participant head scans.
+Confirm CLI syntax with the installed `xerj --help`; this guide does not assert successful XERJ execution. Place the index/database **outside** any tree being indexed, including the repository. Avoid `--insecure` when handling research materials: an unauthenticated XERJ service can expose indexed sources if networking is misconfigured. Do not index `~/`, a working tree indiscriminately, raw EEG/EMG, consent forms, private lab notes, commercially restricted standards or participant head scans.
 
 The existing catalogs `knowledge/corpora/{biomechanics,neural,evidence}.json` are **metadata only**. A future fourth "maker resources" catalog is justified only after a schema, licenses, link checks, reproducible source versions and a distinct search/benchmark use case are reviewed. Avoid turning thousands of low-quality links into an uncurated AI knowledge base.
 
