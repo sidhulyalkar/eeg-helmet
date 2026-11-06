@@ -1,0 +1,87 @@
+{
+  "schema": "neuroshield.synthetic-headform-markers.v1",
+  "origin": "SYNTHETIC_NONHUMAN_HEADFORM_ONLY",
+  "design_id": "illustrative-nine-site-ellipsoid",
+  "claim": "UNVALIDATED_NON_INSTALLABLE_CONCEPT",
+  "units": "mm",
+  "frame": "x_right_y_anterior_z_superior",
+  "headform_radii_mm": [
+    85,
+    95,
+    110
+  ],
+  "sites": [
+    {
+      "id": "SITE-CROWN",
+      "direction_unit": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "id": "SITE-FRONT",
+      "direction_unit": [
+        0,
+        0.6,
+        0.8
+      ]
+    },
+    {
+      "id": "SITE-BACK",
+      "direction_unit": [
+        0,
+        -0.6,
+        0.8
+      ]
+    },
+    {
+      "id": "SITE-LEFT",
+      "direction_unit": [
+        -0.6,
+        0,
+        0.8
+      ]
+    },
+    {
+      "id": "SITE-RIGHT",
+      "direction_unit": [
+        0.6,
+        0,
+        0.8
+      ]
+    },
+    {
+      "id": "SITE-FRONT-LEFT",
+      "direction_unit": [
+        -0.48,
+        0.64,
+        0.6
+      ]
+    },
+    {
+      "id": "SITE-FRONT-RIGHT",
+      "direction_unit": [
+        0.48,
+        0.64,
+        0.6
+      ]
+    },
+    {
+      "id": "SITE-BACK-LEFT",
+      "direction_unit": [
+        -0.48,
+        -0.64,
+        0.6
+      ]
+    },
+    {
+      "id": "SITE-BACK-RIGHT",
+      "direction_unit": [
+        0.48,
+        -0.64,
+        0.6
+      ]
+    }
+  ]
+}
