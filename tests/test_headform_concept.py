@@ -117,6 +117,8 @@ class SyntheticHeadformTests(unittest.TestCase):
         self.source.write_text(raw, encoding="utf-8")
         with self.assertRaises(concept.HeadformConceptError):
             concept.load_manifest(self.source)
+        self.obj = concept.load_manifest(FIXTURE)
+        self._write()  # Remove the duplicate key so this checks non-finite syntax independently.
         self.source.write_text(self.source.read_text().replace('"headform_radii_mm": [85, 95, 110]',
                                                                   '"headform_radii_mm": [NaN, 95, 110]'))
         with self.assertRaises(concept.HeadformConceptError):
