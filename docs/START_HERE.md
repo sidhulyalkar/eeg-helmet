@@ -17,6 +17,10 @@ Then reproduce one numerical experiment without any external datasets:
 
 The numerical audit checks mathematical consistency **within a synthetic model**. Passing it never establishes physical predictive accuracy or protective performance.
 
+## Here to design EEG headwear?
+
+Follow the new [evidence-first EEG headwear starter guide](eeg-headwear-build-guide.md), then the [optional Zoo / open CAD / XERJ toolchain comparison](cad-and-retrieval-toolchain.md). These explain what a maker can reproduce today, what remains synthetic, and why an electrode-holder geometry study must never be confused with certified protective equipment or an approved human-recording device. A separate inverse-EEG research proposal is tracked in [PR #7](https://github.com/sidhulyalkar/eeg-helmet/pull/7).
+
 ## Choose a research question
 
 | I want to... | Research-map identifier | Evidence boundary |

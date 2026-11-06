@@ -4,7 +4,7 @@
 
 **Scientific evidence: S0 only.** This is *not* a certified protective helmet, medical device, concussion detector, clinically validated model, or safe-to-install hardware design. Simulation outputs do not demonstrate injury reduction. All distributed data examples are synthetic.
 
-[Start here for researchers](docs/START_HERE.md) · [Scientific architecture](docs/SCIENTIFIC_ARCHITECTURE.md) · [Evidence contract](docs/research-contract.md) · [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md)
+[Start here for researchers](docs/START_HERE.md) · [Build an EEG research headset](docs/eeg-headwear-build-guide.md) · [CAD + XERJ toolchain](docs/cad-and-retrieval-toolchain.md) · [Scientific architecture](docs/SCIENTIFIC_ARCHITECTURE.md) · [Evidence contract](docs/research-contract.md) · [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md)
 
 ## Run in five minutes
 
