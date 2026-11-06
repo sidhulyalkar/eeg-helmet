@@ -9,7 +9,7 @@ assignees: []
 **Upstream resource name and canonical HTTPS URL**
 
 **Which ecosystem category?**
-headwear / acquisition_hardware / acquisition_software / streaming / analysis / benchmark / data_standard / data_archive / cad / retrieval / community
+headwear / acquisition_hardware / acquisition_software / streaming / analysis / benchmark / data_standard / data_archive / cad / retrieval / community / research_literature
 
 **Openness and permissions**
 Is this open hardware, open-source software, an open standard, public data platform, a community or a hosted service? Cite the exact source where the authors define this. **Do not assume permissive reuse from an open webpage.**
