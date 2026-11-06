@@ -144,13 +144,10 @@ def _safe_new_path(path, input_path):
     source = Path(input_path).resolve()
     if path.resolve() == source or path.exists() or path.is_symlink():
         raise HeadformConceptError("Refusing to overwrite existing input or output")
-    cursor = path.parent
-    if not cursor.is_dir():
-        raise HeadformConceptError("Output directory must exist")
-    while cursor != cursor.parent:
-        if cursor.is_symlink():
-            raise HeadformConceptError("Symlinked output directory rejected")
-        cursor = cursor.parent
+    if not path.parent.is_dir() or path.parent.is_symlink():
+        raise HeadformConceptError("Output parent directory must exist without a direct symlink")
+    # Do not reject system-provided ancestor aliases (e.g. macOS /var -> /private/var).
+    # This check is an overwrite guard, NOT a general filesystem sandbox.
     return path
 
 
@@ -165,12 +162,14 @@ def write_concept(manifest, output_scad, output_receipt):
     report = receipt(obj, scad)
     created = []
     try:
-        with output_scad.open("x", encoding="utf-8") as f:
+        # Binary exclusive creation prevents Windows CRLF translation from
+        # changing the exported bytes after calculating their SHA-256 digest.
+        with output_scad.open("xb") as f:
             created.append(output_scad)
-            f.write(scad)
-        with output_receipt.open("x", encoding="utf-8") as f:
+            f.write(scad.encode("utf-8"))
+        with output_receipt.open("xb") as f:
             created.append(output_receipt)
-            f.write(json.dumps(report, indent=2, sort_keys=True, allow_nan=False) + "\n")
+            f.write((json.dumps(report, indent=2, sort_keys=True, allow_nan=False) + "\n").encode("utf-8"))
     except OSError:
         for path in created:
             path.unlink(missing_ok=True)
