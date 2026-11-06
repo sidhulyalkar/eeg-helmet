@@ -127,6 +127,21 @@
       "id": "ecosystem_protocol",
       "kind": "protocol",
       "path": "docs/open-eeg-ecosystem-and-community.md"
+    },
+    {
+      "id": "synthetic_headform_visual",
+      "kind": "code",
+      "path": "src/neuroshield/headform_concept.py"
+    },
+    {
+      "id": "synthetic_headform_tests",
+      "kind": "test",
+      "path": "tests/test_headform_concept.py"
+    },
+    {
+      "id": "synthetic_headform_protocol",
+      "kind": "protocol",
+      "path": "docs/synthetic-headform-layout-v1.md"
     }
   ],
   "claims": [
@@ -267,6 +282,19 @@
         "ecosystem_protocol"
       ],
       "limitations": "Catalog entries are authored navigation metadata; project freshness, exact upstream licenses, electrical safety, measured EEG performance and scientific evidence are not verified."
+    },
+    {
+      "id": "C-CAD-001",
+      "kind": "implementation",
+      "statement": "A deterministic synthetic ellipsoid preview renders nine symbolic nonhuman headform markers and records structural geometry provenance.",
+      "evidence_tier": "S0",
+      "inference_scope": "synthetic_research_only",
+      "source_ids": [
+        "synthetic_headform_visual",
+        "synthetic_headform_tests",
+        "synthetic_headform_protocol"
+      ],
+      "limitations": "Markers are not EEG electrodes, a measured anatomical montage or wearable; geometry hashes and visual spacing do not establish participant fit, electrical safety or protective performance."
     }
   ]
 }
