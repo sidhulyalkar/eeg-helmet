@@ -112,6 +112,21 @@
       "id": "agent_contract_guide",
       "kind": "protocol",
       "path": "docs/agentic-research-architecture.md"
+    },
+    {
+      "id": "ecosystem_index",
+      "kind": "code",
+      "path": "src/neuroshield/ecosystem.py"
+    },
+    {
+      "id": "ecosystem_tests",
+      "kind": "test",
+      "path": "tests/test_ecosystem.py"
+    },
+    {
+      "id": "ecosystem_protocol",
+      "kind": "protocol",
+      "path": "docs/open-eeg-ecosystem-and-community.md"
     }
   ],
   "claims": [
@@ -239,6 +254,19 @@
         "agent_contract_guide"
       ],
       "limitations": "Task schemas and checksums neither authenticate users nor verify laboratory calibration, data permissions, protective performance or physical predictive accuracy."
+    },
+    {
+      "id": "C-ECOSYSTEM-001",
+      "kind": "implementation",
+      "statement": "An offline read-only catalog lists selected EEG ecosystem projects with structural provenance and explicit non-reuse and non-validation boundaries.",
+      "evidence_tier": "S0",
+      "inference_scope": "synthetic_research_only",
+      "source_ids": [
+        "ecosystem_index",
+        "ecosystem_tests",
+        "ecosystem_protocol"
+      ],
+      "limitations": "Catalog entries are authored navigation metadata; project freshness, exact upstream licenses, electrical safety, measured EEG performance and scientific evidence are not verified."
     }
   ]
 }
