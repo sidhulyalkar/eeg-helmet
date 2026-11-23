@@ -1,0 +1,177 @@
+{
+  "schema_version": "0.1.0",
+  "design_id": "neurocap-hybrid-headform-study-v1",
+  "origin": "SYNTHETIC_NONHUMAN_HEADFORM",
+  "evidence_tier": "S0",
+  "status": "UNVALIDATED_NONWEARABLE_CONCEPT",
+  "intended_use": "visual inspection of nominal cap and around-ear geometry on a fictional ellipsoid only",
+  "units": "mm",
+  "coordinate_frame": {
+    "handedness": "right",
+    "x": "+right",
+    "y": "+anterior",
+    "z": "+superior",
+    "origin": "ellipsoid center"
+  },
+  "geometry": {
+    "radii_mm": [
+      80,
+      94,
+      112
+    ],
+    "cap_shell_gap_mm": 12,
+    "cap_shell_thickness_mm": 2,
+    "band_z_mm": 14,
+    "band_offset_mm": 8,
+    "rail_radius_mm": 2.8,
+    "rib_y_mm": [
+      -38,
+      0,
+      38
+    ],
+    "rib_half_span_mm": 62,
+    "brim_length_mm": 66,
+    "brim_width_mm": 138,
+    "ear_center_x_mm": 91,
+    "ear_center_y_mm": -8,
+    "ear_center_z_mm": -16,
+    "ear_y_radius_mm": 19,
+    "ear_z_radius_mm": 29,
+    "pod_center_mm": [
+      0,
+      -128,
+      36
+    ],
+    "pod_size_mm": [
+      48,
+      19,
+      29
+    ]
+  },
+  "components": [
+    {
+      "id": "headform",
+      "title": "Reference headform",
+      "group": "reference",
+      "purpose": "Fictional ellipsoid for spatial comparison; not measured anatomy",
+      "qualification": "S0_ONLY"
+    },
+    {
+      "id": "cap",
+      "title": "Fabric cap silhouette",
+      "group": "garment",
+      "purpose": "Nonfunctional translucent crown and brim envelope",
+      "qualification": "S0_ONLY"
+    },
+    {
+      "id": "frame",
+      "title": "Segmented inner frame",
+      "group": "mechanical",
+      "purpose": "Illustrative sweatband ring and three independent crown ribs",
+      "qualification": "S0_ONLY"
+    },
+    {
+      "id": "scalp",
+      "title": "Candidate scalp sites",
+      "group": "contact",
+      "purpose": "Visual location targets; no electrode geometry or pressure mechanism",
+      "qualification": "NOT_MEASURED"
+    },
+    {
+      "id": "ears",
+      "title": "Bilateral ear modules",
+      "group": "contact",
+      "purpose": "Abstract around-ear supports and site markers, not anatomically fitted",
+      "qualification": "NOT_MEASURED"
+    },
+    {
+      "id": "routing",
+      "title": "Signal routing",
+      "group": "electrical",
+      "purpose": "Schematic nonconductive paths indicating strain-relief planning",
+      "qualification": "S0_ONLY"
+    },
+    {
+      "id": "pod",
+      "title": "Acquisition pod placeholder",
+      "group": "electrical",
+      "purpose": "External dimensional study; no battery, circuit, fastening or protection",
+      "qualification": "S0_ONLY"
+    }
+  ],
+  "scalp_sites": [
+    {
+      "id": "FL",
+      "zone": "frontotemporal_left",
+      "polar_deg": 73,
+      "azimuth_deg": 124,
+      "interface_candidate": "flat",
+      "status": "NOMINAL"
+    },
+    {
+      "id": "FR",
+      "zone": "frontotemporal_right",
+      "polar_deg": 73,
+      "azimuth_deg": 56,
+      "interface_candidate": "flat",
+      "status": "NOMINAL"
+    },
+    {
+      "id": "CL",
+      "zone": "central_left",
+      "polar_deg": 36,
+      "azimuth_deg": 130,
+      "interface_candidate": "hair_access",
+      "status": "NOMINAL"
+    },
+    {
+      "id": "CR",
+      "zone": "central_right",
+      "polar_deg": 36,
+      "azimuth_deg": 50,
+      "interface_candidate": "hair_access",
+      "status": "NOMINAL"
+    },
+    {
+      "id": "RL",
+      "zone": "posterior_left",
+      "polar_deg": 65,
+      "azimuth_deg": 237,
+      "interface_candidate": "optional_extension",
+      "status": "NOMINAL"
+    },
+    {
+      "id": "RR",
+      "zone": "posterior_right",
+      "polar_deg": 65,
+      "azimuth_deg": 303,
+      "interface_candidate": "optional_extension",
+      "status": "NOMINAL"
+    }
+  ],
+  "ear_sites": [
+    {
+      "id": "EL",
+      "side": -1,
+      "status": "NOMINAL"
+    },
+    {
+      "id": "ER",
+      "side": 1,
+      "status": "NOMINAL"
+    }
+  ],
+  "electrical_contract": {
+    "acquisition_hardware": "NOT_SELECTED",
+    "amplifier_reference": "UNSPECIFIED",
+    "amplifier_bias": "UNSPECIFIED",
+    "channel_count": "NOT_ESTABLISHED",
+    "skin_connection": "PROHIBITED_IN_THIS_CONCEPT"
+  },
+  "limitations": [
+    "Not a wearable design, skin interface, 10-20 montage, approved human measurement, protective helmet or mechanical safety assessment",
+    "Do not fabricate as a body-contact system or attach to certified protective equipment",
+    "Site labels are abstract names, not measured anatomical positions; bilateral ear geometry is deliberately idealized",
+    "No demonstration of contact force, electrical safety, shielding, cable fatigue, comfort, acoustics or signal quality"
+  ]
+}

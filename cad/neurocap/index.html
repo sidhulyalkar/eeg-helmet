@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NeuroCap | Assembly Laboratory</title>
+<style>
+:root{--paper:#f5f2eb;--ink:#203441;--muted:#68747a;--line:#d7d2c8;--white:#fffefb;--navy:#193644;--maroon:#96564c;--tan:#bca88a;--shadow:0 18px 44px #1c30400d}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}button,input{font:inherit}
+header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:18px clamp(18px,4vw,64px);gap:20px;flex-wrap:wrap}
+.brand{font-weight:760;letter-spacing:-.04em;font-size:19px}.brand small{font-size:10px;letter-spacing:.19em;text-transform:uppercase;display:block;font-weight:550;color:var(--muted)}
+.status{font-size:11px;letter-spacing:.08em;font-weight:720;border:1px solid #c4b5aa;border-radius:99px;padding:7px 12px;color:#935c47}
+main{max-width:1510px;margin:auto;padding:30px clamp(16px,3vw,48px) 65px}
+.intro{display:flex;justify-content:space-between;gap:30px;align-items:flex-end;margin-bottom:23px}.eyebrow{font-size:11px;font-weight:770;letter-spacing:.2em;color:var(--maroon);text-transform:uppercase;margin:0 0 8px}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(29px,3.2vw,49px);line-height:1.11;letter-spacing:-.035em;font-weight:500;margin:0 0 10px}p{margin:0}.intro p:not(.eyebrow){color:var(--muted);max-width:730px;font-size:14px}
+.labels{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid var(--line);padding:7px 10px;border-radius:99px;font-size:11px;font-weight:650;color:var(--muted);white-space:nowrap;background:#ffffff50}
+.layout{display:grid;grid-template-columns:minmax(0,1.68fr) minmax(280px,.72fr);gap:16px}.stage{background:#e7e5dc;border:1px solid var(--line);border-radius:19px;overflow:hidden;position:relative;box-shadow:var(--shadow)}
+.stagebar{position:absolute;z-index:2;left:19px;top:16px;right:19px;display:flex;justify-content:space-between;align-items:center;gap:12px;pointer-events:none}.stagebar span{font-size:11px;letter-spacing:.12em;font-weight:800;color:#647078;text-transform:uppercase}.stagebar strong{font-size:10px;background:#ffffffae;border:1px solid #ffffffba;border-radius:8px;padding:6px 9px;font-weight:700;color:#68747a}
+canvas{display:block;width:100%;height:min(64vh,610px);min-height:385px;touch-action:none;cursor:grab}canvas:active{cursor:grabbing}
+.footbar{border-top:1px solid #d5d4cb;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:13px 18px;background:#f4f2eb7d}
+.buttons{display:flex;gap:7px;flex-wrap:wrap}button{border:1px solid #cbd0ca;border-radius:9px;padding:7px 11px;background:#fffdf6;color:var(--ink);font-size:11px;font-weight:700;cursor:pointer}button:hover,button:focus-visible{border-color:var(--navy);background:#fff}
+.helper{font-size:11px;color:#6d7775}.panel{display:flex;flex-direction:column;gap:14px}
+section.card{padding:20px;background:var(--white);border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow)}
+h2{margin:0 0 12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:820}h3{font-size:22px;font-weight:600;letter-spacing:-.025em;margin:0 0 5px;font-family:Georgia,serif}.desc{font-size:13px;line-height:1.6;color:var(--muted)}.partlist{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.part{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink);border:1px solid #e0ddd5;border-radius:9px;padding:8px;cursor:pointer}
+.part input{accent-color:var(--navy);width:15px;height:15px;margin:0}.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:0 0 auto}
+.component-meta{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.micro{font-size:10px;border:1px solid var(--line);padding:5px 7px;border-radius:6px;color:var(--muted);font-weight:680}
+.slider{display:flex;gap:12px;align-items:center;margin-top:15px;font-size:12px}.slider input{width:100%;accent-color:var(--navy)}
+.sites{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.site{border:1px solid var(--line);border-radius:8px;padding:6px;text-align:center;font-size:11px;font-weight:730;background:#f7f5f1}.site small{display:block;font-size:9px;color:var(--muted);font-weight:550}
+.lower{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.lower .card{min-height:175px}.notes{font-size:13px;color:var(--muted);line-height:1.7}.notes strong{color:var(--ink)}.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.links a{color:var(--navy);text-underline-offset:3px;font-size:12px;font-weight:700}
+.error{color:#9e3636;background:#fff1ea;padding:12px;border-radius:10px;font-size:12px;display:none;margin:10px}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.panel{display:grid;grid-template-columns:1fr 1fr}.intro{flex-direction:column;align-items:flex-start}.lower{grid-template-columns:1fr}}
+@media(max-width:620px){header{padding:14px 17px}main{padding:25px 12px 45px}.panel{grid-template-columns:1fr}.partlist{grid-template-columns:1fr 1fr}canvas{height:440px;min-height:340px}.sites{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="brand">neurocap <small>Open hardware research · Assembly laboratory</small></div><span class="status">S0 / HEADFORM ONLY / NOT WEARABLE</span></header>
+<main>
+<div class="intro">
+  <div><p class="eyebrow">01 — Parametric concept workbench</p><h1>See how the pieces fit.<br>Question every assumption.</h1>
+  <p>A navigable 3D study of an ordinary cap silhouette, independent inner rails, candidate scalp sites, bilateral ear modules and external acquisition placeholder. Geometry is synthetic and dimensioned, not a fitted anatomical or functional device.</p></div>
+  <div class="labels"><span class="chip">7 visual layers</span><span class="chip">8 nominal markers</span><span class="chip">mm · right-handed XYZ</span></div>
+</div>
+<div class="layout">
+  <div class="stage">
+    <div class="stagebar"><span>Assembly / spatial study</span><strong>DRAG TO ORBIT · SCROLL TO ZOOM</strong></div>
+    <canvas id="view" aria-label="Rotatable schematic three-dimensional cap and ear assembly with nominal marker positions"></canvas>
+    <div class="error" role="alert" id="error"></div>
+    <div class="footbar">
+      <div class="buttons"><button data-view="iso">Isometric</button><button data-view="front">Front</button><button data-view="side">Side</button><button data-view="top">Top</button></div>
+      <span class="helper">Pointer to orbit · Wheel to zoom · Click a marker to inspect</span>
+    </div>
+  </div>
+  <aside class="panel">
+    <section class="card"><h2>Visible layers</h2><div id="parts" class="partlist"></div>
+      <div class="slider"><span style="white-space:nowrap">Explode</span><input id="explode" type="range" min="0" max="100" value="0" aria-label="Exploded assembly distance"><span id="explodeValue" class="mono">0%</span></div>
+    </section>
+    <section class="card"><h2>Component inspector</h2><h3 id="selected">Assembly overview</h3><p class="desc" id="description">Select a layer or marker to inspect its purpose, limitations and upstream dimension manifest.</p><div id="meta" class="component-meta"><span class="micro">S0 synthetic only</span></div></section>
+    <section class="card"><h2>Nominal sites</h2><div class="sites" id="sites"></div><p class="desc" style="margin-top:11px;font-size:11px">Site labels are invented identifiers, not 10–20 electrode localization. No reference, ground, contact-force or signal quality is specified.</p></section>
+  </aside>
+</div>
+<div class="lower">
+  <section class="card"><h2>Assembly / learning roadmap</h2><p class="notes"><strong>Observe:</strong> cap-shell clearance, separate visual ear carriers, framing arcs and abstract routing. <strong>Next:</strong> measure several headforms, quantify geometric errors, investigate detachable mounts and cable strain relief. <strong>Only after that:</strong> expert-reviewed materials, bioelectrical safety and independent instrumentation tests.</p><div class="links"><a href="manifest.json">Inspect model manifest</a><a href="../../docs/neurocap-assembly-workbench-v1.md">Research guide</a><a href="build.py">OpenSCAD exporter</a><a href="../../docs/neurocap-sensor-layout-research-v1.md">Sensor research</a></div></section>
+  <section class="card"><h2>Evidence boundary</h2><p class="notes">This is a concept visualization, not a hardware wiring plan or an approved wearable. Colored dots are placeholders and the ear forms are generic loops. A synthetic fit does not establish skin pressure, biocompatibility, electrical isolation, acoustic quality, real electrode coverage, or any EEG benefit. <strong>Never place it under a protective sports helmet.</strong></p></section>
+</div>
+</main>
+<script>
+"use strict";
+const canvas=document.getElementById("view"), ctx=canvas.getContext("2d");
+const colors={headform:"#c4a78f",cap:"#a39780",frame:"#28606c",scalp:"#aa5046",ears:"#819275",routing:"#bd863e",pod:"#505f6d"};
+const state={data:null,yaw:0.58,pitch:0.33,zoom:1.02,explode:0,selected:"frame",drag:null,hot:[],visible:{}};
+const byId=id=>document.getElementById(id);
+const rad=d=>d*Math.PI/180, range=(n,fn)=>Array.from({length:n},(_,i)=>fn(i));
+const addLine=(shapes,part,a,b,width=1,opacity=1)=>shapes.push({type:"line",part,a,b,width,opacity});
+const addPoint=(shapes,part,p,label,size=5)=>shapes.push({type:"point",part,p,label,size});
+function surface(g,polar,az){const t=rad(polar),p=rad(az),r=g.radii_mm;return [r[0]*Math.sin(t)*Math.cos(p),r[1]*Math.sin(t)*Math.sin(p),r[2]*Math.cos(t)];}
+function fromShape(g,side){return [side*g.ear_center_x_mm,g.ear_center_y_mm,g.ear_center_z_mm];}
+function scene(data){
+ const g=data.geometry,r=g.radii_mm, shapes=[];
+ // Thin latitude/longitude meridians make the reference transparent.
+ for(let z=-0.91;z<=0.91;z+=0.26){const t=Math.acos(z);range(60,i=>{let a=2*Math.PI*i/60,b=2*Math.PI*(i+1)/60;addLine(shapes,"headform",[r[0]*Math.sin(t)*Math.cos(a),r[1]*Math.sin(t)*Math.sin(a),r[2]*z],[r[0]*Math.sin(t)*Math.cos(b),r[1]*Math.sin(t)*Math.sin(b),r[2]*z],.8,.26);});}
+ range(12,i=>{let a=2*Math.PI*i/12;range(30,j=>{let t=Math.PI*j/30,u=Math.PI*(j+1)/30;addLine(shapes,"headform",[r[0]*Math.sin(t)*Math.cos(a),r[1]*Math.sin(t)*Math.sin(a),r[2]*Math.cos(t)],[r[0]*Math.sin(u)*Math.cos(a),r[1]*Math.sin(u)*Math.sin(a),r[2]*Math.cos(u)],.7,.19);});});
+ // Crown shell is wireframed; opacity is intentionally NOT simulated material.
+ let cosLimit=g.band_z_mm/(r[2]+g.cap_shell_gap_mm);
+ range(13,i=>{let z=cosLimit+(1-cosLimit)*i/13,t=Math.acos(z),u=Math.acos(cosLimit+(1-cosLimit)*(i+1)/13);range(72,j=>{let a=2*Math.PI*j/72,b=2*Math.PI*(j+1)/72,R=[r[0]+g.cap_shell_gap_mm,r[1]+g.cap_shell_gap_mm,r[2]+g.cap_shell_gap_mm];addLine(shapes,"cap",[R[0]*Math.sin(t)*Math.cos(a),R[1]*Math.sin(t)*Math.sin(a),R[2]*z],[R[0]*Math.sin(t)*Math.cos(b),R[1]*Math.sin(t)*Math.sin(b),R[2]*z],.75,.15);if(j%9===0)addLine(shapes,"cap",[R[0]*Math.sin(t)*Math.cos(a),R[1]*Math.sin(t)*Math.sin(a),R[2]*z],[R[0]*Math.sin(u)*Math.cos(a),R[1]*Math.sin(u)*Math.sin(a),R[2]*Math.cos(u)],1,.5);});});
+ const yFront=r[1]+g.cap_shell_gap_mm+2,zBrim=g.band_z_mm+1.5,W=g.brim_width_mm/2,L=g.brim_length_mm;
+ const brim=[[-W*.82,yFront,zBrim],[W*.82,yFront,zBrim],[W*.74,yFront+L*.74,zBrim+1],[W*.44,yFront+L,zBrim+2],[-W*.44,yFront+L,zBrim+2],[-W*.74,yFront+L*.74,zBrim+1]];
+ brim.forEach((p,i)=>addLine(shapes,"cap",p,brim[(i+1)%brim.length],3,.75));
+ for(const s of [-1,1])addLine(shapes,"cap",[s*W*.82,yFront,zBrim],[s*W*.44,yFront+L,zBrim+2],1.1,.35);
+ // Lower perimeter and three independent cross-cap conceptual ribs.
+ let k=Math.sqrt(1-Math.pow(g.band_z_mm/r[2],2));
+ range(96,i=>{let a=2*Math.PI*i/96,b=2*Math.PI*(i+1)/96;addLine(shapes,"frame",[(k*r[0]+g.band_offset_mm)*Math.cos(a),(k*r[1]+g.band_offset_mm)*Math.sin(a),g.band_z_mm],[(k*r[0]+g.band_offset_mm)*Math.cos(b),(k*r[1]+g.band_offset_mm)*Math.sin(b),g.band_z_mm],3.4,.98);});
+ for(const y of g.rib_y_mm){range(38,i=>{let x=-g.rib_half_span_mm+2*g.rib_half_span_mm*i/38,X=-g.rib_half_span_mm+2*g.rib_half_span_mm*(i+1)/38;let z=v=>r[2]*Math.sqrt(Math.max(0,1-(v/r[0])**2-(y/r[1])**2))+g.band_offset_mm;addLine(shapes,"frame",[x,y,z(x)],[X,y,z(X)],3,.95);});}
+ for(const site of data.scalp_sites)addPoint(shapes,"scalp",surface(g,site.polar_deg,site.azimuth_deg),site.id,6.4);
+ for(const site of data.ear_sites){const s=site.side,c=fromShape(g,s);range(50,i=>{let a=2*Math.PI*i/50,b=2*Math.PI*(i+1)/50;addLine(shapes,"ears",[c[0],c[1]+g.ear_y_radius_mm*Math.cos(a),c[2]+g.ear_z_radius_mm*Math.sin(a)],[c[0],c[1]+g.ear_y_radius_mm*Math.cos(b),c[2]+g.ear_z_radius_mm*Math.sin(b)],3.5,.92);});addPoint(shapes,"ears",c,site.id,7);addLine(shapes,"routing",[c[0],c[1]-g.ear_y_radius_mm,c[2]],[s*(r[0]+g.band_offset_mm),-r[1]*.8,g.band_z_mm],2.1,.85);}
+ const c=g.pod_center_mm,sz=g.pod_size_mm,verts=[];
+ for(let sx of [-1,1])for(let sy of [-1,1])for(let sz0 of [-1,1])verts.push([c[0]+sx*sz[0]/2,c[1]+sy*sz[1]/2,c[2]+sz0*sz[2]/2]);
+ verts.forEach((v,i)=>verts.forEach((u,j)=>{if(j>i&&v.filter((n,k)=>Math.abs(n-u[k])>.01).length===1)addLine(shapes,"pod",v,u,2.5,1);}));
+ return shapes;
+}
+function lifted(part,p){
+ const e=state.explode;
+ if(part==="cap")return[p[0],p[1],p[2]+37*e];
+ if(part==="frame")return[p[0],p[1],p[2]+12*e];
+ if(part==="scalp")return[p[0]*(1+.12*e),p[1]*(1+.12*e),p[2]+15*e];
+ if(part==="ears")return[p[0]+(p[0]>0?1:-1)*35*e,p[1],p[2]-9*e];
+ if(part==="routing")return[p[0]+(p[0]>0?1:-1)*13*e,p[1]-10*e,p[2]];
+ if(part==="pod")return[p[0],p[1]-48*e,p[2]];
+ return p;
+}
+function rotate(p){
+ let cy=Math.cos(state.yaw),sy=Math.sin(state.yaw),cp=Math.cos(state.pitch),sp=Math.sin(state.pitch);
+ let x=p[0]*cy-p[1]*sy,y=p[0]*sy+p[1]*cy,z=p[2];
+ return [x, z*cp+y*sp, y*cp-z*sp];
+}
+function project(p,w,h,scale){let a=rotate(p);return {x:w/2+a[0]*scale,y:h*.54-a[1]*scale,depth:a[2]};}
+function draw(){
+ const d=state.data;if(!d)return;
+ const box=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2),w=Math.max(320,box.width),h=Math.max(340,box.height);
+ if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);}
+ ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+ const grad=ctx.createRadialGradient(w*.48,h*.39,20,w*.5,h*.55,w*.65);grad.addColorStop(0,"#f5f2e9");grad.addColorStop(1,"#ddded5");ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
+ const scale=Math.min(w/400,h/390)*state.zoom;
+ const shapes=scene(d).filter(s=>state.visible[s.part]);
+ const items=shapes.map(s=>{const a=project(lifted(s.part,s.a||s.p),w,h,scale),b=s.b?project(lifted(s.part,s.b),w,h,scale):null;return {...s,A:a,B:b,depth:(a.depth+(b?b.depth:a.depth))/2};}).sort((a,b)=>a.depth-b.depth);
+ const selected=state.selected;state.hot=[];
+ for(const s of items){const focus=s.part===selected,alpha=s.opacity===undefined?1:s.opacity;ctx.strokeStyle=colors[s.part];ctx.fillStyle=colors[s.part];ctx.globalAlpha=alpha*(selected&&!focus?.57:1);
+ if(s.type==="line"){ctx.beginPath();ctx.lineCap="round";ctx.lineWidth=s.width*(focus?1.55:1);ctx.moveTo(s.A.x,s.A.y);ctx.lineTo(s.B.x,s.B.y);ctx.stroke();}
+ else{ctx.beginPath();ctx.arc(s.A.x,s.A.y,s.size*(focus?1.35:1),0,2*Math.PI);ctx.fill();ctx.globalAlpha=1;ctx.fillStyle="#fffdf9";ctx.beginPath();ctx.arc(s.A.x,s.A.y,2.2,0,2*Math.PI);ctx.fill();ctx.font="700 11px ui-sans-serif,system-ui";ctx.fillStyle="#4c5254";ctx.fillText(s.label,s.A.x+12,s.A.y-10);state.hot.push(s);}
+ }
+ ctx.globalAlpha=1;
+ // Reference axes in an uncluttered corner; pure geometry semantics.
+ const axes=[[26,0,0,"+X"],[0,26,0,"+Y"],[0,0,26,"+Z"]],origin=project([0,0,0],115,h-90,0.85);
+ for(const [x,y,z,label] of axes){let a=rotate([x,y,z]);ctx.strokeStyle="#879091";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(54,h-46);ctx.lineTo(54+a[0]*.85,h-46-a[1]*.85);ctx.stroke();ctx.font="10px ui-sans-serif";ctx.fillStyle="#697579";ctx.fillText(label,58+a[0]*.85,h-49-a[1]*.85);}
+ ctx.font="10px ui-monospace,monospace";ctx.fillStyle="#79827f";ctx.fillText("ILLUSTRATIVE · NOT FOR FITTING",18,h-14);
+}
+function selectPart(id){state.selected=id;const part=state.data.components.find(p=>p.id===id);byId("selected").textContent=part?part.title:id;byId("description").textContent=part?part.purpose:"Nominal marker for spatial discussion only. No measured electrode location or validated signal.";byId("meta").innerHTML="";for(const val of ["UNVALIDATED",id.toUpperCase(),part?part.qualification:"NOMINAL"]){let span=document.createElement("span");span.className="micro";span.textContent=val;byId("meta").appendChild(span);}draw();}
+function initialize(d){
+ if(d.status!=="UNVALIDATED_NONWEARABLE_CONCEPT"||d.origin!=="SYNTHETIC_NONHUMAN_HEADFORM"){throw new Error("Manifest must remain an unvalidated synthetic headform study");}
+ state.data=d;
+ const list=byId("parts"),sites=byId("sites");
+ for(const item of d.components){state.visible[item.id]=true;const label=document.createElement("label");label.className="part";const input=document.createElement("input");input.type="checkbox";input.checked=true;input.addEventListener("change",()=>{state.visible[item.id]=input.checked;draw();});const dot=document.createElement("i");dot.className="dot";dot.style.background=colors[item.id];const name=document.createElement("span");name.textContent=item.title;name.style.cursor="pointer";name.addEventListener("click",e=>{e.preventDefault();selectPart(item.id);});label.append(input,dot,name);list.appendChild(label);}
+ for(const site of [...d.scalp_sites,...d.ear_sites]){let node=document.createElement("div");node.className="site";let title=document.createElement("span");title.textContent=site.id;let sub=document.createElement("small");sub.textContent=site.status;node.append(title,sub);sites.appendChild(node);}
+ selectPart("frame");
+}
+canvas.addEventListener("pointerdown",e=>{canvas.setPointerCapture(e.pointerId);state.drag={x:e.clientX,y:e.clientY,moved:false};});
+canvas.addEventListener("pointermove",e=>{if(!state.drag)return;let dx=e.clientX-state.drag.x,dy=e.clientY-state.drag.y;state.drag.x=e.clientX;state.drag.y=e.clientY;if(Math.abs(dx)+Math.abs(dy)>1)state.drag.moved=true;state.yaw+=dx*.009;state.pitch=Math.max(-1.3,Math.min(1.42,state.pitch+dy*.009));draw();});
+canvas.addEventListener("pointerup",e=>{if(!state.drag)return;let moved=state.drag.moved;state.drag=null;if(!moved){const box=canvas.getBoundingClientRect();let x=e.clientX-box.left,y=e.clientY-box.top;let near=state.hot.map(s=>({s,dist:Math.hypot(s.A.x-x,s.A.y-y)})).sort((a,b)=>a.dist-b.dist)[0];if(near&&near.dist<24)selectPart(near.s.part);}});
+canvas.addEventListener("wheel",e=>{e.preventDefault();state.zoom=Math.max(.55,Math.min(2.6,state.zoom*Math.exp(-e.deltaY*.0009)));draw();},{passive:false});
+byId("explode").addEventListener("input",e=>{state.explode=Number(e.target.value)/100;byId("explodeValue").textContent=e.target.value+"%";draw();});
+for(const button of document.querySelectorAll("[data-view]"))button.addEventListener("click",()=>{const preset={iso:[.58,.33],front:[0,0],side:[Math.PI/2,0],top:[0,Math.PI/2-0.01]}[button.dataset.view];state.yaw=preset[0];state.pitch=preset[1];draw();});
+window.addEventListener("resize",draw);
+fetch("manifest.json").then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}).then(initialize).catch(e=>{byId("error").style.display="block";byId("error").textContent="Could not load manifest.json: "+e.message+". Start a local server here with: python -m http.server 8766, then visit http://localhost:8766/";});
+</script>
+</body>
+</html>
