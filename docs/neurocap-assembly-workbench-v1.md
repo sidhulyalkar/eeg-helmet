@@ -103,7 +103,7 @@ Acquire properly qualified and permissioned recordings in local private storage.
              QC + event timing + behavioral modeling
 ~~~
 
-This deliberately reuses the [existing EEG headwear builder guide](../../docs/eeg-headwear-build-guide.md), [scientific contract](../../docs/research-contract.md), [open-hardware NeuroDAQ reuse plan in draft PR #41](https://github.com/sidhulyalkar/eeg-helmet/pull/41), [first headform marker lab in draft PR #38](https://github.com/sidhulyalkar/eeg-helmet/pull/38), and the [gameplay observatory draft PR #40](https://github.com/sidhulyalkar/eeg-helmet/pull/40). Keep each proposal separate until reviewed and avoid accidentally declaring an unmerged prerequisite as existing functionality on \`main\`.
+This deliberately reuses the [existing EEG headwear builder guide](eeg-headwear-build-guide.md), [scientific contract](research-contract.md), [open-hardware NeuroDAQ reuse plan in draft PR #41](https://github.com/sidhulyalkar/eeg-helmet/pull/41), [first headform marker lab in draft PR #38](https://github.com/sidhulyalkar/eeg-helmet/pull/38), and the [gameplay observatory draft PR #40](https://github.com/sidhulyalkar/eeg-helmet/pull/40). Keep each proposal separate until reviewed and avoid accidentally declaring an unmerged prerequisite as existing functionality on \`main\`.
 
 ## QA checklist and engineering gates
 
