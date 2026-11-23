@@ -46,6 +46,8 @@ The generator and viewer share a **single versioned JSON geometry manifest** in 
 
 **Important:** component-count != electrical-channel-count. This design deliberately leaves **EEG reference, bias/ground and acquisition configuration unspecified**. The proposed ear sites, six scalp markers, and earpiece loops do not imply a usable eight-channel system. The cap shell may be too shallow to access posterior sites; actual placement must be measured and evaluated independently.
 
+For task-specific channel and artifact tradeoffs, read [NeuroCap sensor-layout research](neurocap-sensor-layout-research-v1.md). Candidate geometry is not an EEG montage or measured cortical sensitivity.
+
 ## Full part-development roadmap
 
 ### P0. Nonfunctional spatial kit: implemented visual placeholders
