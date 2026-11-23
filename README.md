@@ -26,7 +26,7 @@ Then open http://127.0.0.1:8765. The demo binds to loopback only, does not uploa
 
 A new [interactive assembly viewer](cad/neurocap/index.html) and [parametric geometry manifest](cad/neurocap/manifest.json) allow offline inspection of a fictional reference headform, fabric-cap envelope, independent inner ribs, candidate scalp markers, bilateral ear loops, abstract signal paths and acquisition-pod placeholder. **These are headform-only visualizations, not fitted electrodes, fabrication-ready parts, verified anatomical placements or safe human-use designs.**
 
-To open the viewer locally: `cd cad/neurocap && python -m http.server 8766 --bind 127.0.0.1`, then browse http://127.0.0.1:8766/. To export editable OpenSCAD, use `python cad/neurocap/build.py --out ../neurocap-assembly-SYNTHETIC.scad --receipt ../neurocap-assembly-receipt.json` from the root. Read the [NeuroCap assembly research and part roadmap](docs/neurocap-assembly-workbench-v1.md) before interpreting any geometry.
+To open the viewer locally: `cd cad/neurocap && python -m http.server 8766 --bind 127.0.0.1`, then browse http://127.0.0.1:8766/. To export editable OpenSCAD, use `python cad/neurocap/build.py --out ../neurocap-assembly-SYNTHETIC.scad --receipt ../neurocap-assembly-receipt.json` from the root. Read the [NeuroCap assembly research and part roadmap](docs/neurocap-assembly-workbench-v1.md) and [sensor-layout comparison](docs/neurocap-sensor-layout-research-v1.md) before interpreting any geometry.
 
 ## Choose a scientific workflow
 
