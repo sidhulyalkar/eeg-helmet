@@ -163,7 +163,7 @@ def generate_scad(data):
         f'  translate({vec(pos)}) color([0.68,0.30,0.23]) sphere(r=5,$fn=28); // {name} NOMINAL'
         for name, pos in sites
     )
-    return f"""// GENERATED FROM cad/neurocap/manifest.json. NOT A WEARABLE OR ELECTRODE DESIGN.
+    return f"""// GENERATED FROM cad/neurocap/manifest.json. UNVALIDATED_NONWEARABLE_CONCEPT.
 // S0 FICTIONAL HEADFORM ONLY. No measured human anatomy, contacts, compliance,
 // acoustic design, certified protective helmet, skin connection, or validation.
 // All dimensions millimeters. Right-handed x right, y anterior, z superior.
